@@ -1,0 +1,220 @@
+1. [LOCATION] What is the main purpose or goal of this project?	The main purpose of this project is to provide technical students with a practical opportunity to design and implement innovative digital solutions tailored to the needs of a modern dance school. The goal is to improve operational efficiency, enhance student and parent experience, and streamline administrative processes through the use of digital technologies.
+   - Who will use this project or product, and why do they need it?	"This project will be used by several key groups within the dance school community, each benefiting in specific ways:
+
+Students (Dancers):
+Dancers will benefit from features such as live class broadcasts, allowing them to participate remotely when they cannot attend in person. The digital access system will make entering and exiting the building more convenient and streamlined, while also ensuring accurate attendance tracking. This creates a smoother and more flexible experience for students.
+
+Parents:
+Parents will have the opportunity to observe their children's classes in real time through the live broadcasts, helping them stay informed and involved in their child’s progress. This level of transparency increases trust and engagement between the school and families.
+
+Teachers:
+Teachers will find their work simplified with automated attendance records, real-time class streaming (eliminating the need to personally update absent students), and a more organized costume system. This allows them to focus more on teaching and less on administrative tasks.
+
+Principal and Administrative Staff:
+The principal and staff will benefit significantly from the digitalization of access control, attendance, costume management, and registration systems. These tools reduce manual work, prevent errors, and provide clear records of who attended classes, which costumes are in use, and which students are enrolled. This makes daily operations more efficient and data-driven.
+
+In summary, this product is designed to serve the entire dance school ecosystem. It addresses practical challenges and improves workflow efficiency, while also enhancing the overall user experience. Most importantly, it helps make the work of both the teachers and the principal easier by automating routine tasks and centralizing key processes."
+   - What business problems or needs are we aiming to solve?	"This project aims to solve several practical and operational problems currently faced by the dance school, as well as to meet key organizational and communication needs. These include:
+
+1. Limited Access for Remote or Absent Participants:
+   One major challenge is the inability of some students to attend classes in person due to illness, scheduling conflicts, or transportation issues. By introducing live video broadcasting from each studio, students can still follow classes remotely, helping maintain learning consistency and engagement.
+
+2. Lack of Transparency for Parents:
+   Currently, parents have little visibility into what happens during classes. This can lead to questions or concerns about the quality of instruction or their child’s participation. With live video access at specific times, parents can observe the structure and content of the classes, increasing their confidence and trust in the school.
+
+3. Manual and Inefficient Attendance Tracking:
+   Attendance is often tracked manually or through basic systems that require extra administrative work. The digital access system will automate this process, reducing errors and ensuring accurate, real-time attendance data that can be used for reporting and planning.
+
+4. Inefficient Costume Management:
+   Costumes are essential for performances, but tracking which student has borrowed which costume, and whether it has been returned, is often done manually or not at all. A barcode-based costume system will allow for fast and accurate check-out and return logging, preventing loss and improving accountability.
+
+5. Difficult Class Registration and Payment Process:
+   The current system for signing up and paying for classes may be unclear, outdated, or too dependent on manual processes. By offering a user-friendly website with links to a registration and payment platform (Wix), the process becomes easier, more efficient, and more professional for both users and staff.
+
+6. Administrative Overload:
+   Managing daily operations takes up a lot of time and effort from both the principal and the teachers. By automating key systems (access, attendance, costume tracking, registration), the workload is reduced significantly, allowing the staff to focus more on teaching and improving the school’s educational offerings.
+
+In short, this project addresses real business needs, improving efficiency, transparency, user satisfaction, and administrative control, while also supporting the growth and modernization of the dance school."
+   - Are there any similar projects or solutions we can reference? Something you already have?	"Yes, the dance school already has a few existing systems and tools that serve as a foundation for this project. While they are limited in scope and functionality, they demonstrate that some digital elements are already in place. These include:
+
+Cameras in Studios (Current Use):
+Cameras are already installed in each studio, but they are currently used only for internal monitoring by the school owner. Their main purpose is for security, such as checking for robberies or monitoring behavior in case of any incidents. These cameras are not currently used for educational purposes or live streaming to students or parents.
+
+Two Existing Websites:
+The dance school currently operates two websites. These sites already provide general information and act as a digital presence for the school. The only feature missing is an integrated registration form with an option to pay for classes online. This feature is part of the new project and will enhance the functionality of the existing websites.
+
+Digital Costume File (in Excel):
+The school maintains a costume inventory in an Excel file, which includes each costume's number and a photo. This file is helpful but requires manual updates and doesn’t allow for real-time tracking of costume distribution or returns. The project aims to transform this static file into an interactive barcode-based digital costume management system for better efficiency and traceability."
+	
+2. Scope and Goals	
+   - What are the main things you expect this project to accomplish?	"We expect this project to achieve the following key goals:
+
+1. Enable remote participation by live-streaming classes for students who can’t attend in person and for parents who want to observe their child’s progress.
+
+2. Simplify access and attendance tracking with a QR code (for example) system that records entry and exit times automatically.
+
+3. Improve costume management through a barcode system that tracks which student has each costume and when it’s returned.
+
+4. Streamline class registration and payments by adding an online form with payment options to the existing website.
+
+5. Reduce the administrative workload for teachers and the principal by automating routine tasks and organizing information digitally."
+   - What specific tasks or features are essential for the project to succeed?	"To ensure the success of the project, the following tasks and features are essential:
+
+Live Streaming Setup:
+Configure cameras to securely stream classes at scheduled times, with access for students and parents.
+
+QR Code Access System:
+Develop a system that allows dancers to enter and exit using a phone-scanned QR code, automatically logging attendance.
+
+Barcode Costume Tracking:
+Create a digital system that assigns costumes to students using barcodes, recording when they are issued and returned.
+
+Website Integration for Registration and Payment:
+Add a user-friendly form to the existing website that allows online registration, with or without immediate payment.
+
+Data Management and Reporting Tools:
+Build a simple interface to manage attendance records, costume inventory, and registration data in one place.
+
+Each of these components is necessary to meet the project's goals and provide real value to the school’s students, staff, and parents."
+   - Is there anything that should not be included in this project?	"Yes, the project should avoid the following:
+
+Physical access tools like key cards or chips:
+The goal is to keep the system fully digital and accessible via smartphones to reduce costs and simplify use.
+
+Complex or expensive hardware installations:
+The focus is on practical, cost-effective solutions using existing infrastructure where possible.
+
+Unnecessary features not related to the dance school’s daily operations:
+The project should stay focused on real needs, like streaming, access control, costume tracking, and registration, and avoid extras that would add complexity without clear benefit."
+   - Do you have a timeline or deadline in mind for this project?	There is no specific deadline, but it would be great to do it till 2026 August
+	
+3. User and Product Needs	
+   - Who will use this product, and what will they use it for?	"Students (Dancers):
+To access the building using a QR code, attend classes remotely via live stream when needed, and be automatically marked for attendance.
+
+Parents:
+To watch class broadcasts at specific times, giving them insight into their child’s progress and class structure.
+
+Teachers:
+To save time with automated attendance, track costume distribution easily, and focus more on teaching.
+
+Principal and Administrative Staff:
+To manage access logs, attendance records, costume inventory, and class registrations more efficiently and with less manual work.
+
+Each group will use the system to simplify tasks, improve communication, and support a more organized and modern dance school environment."
+   - What is the minimum version of the product we can create to meet basic needs?	"The minimum version of the product should include the following essential features:
+
+Live class streaming using existing cameras, with secure access for students and parents at scheduled times.
+
+QR code access system that logs entry and exit times to track attendance automatically.
+
+Basic digital costume tracking using a barcode scanner and a connected database to record which student has each costume.
+
+Online registration form added to the existing website, with the option to pay for classes.
+
+This will cover the core needs, remote access, attendance, costume management, and registration, while allowing room for future improvements."
+	
+4. Team and Skills Needed	
+   - What skills, technologies or types of roles are needed to work on this project (e.g., specific language programmers Java; specific technologies - Kubernetes, testers, etc.)?	"To successfully complete this project, the following skills and roles are required:
+
+Web Developers:
+Skilled in front-end and back-end development to build and integrate the registration and payment system (e.g., HTML, CSS, JavaScript, possibly Wix or similar platforms).
+
+Mobile/QR Code System Developers:
+Experienced in creating QR code scanning and digital access systems, including mobile-friendly apps or web-based solutions.
+
+Video Streaming Specialists:
+Knowledgeable in setting up live streaming using existing cameras, managing secure access, and ensuring smooth video delivery.
+
+Database Developers/Administrators:
+To design and manage databases for attendance, costume tracking, and registrations, ensuring data integrity and easy access.
+
+Barcode System Developers:
+Skilled in integrating barcode scanning hardware/software for costume management.
+
+Testers/QA:
+To test all systems thoroughly for usability, security, and reliability before launch.
+
+Technologies might include web frameworks, QR code libraries, video streaming platforms, barcode scanning software, and database management systems."
+	
+5. Data and Information	
+   - What information or data will this project need to collect, store, or work with?	"This project will need to handle several types of data, including:
+
+Student and Participant Information:
+Names, contact details, class schedules, and registration status.
+
+Attendance Records:
+Entry and exit times recorded automatically via the QR code access system to track class participation.
+
+Costume Inventory Data:
+Costume ID numbers, photos, issuance records (which student borrowed which costume and when), and return status.
+
+Live Streaming Access Logs:
+Information on who accessed the live streams and when, to manage permissions and security.
+
+Payment and Registration Data:
+Details of class registrations, payment status, transaction records, and related billing information.
+
+System Usage Data:
+Logs related to system performance, errors, and user interactions for maintenance and improvements.
+
+All collected data must be securely stored and handled with respect for user privacy, ensuring compliance with relevant data protection regulations."
+	
+6. Quality and Testing	
+   - Are there certain standards or requirements the project must meet to be successful?	"Yes, to ensure success, the project must meet the following standards and requirements:
+
+Data Privacy and Security:
+Protect sensitive information (student data, payment details) by following relevant data protection laws and implementing secure authentication and encryption.
+
+Reliability and Uptime:
+Ensure the live streaming, access control, and registration systems are stable and available during class times without interruptions.
+
+User-Friendly Interface:
+Design simple, intuitive interfaces for students, parents, teachers, and administrators to easily use the system without technical difficulties.
+
+Compatibility:
+The system should work smoothly on common devices (smartphones, tablets, desktops) and major browsers.
+
+Scalability:
+The solution should be able to handle an increasing number of users and data as the school grows.
+
+Accurate and Real-Time Data:
+Attendance, costume tracking, and payment information must be recorded accurately and updated promptly.
+
+Compliance with School Policies:
+Align with any existing rules or guidelines set by the dance school regarding technology use and data handling.
+
+Meeting these standards will help deliver a secure, efficient, and user-friendly system that supports the school’s goals."
+   - Will there be a need to test the product with real users before launch?	"Yes, testing with real users is essential to ensure the system works as intended and meets the needs of all stakeholders. This includes:
+
+Students and Parents: To verify the live streaming, registration, and access features are easy to use and reliable.
+
+Teachers and Administrative Staff: To ensure attendance tracking, costume management, and payment systems function smoothly and reduce their workload.
+
+Technical Testing: To identify and fix any bugs, security issues, or performance problems before full deployment.
+
+User testing will provide valuable feedback to improve usability, catch unforeseen issues, and increase overall satisfaction with the final product."
+	
+7. Timeline	
+   - Are there any specific deadlines or important dates to consider?	There is no specific deadline, but it would be great to do it till 2026 August, but we are open to every option
+	
+8. Potential Challenges	
+   - What do you see as the main challenges or risks in this project?	"The main challenges and risks include:
+
+Technical Complexity:
+Integrating multiple systems, live streaming, QR code access, barcode costume tracking, and online payments, may be complex and require careful coordination.
+
+User Adoption:
+Ensuring students, parents, teachers, and staff are comfortable using new digital tools may require training and ongoing support.
+
+Data Security and Privacy:
+Protecting sensitive information from unauthorized access or breaches is critical and may pose challenges.
+
+Reliable Internet and Streaming Quality:
+Live streaming depends on stable internet connections, and poor quality could affect user experience.
+
+Accurate Data Recording:
+Automated systems must be precise in tracking attendance and costume returns; errors could cause confusion or disputes."
+	
+9. Contacts	
+   - Contacts from your side? (technical person, product owner, etc)	 ''''/Dance school '''' owner/director - [PERSON] [PHONE]) ([EMAIL])

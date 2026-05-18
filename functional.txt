@@ -1,0 +1,44 @@
+- Sistēmai jāspēj nodrošināt lietotāju autentifikāciju un autorizāciju (piem., skolēns, vecāks, skolotājs, administrators/direktors) ar atšķirīgām piekļuves tiesībām funkcijām un datiem.  
+- Sistēmai jāspēj uzturēt skolēnu profilu datus (vārds, uzvārds, kontaktinformācija, piederība grupām/nodarbībām, statuss).  
+- Sistēmai jāspēj uzturēt vecāku profilu datus un sasaistīt vecāku kontus ar vienu vai vairākiem bērniem (skolēniem).  
+- Sistēmai jāspēj uzturēt skolotāju profilu datus un sasaistīt skolotājus ar nodarbībām/grupām.  
+- Sistēmai jāspēj uzturēt nodarbību/grupu sarakstu ar grafiku (laiks, zāle/studija, skolotājs, dalībnieki).  
+
+- Sistēmai jāspēj nodrošināt tiešraides (live stream) skatīšanos no katras studijas kameras autorizētiem lietotājiem (skolēniem/vecākiem) atbilstoši piešķirtajām tiesībām.  
+- Sistēmai jāspēj ierobežot tiešraides pieejamību pēc grafika (piem., straume pieejama tikai nodarbības laikā vai noteiktos laikos).  
+- Sistēmai jāspēj nodrošināt, ka vecāki var skatīties tikai to nodarbību tiešraides, kurās piedalās viņu bērns (vai bērna grupa).  
+- Sistēmai jāspēj nodrošināt skolotājiem un administrācijai iespēju pārvaldīt tiešraižu piekļuves tiesības (piem., ieslēgt/izslēgt piekļuvi grupai vai lietotājam).  
+- Sistēmai jāspēj reģistrēt tiešraides piekļuves žurnālu (kurš lietotājs, kurai straumei, kad pieslēdzās/atvienojās).  
+
+- Sistēmai jāspēj ģenerēt un piešķirt skolēniem digitālu piekļuves identifikatoru (piem., QR kodu) ēkas ieejai/izejai.  
+- Sistēmai jāspēj reģistrēt ieejas notikumu, nolasot skolēna QR kodu, un saglabāt datumu/laiku un identifikatoru.  
+- Sistēmai jāspēj reģistrēt izejas notikumu, nolasot skolēna QR kodu, un saglabāt datumu/laiku un identifikatoru.  
+- Sistēmai jāspēj automātiski veidot apmeklējuma ierakstus (attendance) no ieejas/izejas notikumiem un sasaistīt tos ar nodarbībām pēc grafika.  
+- Sistēmai jāspēj nodrošināt skolotājam iespēju apskatīt nodarbības apmeklējumu sarakstu reāllaikā un vēsturiski.  
+- Sistēmai jāspēj nodrošināt administrācijai iespēju apskatīt un filtrēt apmeklējuma datus (pēc datuma, grupas, skolēna, skolotāja).  
+- Sistēmai jāspēj nodrošināt iespēju manuāli koriģēt apmeklējuma ierakstus (piem., ja QR nolasīšana nav notikusi), saglabājot izmaiņu audita informāciju (kas, kad, ko mainīja).  
+- Sistēmai jāspēj ģenerēt atskaites par apmeklējumu (piem., apmeklējums pa periodiem, kavējumi, biežums) administrācijas vajadzībām.  
+
+- Sistēmai jāspēj uzturēt tērpu (kostīmu) inventāra katalogu ar unikālu tērpa ID, fotoattēlu un apraksta informāciju.  
+- Sistēmai jāspēj importēt vai ievadīt tērpu datus (t.sk. no esošā Excel principa) un uzturēt tos centralizētā datubāzē.  
+- Sistēmai jāspēj piešķirt tērpiem svītrkodus (barcode) un atbalstīt svītrkodu nolasīšanu tērpu izsniegšanai/atgriešanai.  
+- Sistēmai jāspēj reģistrēt tērpa izsniegšanu konkrētam skolēnam (tērps, skolēns, datums/laiks, izsniedzējs).  
+- Sistēmai jāspēj reģistrēt tērpa atgriešanu (tērps, datums/laiks, pieņēmējs) un automātiski atjaunot tērpa statusu (pieejams/izsniegts).  
+- Sistēmai jāspēj parādīt tērpa aktuālo statusu un vēsturi (kam izsniegts, kad izsniegts, kad atgriezts).  
+- Sistēmai jāspēj nodrošināt administrācijai un skolotājiem meklēšanu un filtrēšanu tērpu inventārā (pēc ID, statusa, skolēna, grupas).  
+- Sistēmai jāspēj ģenerēt atskaites par neatgrieztiem tērpiem un tērpu aprites statistiku.  
+
+- Sistēmai jāspēj nodrošināt publiski pieejamu reģistrācijas plūsmu skolas mājaslapā (integrējamu ar esošo mājaslapu), lai pieteiktos nodarbībām.  
+- Sistēmai jāspēj savākt reģistrācijas pieteikuma datus (dalībnieka dati, izvēlētā grupa/nodarbība, kontaktinformācija, piekrišanas).  
+- Sistēmai jāspēj nodrošināt iespēju reģistrēties ar tūlītēju apmaksu vai bez tūlītējas apmaksas (atkarībā no izvēlētā scenārija).  
+- Sistēmai jāspēj integrēties ar ārēju reģistrācijas/apmaksas platformu (piem., Wix) caur saiti/iegulšanu vai citu integrācijas mehānismu, saglabājot pieteikumu izsekojamību.  
+- Sistēmai jāspēj saglabāt reģistrācijas un maksājumu statusu (piem., “iesniegts”, “apmaksāts”, “gaida apmaksu”, “atcelts”).  
+- Sistēmai jāspēj nodrošināt administrācijai iespēju pārskatīt, apstiprināt/noraidīt un pārvaldīt pieteikumus.  
+- Sistēmai jāspēj nodrošināt administrācijai iespēju eksportēt reģistrācijas un maksājumu datus atskaitēm/grāmatvedībai.  
+
+- Sistēmai jāspēj nodrošināt vienotu administratīvo saskarni (paneli), kurā centralizēti pieejami apmeklējumi, piekļuves notikumi, tērpu uzskaite un reģistrācijas dati.  
+- Sistēmai jāspēj uzturēt sistēmas notikumu un kļūdu žurnālus (piem., straumes pieejamība, skenēšanas kļūdas, integrāciju kļūdas) uzturēšanas vajadzībām.  
+- Sistēmai jāspēj nodrošināt datu meklēšanu, filtrēšanu un šķirošanu visos galvenajos moduļos (apmeklējumi, tērpi, reģistrācijas, lietotāji).  
+- Sistēmai jāspēj nodrošināt datu piekļuves tiesību kontroli, lai lietotāji redz tikai sev atļautos datus (piem., vecāks neredz citu bērnu datus).  
+- Sistēmai jāspēj nodrošināt personas datu apstrādes prasībām atbilstošu datu glabāšanu un piekļuves izsekojamību (audits par būtiskām darbībām).  
+- Sistēmai jāspēj darboties uz biežāk lietotajām ierīcēm un pārlūkprogrammām (mobilās ierīces QR izmantošanai, datori/planšetes administrēšanai un straumju skatīšanai).

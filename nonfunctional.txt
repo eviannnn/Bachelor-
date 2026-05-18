@@ -1,0 +1,128 @@
+Zemāk ir izmērāmas nefunkcionālās prasības (NFR) deju skolas digitālajai sistēmai (tiešraides, QR piekļuve/uzskaite, kostīmu svītrkodi, reģistrācija/maksājumi, administrēšana). Skaitļi ir definēti kā mērķi, kurus var pārbaudīt ar testiem/monitoringu.
+
+---
+
+## 1) Veiktspēja (Performance)
+
+**P1. Sistēmas atbildes laiks (UI/API)**
+- 95% no lietotāja darbībām (autorizācija, sarakstu atvēršana, meklēšana, ieraksta izveide) jāapstrādā **≤ 2.0 s**, 99% **≤ 4.0 s** pie normālas slodzes.
+- Administrācijas “atskaišu” vaicājumi (piem., apmeklējums par mēnesi, kostīmu statuss) 95% gadījumu **≤ 5.0 s**.
+
+**P2. QR piekļuves/uzskaites notikumu apstrāde**
+- QR skenēšanas notikums (ieeja/izeja) jāreģistrē datubāzē un jāatspoguļo lietotāja statusā **≤ 3 s** 95% gadījumu.
+- Sistēmai jāspēj apstrādāt vismaz **10 skenējumus sekundē** (burst) **60 s** periodā bez datu zuduma.
+
+**P3. Kostīmu svītrkodu apstrāde**
+- Svītrkoda skenēšanas operācija (izsniegt/atgriezt) 95% gadījumu jāapstiprina **≤ 2 s**.
+- Konfliktu noteikšana (piem., kostīms jau izsniegts) jāatgriež **≤ 1 s**.
+
+**P4. Tiešraides pieejamība un starta laiks**
+- Tiešraides skatītājam straumei jāsāk atskaņoties **≤ 5 s** pēc “Play” 95% gadījumu (pie atbilstoša interneta).
+- Tiešraides skatīšanās sesijas laikā “rebuffering” (pauzes ielādei) kopējais laiks **< 1%** no skatīšanās laika 95% sesiju (mērīts ar player metriku).
+
+**P5. Vienlaicīgo lietotāju slodze**
+- Sistēmai jāatbalsta vismaz:
+  - **200** vienlaicīgi autentificēti lietotāji (portāls/administrācija) ar P1 izpildi.
+  - **100** vienlaicīgi tiešraides skatītāji vienai studijai (vai definēts kā konfigurējams limits), saglabājot P4.
+
+---
+
+## 2) Drošība (Security)
+
+**S1. Autentifikācija un sesiju drošība**
+- Visiem lietotājiem jāizmanto autentifikācija; administrācijas kontiem obligāti **MFA**.
+- Sesijas derīguma termiņš: automātiska izlogošana pēc **30 min** neaktivitātes (administrācijai) un **60 min** (studentiem/vecākiem).
+- Paroles: min. **12** simboli, jāatbalsta bloķēšana pēc **10** neveiksmīgiem mēģinājumiem uz **15 min**.
+
+**S2. Autorizācija (RBAC)**
+- Jābūt lomām vismaz: Students, Vecāks, Skolotājs, Administrators/Direktors.
+- Piekļuve tiešraidēm: tikai autorizētiem lietotājiem konkrētajai klasei; neatļauta piekļuve jāatgriež ar **HTTP 403** un jālogē.
+
+**S3. Šifrēšana**
+- Visiem savienojumiem jābūt ar **TLS 1.2+** (ieteicams TLS 1.3).
+- Sensitīvie dati glabātuvē (PII, piekļuves žetoni, atslēgas) jāšifrē “at rest” ar **AES-256** vai ekvivalentu.
+- Maksājumu kartes dati netiek glabāti sistēmā (tikai maksājumu pakalpojuma pusē); sistēma glabā tikai transakcijas identifikatorus un statusus.
+
+**S4. Audits un žurnāli**
+- Jālogē: ielogošanās, lomu/atļauju izmaiņas, QR piekļuves notikumi, kostīmu izsniegšana/atgriešana, tiešraides piekļuves mēģinājumi.
+- Auditlogiem jābūt nemaināmiem (append-only) un jāglabājas **≥ 12 mēnešus**.
+
+**S5. Ievainojamību pārvaldība**
+- Kritiskās ievainojamības (CVSS ≥ 9) jānovērš **≤ 7 dienu** laikā, augstas (7–8.9) **≤ 30 dienu** laikā.
+- Pirms relīzes: automatizēts SAST/Dependency scan bez “critical” atradnēm.
+
+**S6. Privātums (minimizācija)**
+- Sistēma drīkst vākt tikai nepieciešamos datus; datu eksports/dzēšana pēc pieprasījuma jāizpilda **≤ 30 dienu** laikā (procesa SLA).
+
+---
+
+## 3) Lietojamība (Usability)
+
+**U1. Uzdevumu izpildes panākumu rādītāji**
+- Lietotāju testā (≥ 10 lietotāji katrai lomai) vismaz **90%** spēj:
+  - atrast un palaist tiešraidi,
+  - apskatīt apmeklējumu (skolotājs/admin),
+  - reģistrēt kostīma izsniegšanu/atgriešanu,
+  bez palīdzības **≤ 2 min** katram uzdevumam.
+
+**U2. Kļūdu līmenis**
+- Kritisko lietojamības kļūdu (kas bloķē uzdevumu) īpatsvars testos **< 5%** uz uzdevumu.
+
+**U3. Pieejamība (Accessibility)**
+- Tīmekļa saskarnei jāatbilst **WCAG 2.1 AA** (pārbaudāms ar automatizētiem un manuāliem testiem).
+- Mobilajā ierīcē galvenās darbības jābūt izpildāmām bez horizontālas ritināšanas pie 360px platuma.
+
+**U4. Saderība**
+- Atbalsts pēdējām **2** versijām: Chrome, Safari, Edge, Firefox; mobilajām: iOS Safari un Android Chrome.
+- Visām galvenajām lapām jāielādējas un jābūt lietojamām šajos pārlūkos ar P1 izpildi.
+
+**U5. Apmācība un palīdzība**
+- Iebūvēta palīdzība/FAQ un īsas instrukcijas QR un kostīmu skenēšanai; lietotāju aptaujā (pēc pilotēšanas) apmierinātība ar skaidrību **≥ 4.0/5**.
+
+---
+
+## 4) Uzticamība (Reliability)
+
+**R1. Pieejamība (Uptime)**
+- Portālam un administrācijas funkcijām: **≥ 99.5%** mēneša pieejamība.
+- Tiešraides pakalpojumam klases laikos: **≥ 99.0%** pieejamība (mērīts klases grafika logā).
+
+**R2. Datu integritāte**
+- Nevienam QR notikumam vai kostīmu transakcijai nedrīkst pazust: datu zudums **0** (pārbaudāms ar notikumu skaita salīdzinājumu starp klientu un DB/queue).
+- Dubultieraksti: pieļaujamais dublikātu īpatsvars **< 0.1%** (ar idempotences mehānismu).
+
+**R3. Atkopšana pēc kļūmēm**
+- RPO (maks. datu zudums): **≤ 15 min**.
+- RTO (atjaunošanas laiks): **≤ 2 h** kritiskām funkcijām (autentifikācija, uzskaite, kostīmi, reģistrācija).
+
+**R4. Rezerves kopijas**
+- Automātiskas rezerves kopijas vismaz **1x dienā**, glabāšana **≥ 30 dienas**.
+- Atjaunošanas tests jāveic vismaz **1x ceturksnī** ar dokumentētu rezultātu.
+
+**R5. Monitorings un incidentu reakcija**
+- Jābūt metrikām un alertiem: kļūdu īpatsvars, latentums, straumes starta laiks, DB veselība.
+- Kritiska incidenta noteikšana un paziņošana atbildīgajam **≤ 5 min** pēc sliekšņa pārsniegšanas.
+
+---
+
+## 5) Mērogojamība (Scalability)
+
+**SC1. Lietotāju un datu apjoma pieaugums**
+- Sistēmai jāspēj palielināties līdz vismaz **3x** sākotnējā lietotāju skaita (studenti/vecāki) bez arhitektūras pārbūves, saglabājot P1/P2.
+- Datu apjoms: jāatbalsta vismaz **5 gadi** apmeklējuma notikumu un kostīmu transakciju vēsture ar atskaišu vaicājumiem P1/P1-admin robežās (izmantojot indeksus/particionēšanu).
+
+**SC2. Horizontāla mērogošana**
+- Lietotnes slānim jābūt horizontāli mērogojamam (stateless), lai pievienojot instanci, caurlaidspēja pieaugtu vismaz **lineāri līdz 4 instancēm** (±20%).
+
+**SC3. Tiešraides mērogošana**
+- Tiešraides risinājumam jāatbalsta vairāku studiju paralēlas straumes (min. **3** vienlaicīgas studijas) un skatītāju limitu konfigurēšana per studija.
+- Ja skatītāju skaits pārsniedz limitu, sistēmai jānodrošina kontrolēta atteice (queue/“capacity reached”) ar atbildi **≤ 2 s**, nevis degradācija visiem.
+
+**SC4. Integrāciju mērogošana (Wix/maksājumi)**
+- Reģistrācijas/maksājumu integrācijām jāapstrādā vismaz **50** reģistrācijas pieteikumi **10 min** laikā bez kļūdām > **1%**.
+
+---
+
+Ja vēlies, varu šīs NFR pārveidot par:
+1) “Definition of Done” kontrolsarakstu katram modulim (tiešraide/QR/kostīmi/reģistrācija), vai  
+2) testējamu kvalitātes plānu (kādi testi un ar kādiem rīkiem pierāda katru prasību).

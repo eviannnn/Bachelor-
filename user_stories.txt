@@ -1,0 +1,105 @@
+### Live straumēšana (studenti/vecāki/skolotāji)
+
+**1) Kā dejotājs (students), es vēlos pieslēgties tiešraidei savas nodarbības laikā, lai varētu piedalīties attālināti, ja nevaru ierasties klātienē.**  
+Acceptance criteria:  
+- Tiešraide ir pieejama tikai konkrētās nodarbības laikā un tikai autorizētiem lietotājiem.  
+- Lietotājs var atvērt tiešraidi no telefona un datora bez papildu instalācijām.  
+- Ja tiešraide nav pieejama (piem., tehniska kļūme), lietotājs redz saprotamu paziņojumu.
+
+**2) Kā vecāks, es vēlos skatīties bērna nodarbības tiešraidi noteiktos laikos, lai redzētu progresu un nodarbības norisi.**  
+Acceptance criteria:  
+- Vecāks redz tikai sava bērna grupai/studijai paredzēto tiešraidi.  
+- Piekļuve tiešraidei ir aizsargāta (piem., ar kontu un atļaujām).  
+- Sistēma reģistrē tiešraides skatījuma faktu (lietotājs + laiks) auditam.
+
+**3) Kā skolotājs, es vēlos, lai tiešraide ieslēdzas/izslēdzas automātiski pēc nodarbību grafika, lai man nav manuāli jāvada tehnika.**  
+Acceptance criteria:  
+- Administrators var piesaistīt kameru konkrētai studijai un nodarbību grafikam.  
+- Tiešraide automātiski aktivizējas noteiktā laikā un apstājas pēc nodarbības.  
+- Skolotājs redz statusu “tiešraide aktīva/neaktīva” savā skatā.
+
+---
+
+### QR piekļuve un apmeklējuma uzskaite (studenti/skolotāji/administrācija)
+
+**4) Kā dejotājs, es vēlos ieiet/iziet no skolas, noskenējot QR kodu, lai piekļuve būtu ātra un bez kartēm/čipiem.**  
+Acceptance criteria:  
+- QR kods ir pieejams lietotāja profilā un ir derīgs tikai autorizētam lietotājam.  
+- Pēc skenēšanas sistēma reģistrē notikumu (ieeja/izeja) ar laika zīmogu.  
+- Ja QR kods nav derīgs vai lietotājs nav aktīvs, piekļuve tiek noraidīta ar skaidru iemeslu.
+
+**5) Kā skolotājs, es vēlos redzēt automātiski ģenerētu apmeklējuma sarakstu savai nodarbībai, lai nav jāatzīmē klātbūtne manuāli.**  
+Acceptance criteria:  
+- Nodarbības skatā redzams saraksts ar “ieradies/izgājis” un laikiem.  
+- Skolotājs var manuāli koriģēt ierakstu (piem., ja skenēšana neizdevās), un korekcija tiek auditēta.  
+- Sarakstu var filtrēt pēc datuma, grupas un nodarbības.
+
+**6) Kā administrācijas darbinieks, es vēlos apskatīt piekļuves un apmeklējuma atskaites, lai varētu kontrolēt disciplīnu un plānot resursus.**  
+Acceptance criteria:  
+- Ir atskaite par apmeklējumu pa periodiem (diena/nedēļa/mēnesis) un grupām.  
+- Datus var eksportēt (piem., CSV/Excel) turpmākai apstrādei.  
+- Redzami tikai tie dati, kam lietotājam ir tiesības (lomu piekļuve).
+
+---
+
+### Tērpu (kostīmu) pārvaldība ar svītrkodiem (skolotāji/administrācija)
+
+**7) Kā administrācijas darbinieks, es vēlos reģistrēt tērpa izsniegšanu, noskenējot svītrkodu, lai precīzi zinātu, pie kura skolēna tērps atrodas.**  
+Acceptance criteria:  
+- Izsniegšanas brīdī tiek saglabāts: tērpa ID, skolēns, datums/laiks, izsniedzējs.  
+- Sistēma neļauj izsniegt tērpu, ja tas jau ir atzīmēts kā “izsniegts” citam skolēnam.  
+- Tērpa kartītē redzama bilde un statuss (noliktavā/izsniegts).
+
+**8) Kā administrācijas darbinieks, es vēlos reģistrēt tērpa atgriešanu ar svītrkodu, lai samazinātu pazudušu tērpu risku.**  
+Acceptance criteria:  
+- Atgriežot tērpu, statuss mainās uz “noliktavā” un tiek saglabāts atgriešanas laiks.  
+- Ja tērps nav atrasts sistēmā, tiek parādīts kļūdas paziņojums un iespēja meklēt manuāli.  
+- Sistēma saglabā izsniegšanas/atgriešanas vēsturi.
+
+**9) Kā skolotājs, es vēlos redzēt, kuriem skolēniem ir izsniegti tērpi konkrētam pasākumam, lai varu savlaicīgi organizēt mēģinājumus un atgādinājumus.**  
+Acceptance criteria:  
+- Skolotājs var filtrēt tērpus pēc grupas/pasākuma un statusa.  
+- Redzams saraksts “skolēns → tērps → izsniegšanas datums”.  
+- Ir iespēja atzīmēt “jāatgādina” un ģenerēt atgādinājumu sarakstu (minimāli: eksportējams saraksts).
+
+---
+
+### Reģistrācija un apmaksa (studenti/vecāki/administrācija)
+
+**10) Kā potenciālais students/vecāks, es vēlos aizpildīt tiešsaistes pieteikumu nodarbībām mājaslapā, lai varu pieteikties bez zvaniem un e-pastiem.**  
+Acceptance criteria:  
+- Forma savāc minimāli nepieciešamos datus (vārds, kontakts, grupa/vecums, izvēlētā nodarbība).  
+- Pēc iesniegšanas lietotājs saņem apstiprinājumu (ekrānā un/vai e-pastā).  
+- Administrācija redz jaunu pieteikumu sarakstu ar statusu (jauns/apstrādāts).
+
+**11) Kā vecāks, es vēlos apmaksāt nodarbības tiešsaistē reģistrācijas laikā, lai process būtu ātrs un caurspīdīgs.**  
+Acceptance criteria:  
+- Maksājums ir pieejams kā opcija (arī “apmaksāt vēlāk”).  
+- Pēc veiksmīga maksājuma sistēma saglabā maksājuma statusu un atsauci (transaction/reference).  
+- Neveiksmīga maksājuma gadījumā pieteikums netiek pazaudēts un statuss ir “gaida apmaksu”.
+
+**12) Kā administrācijas darbinieks, es vēlos pārvaldīt pieteikumus un maksājumu statusus vienuviet, lai samazinātu manuālo darbu un kļūdas.**  
+Acceptance criteria:  
+- Var mainīt pieteikuma statusu (jauns/apstiprināts/noraidīts/gaida info).  
+- Var redzēt maksājuma statusu un filtrēt “neapmaksātie”.  
+- Ir auditējamas izmaiņas (kas un kad mainīja statusu).
+
+---
+
+### Lietotāju konti, lomas un drošība (visi)
+
+**13) Kā sistēmas administrators, es vēlos pārvaldīt lietotāju lomas (students, vecāks, skolotājs, administrācija), lai katrs redz tikai sev paredzēto funkcionalitāti un datus.**  
+Acceptance criteria:  
+- Lomu piešķiršana/maiņa ir pieejama tikai administratoram.  
+- Vecāks redz tikai sava bērna datus (ne citu skolēnu).  
+- Skolotājs redz tikai savas grupas/nodarbības datus.
+
+**14) Kā lietotājs, es vēlos droši pieslēgties sistēmai, lai mani dati (apmeklējums, maksājumi, tiešraides piekļuve) būtu aizsargāti.**  
+Acceptance criteria:  
+- Pieslēgšanās notiek ar drošu autentifikāciju (piem., e-pasts + parole vai vienreizējā saite).  
+- Lietotājs var atiestatīt paroli/atjaunot piekļuvi.  
+- Sesijas beidzas pēc noteikta neaktivitātes laika.
+
+---
+
+Ja vēlies, varu šos stāstus sagrupēt pa MVP (minimālā versija) un nākamajām iterācijām, kā arī pievienot prioritātes (MoSCoW) un “Definition of Done”.

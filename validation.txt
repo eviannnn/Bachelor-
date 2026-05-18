@@ -1,0 +1,469 @@
+Zemāk validēju **FUNCTIONAL prasības** pēc ISO/IEC/IEEE 29148:2018 pret kritērijiem: *necessary, unambiguous, complete, feasible, verifiable, correct, singular*.  
+Formāts katrai prasībai: **Novērtējums → Problēmas → Uzlabota versija**.  
+(Piezīme: “correct” pilnībā apstiprināt nevaru bez biznesa noteikumiem/likumdošanas konteksta, bet norādu riskus/neskaidrības.)
+
+---
+
+## F-01 Autentifikācija/autorizācija ar lomām
+**Novērtējums:**  
+- necessary: Jā  
+- unambiguous: Daļēji  
+- complete: Daļēji  
+- feasible: Jā  
+- verifiable: Daļēji  
+- correct: Pieņemami  
+- singular: Daļēji (2 spējas vienā)
+
+**Problēmas:**  
+- “autentifikāciju un autorizāciju” vienā prasībā (nav singular).  
+- “ar lomām vismaz …” – nav definēts, ko katra loma drīkst (RBAC matrica).  
+- Nav minēts autentifikācijas veids (parole, SSO, MFA adminiem u.tml.) – verifikācija grūtāka.
+
+**Uzlabota versija:**  
+- **F-01a (Autentifikācija):** Sistēmai jānodrošina lietotāju autentifikācija ar lietotājvārdu/e‑pastu un paroli.  
+- **F-01b (Autorizācija/RBAC):** Sistēmai jānodrošina lomu balstīta piekļuves kontrole (RBAC) ar lomām: *Audzēknis, Vecāks, Skolotājs, Administrators/Direktors*, piemērojot piekļuves tiesības saskaņā ar apstiprinātu piekļuves matricu (pielikums “RBAC-01”).
+
+---
+
+## F-02 Audzēkņu profilu dati
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- “kontaktinformācija” nav definēta (telefons? e‑pasts? adrese?).  
+- “statuss” nav definētas vērtības (aktīvs/neaktīvs/izstājies u.c.).  
+- “piesaiste grupām/nodarbībām” – vai audzēknis var būt vairākās grupās vienlaikus? ar datumiem?
+
+**Uzlabota versija:**  
+Sistēmai jānodrošina audzēkņa profila datu uzturēšana ar laukiem: vārds, uzvārds, dzimšanas datums (ja nepieciešams), e‑pasts un/vai telefons, statuss (*Aktīvs, Neaktīvs, Izstājies*), kā arī piesaiste vienai vai vairākām grupām ar piesaistes sākuma/beigu datumu.
+
+---
+
+## F-03 Vecāku profili un sasaistes ar audzēkņiem
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Daļēji
+
+**Problēmas:**  
+- Vienā prasībā: profila uzturēšana + sasaistīšana.  
+- Nav noteikts sasaistes apstiprināšanas mehānisms (piem., admins apstiprina, vai ar kodu).  
+- Nav noteikts, vai 2 vecāki var būt piesaistīti vienam audzēknim (parasti jā).
+
+**Uzlabota versija:**  
+- **F-03a:** Sistēmai jānodrošina vecāka profila datu uzturēšana (vārds, uzvārds, e‑pasts, telefons).  
+- **F-03b:** Sistēmai jānodrošina vecāka konta sasaistīšana ar vienu vai vairākiem audzēkņiem, saglabājot sasaistes izveidotāju un datumu/laiku; sasaisti apstiprina administrators vai ar audzēkņa/administrācijas izsniegtu verifikācijas kodu.
+
+---
+
+## F-04 Skolotāju profili un piesaiste nodarbībām/grupām
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Daļēji
+
+**Problēmas:**  
+- Profils + piesaiste vienā prasībā.  
+- Nav definēts, vai skolotājs var būt vairākiem grafikiem, aizvietošana u.tml.
+
+**Uzlabota versija:**  
+- **F-04a:** Sistēmai jānodrošina skolotāja profila datu uzturēšana (vārds, uzvārds, kontaktinformācija, statuss).  
+- **F-04b:** Sistēmai jānodrošina skolotāja piesaiste vienai vai vairākām grupām/nodarbībām ar spēkā esamības periodu.
+
+---
+
+## F-05 Nodarbību grafika uzturēšana
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- Nav minēts ilgums (sākums/beigas), atkārtošanās (iknedēļas), atcelšana, izmaiņu vēsture.  
+- “zāle/studija” – vai ir atsevišķs studiju katalogs?
+
+**Uzlabota versija:**  
+Sistēmai jānodrošina nodarbību grafika uzturēšana ar laukiem: datums, sākuma laiks, beigu laiks, studija/zāle (no studiju kataloga), grupa, skolotājs; jāatbalsta atkārtojošies grafiki un atsevišķu nodarbību atcelšana/pārcelšana ar izmaiņu auditu.
+
+---
+
+## F-06 QR koda ģenerēšana un piešķiršana audzēknim
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Daļēji; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- Nav definēts QR koda derīgums (rotācija, termiņš), drošība (vai satur tokenu), atjaunošana zuduma gadījumā.  
+- “izmantošanai ieejai/izejai” – vai QR ir vienāds ieejai un izejai?
+
+**Uzlabota versija:**  
+Sistēmai jāģenerē audzēknim unikāls digitāls QR kods, kas identificē audzēkni ar drošu nejaušu tokenu; tokenam jābūt atsaucamam un atjaunojamam administratora darbībā, un sistēmai jāspēj atzīmēt QR kā nederīgu (piem., konta deaktivizācijas gadījumā).
+
+---
+
+## F-07 Ieejas notikuma reģistrēšana ar QR
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- Nav definēts minimālais notikuma saturs (audzēknis, punkts, ierīce, rezultāts).  
+- Nav definēta rīcība nederīga QR gadījumā.
+
+**Uzlabota versija:**  
+Nolasot audzēkņa QR kodu ieejas punktā, sistēmai jāizveido piekļuves notikums ar datiem: audzēkņa ID, notikuma tips=“Ieeja”, datums/laiks (servera laiks), ieejas punkta/ierīces ID un validācijas rezultāts (atļauts/noraidīts ar iemeslu).
+
+---
+
+## F-08 Izejas notikuma reģistrēšana ar QR
+**Novērtējums:** kā F-07
+
+**Problēmas:**  
+- Tādas pašas kā F-07; papildus: ko darīt, ja nav ieejas notikuma (tikai izeja)?
+
+**Uzlabota versija:**  
+Nolasot audzēkņa QR kodu izejas punktā, sistēmai jāizveido piekļuves notikums ar datiem: audzēkņa ID, notikuma tips=“Izeja”, datums/laiks, izejas punkta/ierīces ID un validācijas rezultāts; ja nav atrasts atbilstošs ieejas notikums, sistēmai jāreģistrē notikums ar atzīmi “nepāra notikums”.
+
+---
+
+## F-09 Automātiska apmeklējuma ierakstu veidošana pēc grafika
+**Novērtējums:** necessary: Jā; unambiguous: Nē; complete: Nē; feasible: Jā; verifiable: Daļēji; correct: Atkarīgs; singular: Jā
+
+**Problēmas:**  
+- Nav definēti sasaistes noteikumi: laika logs (piem., ±15 min), kavējums, ja vairākas nodarbības vienā dienā, ja audzēknis ir vairākās grupās.  
+- Nav definēts, vai apmeklējums balstās uz ieeju ēkā vai ieeju konkrētā studijā.
+
+**Uzlabota versija:**  
+Sistēmai automātiski jāizveido apmeklējuma ieraksts nodarbībai, ja audzēknim ir reģistrēts “Ieeja” notikums laika logā **[nodarbības sākums − X min; nodarbības beigas]** un audzēknis ir piesaistīts attiecīgajai grupai; X (piem., 15) ir konfigurējams. Sistēmai jāatzīmē statuss: *Klāt, Kavē (ja ieeja pēc sākuma + Y min), Nav klāt*.
+
+---
+
+## F-10 Skolotājs pārskata apmeklējumu reāllaikā un pēc nodarbības
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Daļēji; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- “reāllaikā” nav definēts (atjaunošana ik pēc cik sekundēm/minūtēm).  
+- Nav definēts, ko tieši redz (statusi, laiki, piezīmes).
+
+**Uzlabota versija:**  
+Sistēmai jānodrošina skolotājam apmeklējuma saraksta skats savai nodarbībai ar dalībnieku statusiem un ieejas laiku; sarakstam jāatjaunojas ne retāk kā reizi 30 sekundēs nodarbības laikā un jābūt pieejamam arī pēc nodarbības.
+
+---
+
+## F-11 Adminam piekļuve piekļuves žurnāliem un apmeklējuma atskaitēm
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- Nav definēti filtri/periodi/eksports (daļa ir citā prasībā).  
+- “administrators/direktors” – vai tās ir 2 lomas vai viena?
+
+**Uzlabota versija:**  
+Sistēmai jānodrošina lomai *Administrators* un/vai *Direktors* piekļuve piekļuves notikumu žurnālam un apmeklējuma atskaitēm ar filtriem pēc perioda, audzēkņa, grupas un ieejas punkta.
+
+---
+
+## F-12 Manuāla apmeklējuma korekcija ar auditu
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- Nav noteikts, kuras lomas drīkst labot (skolotājs? admins?).  
+- Nav noteikts, kas tieši auditā jāglabā (vecā vērtība/jaunā vērtība).
+
+**Uzlabota versija:**  
+Sistēmai jāļauj skolotājam un administratoram manuāli labot apmeklējuma ieraksta statusu un piezīmi; katrai izmaiņai jāizveido audita ieraksts ar: lietotāja ID, datums/laiks, objekts (nodarbība+audzēknis), vecā vērtība, jaunā vērtība un izmaiņas iemesls (brīvs teksts vai izvēlne).
+
+---
+
+## F-13 Tiešraides video straumēšana noteiktos laikos
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Daļēji; verifiable: Daļēji; correct: Atkarīgs; singular: Jā
+
+**Problēmas:**  
+- “no katras studijas kameras” – pieņēmums par kameru skaitu/tehnisko integrāciju.  
+- “noteiktos laikos” – nav sasaistes ar grafiku/konfigurāciju (daļa ir F-17).  
+- Nav definēts, vai straume ir vienvirziena, vai tiek ierakstīta.
+
+**Uzlabota versija:**  
+Sistēmai jānodrošina tiešraides video straumes atskaņošana katrai konfigurētai studijai laikā, kas definēts tiešraižu grafikā; sistēmai nav jānodrošina ierakstīšana, ja vien nav norādīts atsevišķā prasībā.
+
+---
+
+## F-14 Tiešraides piekļuves ierobežošana autorizētiem lietotājiem pēc grupas/nodarbības
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- “audzēkņiem un vecākiem” – vai skolotājs/admins arī var skatīties?  
+- “atbilstoši viņu grupai/nodarbībai” – jādefinē noteikums vecākiem (pēc bērna piesaistes).
+
+**Uzlabota versija:**  
+Sistēmai jānodrošina, ka tiešraidi var skatīties tikai autentificēti lietotāji, kuriem ir tiesības uz attiecīgo nodarbību: audzēknis ir piesaistīts grupai; vecāks ir sasaistīts ar audzēkni, kas piesaistīts grupai; administrators/direktors var skatīties visas straumes.
+
+---
+
+## F-15 Tiešraides skatīšanās saite/interfeiss mobilajās ierīcēs un datoros
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Daļēji; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- “darbojas” nav izmērāms (pārlūku/OS matrica ir NFR U4, bet šeit nav sasaistes).  
+- “saite” vs “interfeiss” – vai pietiek ar iebūvētu lapu?
+
+**Uzlabota versija:**  
+Sistēmai jānodrošina tiešraides skatīšanās tīmekļa lapa (viewer), kas atbalsta atskaņošanu mērķa pārlūkos un ierīcēs saskaņā ar NFR U4.
+
+---
+
+## F-16 Tiešraides piekļuves žurnāls
+**Novērtējums:** necessary: Jā; unambiguous: Jā; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- Nav definēts, vai žurnāls ir par “play start”, “stop”, sesijas ilgumu, IP u.tml.
+
+**Uzlabota versija:**  
+Sistēmai jāreģistrē tiešraides skatīšanās sesijas sākums un beigas ar datiem: lietotāja ID, studijas/straumes ID, datums/laiks, sesijas identifikators.
+
+---
+
+## F-17 Admins konfigurē tiešraides pieejamību un laikus
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- Nav definēts, vai konfigurācija ir pēc nodarbības grafika vai neatkarīgs grafiks.  
+- Nav definēts, vai ir “buffer” pirms/pēc nodarbības.
+
+**Uzlabota versija:**  
+Sistēmai jānodrošina administratoram iespēja konfigurēt tiešraides pieejamību katrai studijai/nodarbībai, norādot laika logu (sākums, beigas) un piekļuves auditoriju; jāatbalsta konfigurējams “pirms/pēc” buferis (piem., 5 min).
+
+---
+
+## F-18 Tērpu inventāra reģistrs ar unikālu ID, foto, aprakstu
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- “unikāls tērpa ID” – formāts/ģenerēšana nav noteikta.  
+- Foto glabāšana (izmērs/formāts) nav noteikta (var būt NFR).
+
+**Uzlabota versija:**  
+Sistēmai jāuztur tērpu reģistrs, kur katram tērpam ir unikāls sistēmas ID, nosaukums, apraksts un vismaz viens fotoattēls.
+
+---
+
+## F-19 Svītrkoda ģenerēšana vai reģistrēšana un sasaistīšana
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- “ģenerēt vai reģistrēt” – divi režīmi, jāprecizē atbalstītie standarti (Code128/QR u.c.).  
+- Jānosaka unikālums (svītrkods nedrīkst atkārtoties).
+
+**Uzlabota versija:**  
+Sistēmai jāatbalsta tērpa svītrkoda pievienošana tērpa ierakstam, nodrošinot svītrkoda unikālumu sistēmā; svītrkoda formāts: Code128 (vai cits saskaņots formāts).
+
+---
+
+## F-20 Tērpa izsniegšana audzēknim (svītrkods + audzēknis + datums/laiks + atbildīgais)
+**Novērtējums:** necessary: Jā; unambiguous: Jā; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- Nav noteikts, vai jānorāda plānotais atdošanas datums.  
+- Nav noteikts, ko darīt, ja tērps jau izsniegts.
+
+**Uzlabota versija:**  
+Noskenējot tērpa svītrkodu, sistēmai jāļauj pilnvarotam lietotājam izsniegt tērpu izvēlētam audzēknim, saglabājot izsniegšanas datumu/laiku, atbildīgā lietotāja ID un (ja norādīts) plānoto atdošanas datumu; ja tērps nav statusā “Pieejams”, izsniegšana jābloķē.
+
+---
+
+## F-21 Tērpa atgriešana (svītrkods + datums/laiks + atbildīgais)
+**Novērtējums:** necessary: Jā; unambiguous: Jā; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- Nav noteikts, vai var pievienot stāvokli/piezīmi (tas ir user stories, bet ne šeit).
+
+**Uzlabota versija:**  
+Noskenējot tērpa svītrkodu, sistēmai jāreģistrē tērpa atgriešana, saglabājot atgriešanas datumu/laiku, atbildīgā lietotāja ID un tērpa stāvokli (piem., *OK, Jāmazgā, Bojāts*).
+
+---
+
+## F-22 Tērpa statuss un kam izsniegts
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- Statusu saraksts nav pilns (piem., “remontā”, “norakstīts”).  
+- “kam tas izsniegts” – jāprecizē, ka tikai, ja statuss “izsniegts”.
+
+**Uzlabota versija:**  
+Sistēmai jāattēlo tērpa statuss (*Pieejams, Izsniegts, Rezervēts, Remontā, Norakstīts*) un, ja statuss ir “Izsniegts”, jāattēlo audzēknis un izsniegšanas datums.
+
+---
+
+## F-23 Tērpu meklēšana/filtrēšana
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Daļēji; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- “citiem parametriem” ir neskaidrs (unambiguous).  
+- Nav noteikts minimālais filtru komplekts.
+
+**Uzlabota versija:**  
+Sistēmai jānodrošina tērpu meklēšana un filtrēšana vismaz pēc: tērpa ID, svītrkoda, statusa, audzēkņa (kam izsniegts), izmēra un kategorijas.
+
+---
+
+## F-24 Atskaites par izsniegtajiem tērpiem, kavējumiem, apriti
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Daļēji; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- “kavētām atgriešanām” – nav definēts, kas ir “kavēts” (pret plānoto atdošanas datumu?).  
+- Nav definēts atskaites formāts/filtri.
+
+**Uzlabota versija:**  
+Sistēmai jāģenerē atskaites par tērpu izsniegšanām un atgriešanām ar filtriem pēc perioda, statusa un grupas; “kavēta atgriešana” ir gadījums, kad plānotais atdošanas datums ir pagājis un tērps nav atgriezts.
+
+---
+
+## F-25 Tiešsaistes pieteikšanās forma mājaslapā
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Daļēji; verifiable: Daļēji; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- “skolas mājaslapā” – integrācijas veids nav noteikts (iframe, link, embed, API).  
+- Atkarīgs no platformas (Wix u.c.) – feasibility jāapstiprina.
+
+**Uzlabota versija:**  
+Sistēmai jānodrošina pieteikšanās forma, ko var integrēt skolas mājaslapā kā iegulstamu komponenti (embed) vai atsevišķu lapu ar saiti; formai jābūt pieejamai mobilajās ierīcēs.
+
+---
+
+## F-26 Pieteikuma datu saglabāšana
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- “piekrišanas” – jānorāda, kādas piekrišanas un kā glabā (versija ir citā prasībā).  
+- “pieteicējs, audzēknis” – vai tie var būt viena persona?
+
+**Uzlabota versija:**  
+Sistēmai jāglabā pieteikuma dati: pieteicēja vārds/uzvārds, kontakts (e‑pasts, telefons), audzēkņa dati (ja atšķiras), izvēlētā grupa/nodarbība, pieteikuma statuss un piekrišanas (piekrišanas ID/versija + datums/laiks).
+
+---
+
+## F-27 Integrācija ar ārēju reģistrācijas/maksājumu platformu (piem., Wix)
+**Novērtējums:** necessary: Daļēji; unambiguous: Nē; complete: Nē; feasible: Daļēji; verifiable: Daļēji; correct: Atkarīgs; singular: Daļēji
+
+**Problēmas:**  
+- “integrēt … (piem., Wix)” – nav definēts integrācijas scenārijs (kurš ir “source of truth”?).  
+- “nodrošinot pāreju uz apmaksu vai pieteikšanos bez tūlītējas apmaksas” – divi procesi vienā prasībā.  
+- Feasibility atkarīga no Wix API iespējām.
+
+**Uzlabota versija:**  
+- **F-27a:** Sistēmai jānodrošina pieteikuma izveide bez tūlītējas apmaksas, saglabājot statusu “Gaida apmaksu” vai “Iesniegts”.  
+- **F-27b:** Sistēmai jānodrošina integrācija ar ārēju maksājumu pakalpojumu sniedzēju (konkrēts: Wix/Stripe/…), izmantojot definētu API/Webhook specifikāciju (pielikums “PAY-INT-01”), lai pēc maksājuma notikuma atjauninātu pieteikuma statusu.
+
+---
+
+## F-28 Maksājuma statusa reģistrēšana un sasaistīšana ar pieteikumu
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- Statusu kopa nav pilna (piem., “refundēts”, “daļēji apmaksāts”).  
+- Nav minēta transakcijas atsauce.
+
+**Uzlabota versija:**  
+Sistēmai jāglabā maksājuma statuss pieteikumam (*Gaida apmaksu, Apmaksāts, Neveiksmīgs, Atcelts, Refundēts*) un maksājuma atsauce (transaction/payment ID) no maksājumu pakalpojuma sniedzēja.
+
+---
+
+## F-29 Admins pārskata/apstiprina/noraida pieteikumus un pārvalda uzņemšanu grupās
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Daļēji
+
+**Problēmas:**  
+- Apstiprināšana/noraidīšana + uzņemšana grupās vienā prasībā.  
+- Nav definēti statusi un pārejas (workflow).
+
+**Uzlabota versija:**  
+- **F-29a:** Sistēmai jāļauj administratoram mainīt pieteikuma statusu saskaņā ar statusu modeli: *Iesniegts → Apstiprināts/Noraidīts; Apstiprināts → Uzņemts grupā*.  
+- **F-29b:** Sistēmai jāļauj administratoram pievienot audzēkni grupai, izveidojot piesaisti ar sākuma datumu.
+
+---
+
+## F-30 Centralizēts administratīvais panelis
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Daļēji; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- “centralizētu” ir interpretējams (viena UI? viena vietne?).  
+- Nav definēts minimālais funkciju kopums panelī.
+
+**Uzlabota versija:**  
+Sistēmai jānodrošina administratīvais tīmekļa panelis, kurā administrators var pārvaldīt apmeklējumu, piekļuves notikumus, tērpu inventāru un pieteikumus.
+
+---
+
+## F-31 Datu eksports (CSV/Excel)
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- “piem., CSV/Excel” – jāfiksē atbalstītie formāti.  
+- Nav noteikts, kuras lomas drīkst eksportēt (drošība).
+
+**Uzlabota versija:**  
+Sistēmai jāļauj administratoram eksportēt apmeklējuma, tērpu un pieteikumu datus CSV un XLSX formātos; eksporta darbība jāreģistrē auditlogā.
+
+---
+
+## F-32 Sistēmas notikumu un kļūdu žurnāli
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Daļēji; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- Nav definēts, kas ir “notikumi” (biznesa vs tehniskie).  
+- Nav definēts glabāšanas termiņš (tas ir NFR S5/R?).
+
+**Uzlabota versija:**  
+Sistēmai jāreģistrē tehniskie kļūdu žurnāli un sistēmas notikumi (servisu kļūdas, integrāciju kļūmes, straumes kļūdas) ar datumu/laiku, komponenti un korelācijas ID; žurnāli jāglabā vismaz 12 mēnešus.
+
+---
+
+## F-33 Paziņojumi (e-pasts) par būtiskiem notikumiem
+**Novērtējums:** necessary: Daļēji; unambiguous: Daļēji; complete: Nē; feasible: Jā; verifiable: Daļēji; correct: Pieņemami; singular: Daļēji
+
+**Problēmas:**  
+- “piem., e-pasts” – kanāli nav fiksēti.  
+- “būtiskiem notikumiem” nav definēts saraksts un saņēmēji.  
+- Divi piemēri vienā prasībā (jauns pieteikums; neatgriezts tērps).
+
+**Uzlabota versija:**  
+- **F-33a:** Sistēmai jānosūta e‑pasta paziņojums administratoram par jaunu pieteikumu 5 minūšu laikā pēc pieteikuma iesniegšanas.  
+- **F-33b:** Sistēmai jānosūta e‑pasta paziņojums atbildīgajai lomai par tērpu, kas nav atgriezts līdz plānotajam atdošanas datumam (nosūtīšana reizi dienā plkst. 08:00).
+
+---
+
+## F-34 Datu piekļuves ierobežošana pēc lomas un piesaistēm
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Daļēji; correct: Pieņemami; singular: Jā
+
+**Problēmas:**  
+- Pārklājas ar F-01/F-14; vajag atsauci uz vienotu RBAC noteikumu kopu.  
+- “piem., vecāks redz tikai sava bērna datus” – jādefinē arī skolotājs, admins.
+
+**Uzlabota versija:**  
+Sistēmai jāpiemēro datu piekļuves ierobežojumi saskaņā ar RBAC un piesaistēm: vecāks redz tikai ar viņu sasaistīto audzēkņu datus; skolotājs redz tikai savu grupu/nodarbību datus; administrators/direktors redz visus datus.
+
+---
+
+## F-35 Piekrišana personas datu apstrādei reģistrācijā + piekrišanas fakta glabāšana
+**Novērtējums:** necessary: Jā; unambiguous: Daļēji; complete: Daļēji; feasible: Jā; verifiable: Jā; correct: Atkarīgs (juridiski); singular: Jā
+
+**Problēmas:**  
+- Jāprecizē, kādas piekrišanas (privātuma politika, video straume, mārketings).  
+- “versija” – jādefinē, kas ir versija (dokumenta versija/ID).
+
+**Uzlabota versija:**  
+Reģistrācijas procesā sistēmai jāpieprasa lietotājam apstiprināt privātuma politiku (un citas definētas piekrišanas), un jāglabā piekrišanas fakts: lietotāja ID, piekrišanas veids, dokumenta versija/ID, datums/laiks un avots (web forma).
+
+---
+
+## F-36 Datu dzēšana vai anonimizācija pēc administratīva pieprasījuma un normatīvajām prasībām
+**Novērtējums:** necessary: Jā; unambiguous: Nē; complete: Nē; feasible: Daļēji; verifiable: Daļēji; correct: Atkarīgs; singular: Daļēji
+
+**Problēmas:**  
+- “dzēšanas vai anonimizācijas” – jādefinē, kad kuru piemēro (retention, juridiskie pienākumi).  
+- Nav definēts process, termiņi, datu apjoms (kādi objekti: profili, žurnāli, maksājumi).  
+- Feasibility atkarīga no auditlog “append-only” prasībām (konflikts: dzēšana vs nemaināmi žurnāli).
+
+**Uzlabota versija:**  
+Sistēmai jānodrošina administratīvs process personas datu dzēšanai vai anonimizācijai, kur: (1) administrators iesniedz pieprasījumu ar pamatojumu, (2) sistēma anonimizē audzēkņa/vecāka profila datus un saglabā tikai minimālos tehniskos ierakstus, kas nepieciešami juridiskai atbilstībai (piem., auditlogos), (3) darbība tiek auditēta; izpildes termiņš ≤ 30 dienas.
+
+---
+
+# Kopsavilkums par tipiskajām neatbilstībām (visā funkcionālajā blokā)
+Biežākie 29148 kvalitātes riski:
+1. **Nav singular**: vairākas funkcijas vienā teikumā (F-01, F-03, F-04, F-27, F-29, F-33, F-36).  
+2. **Nepietiekama noteikumu formalizācija**: “reāllaikā”, “noteiktos laikos”, “citi parametri”, “būtiski notikumi” (F-09, F-10, F-13, F-23, F-33).  
+3. **Trūkst datu modeļa/enum vērtību**: statusi, piekrišanas veidi, atskaišu definīcijas.  
+4. **Integrāciju neskaidrība**: Wix/maksājumi – jāfiksē konkrēts integrācijas līgums/specifikācija (F-27).  
+5. **Verifikācijas grūtības**: ja nav mērījuma vai skaidra “done” kritērija.
+
+---
+
+Ja vēlies, nākamajā solī varu:
+1) izveidot **unikālu ID shēmu** (F-01…F-36) un sakārtot prasības pa moduļiem; vai  
+2) pārveidot uzlabotās prasības par **testējamiem acceptance criteria (Given/When/Then)**; vai  
+3) izdarīt to pašu validāciju arī **NFR** (tur lielākā daļa jau ir labi, bet ir vietas, kur jāsaskaņo definīcijas un mērījumu metodes).

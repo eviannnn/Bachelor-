@@ -1,0 +1,376 @@
+Zemāk ir validācija pēc ISO/IEC/IEEE 29148:2018 prasību kvalitātes kritērijiem, interpretējot katru **use case** kā prasību artefaktu (lietojuma scenāriju). Vērtējums ir par to, cik labi katrs UC ir definēts tā, lai to varētu droši projektēt/izstrādāt un testēt.
+
+Vērtējuma skala: **OK / Daļēji / Nē**.
+
+---
+
+## 1) Skatīties nodarbības tiešraidi (students)
+
+### 1) Kritēriju novērtējums
+- Nepieciešamība: **OK**
+- Nepārprotamība: **Daļēji**
+- Pilnīgums: **Daļēji**
+- Realizējamība: **OK**
+- Pārbaudāmība: **Daļēji**
+- Korektums: **Daļēji**
+- Viennozīmīgums (singular): **Daļēji**
+
+### 2) Problēmas
+- Nav definēti **priekšnosacījumi** (piem., “studentam ir aktīvs konts”, “nodarbībai ir piesaistīta kamera/straume”).
+- “Sistēma pārbauda piekļuves tiesības un nodarbības laiku” – nav skaidrs:
+  - ko nozīmē “laiks” (cik min pirms/pēc sākuma drīkst pieslēgties),
+  - kas notiek, ja nav atļauts (kļūdas ziņa? alternatīvs ceļš?).
+- “Sistēma reģistrē piekļuves faktu (logs)” – “logs” ir neskaidrs termins (žurnāls/audits?).
+- UC sajauc vairākus mērķus: skatīšanās + audita reģistrēšana (var palikt, bet jānoformulē kā sistēmas pienākums ar skaidriem datiem).
+
+### 3) Uzlabota versija (ieteikums)
+**Nosaukums:** Skatīties nodarbības tiešraidi (students)  
+**Aktors:** Students  
+**Mērķis:** Students skatās savas grupas nodarbības tiešraidi atļautajā laikā.  
+**Priekšnosacījumi:** (1) Students ir autorizēts; (2) studentam ir piešķirta grupa; (3) nodarbībai ir aktīva tiešraide vai plānota tiešraide.  
+**Trigeris:** Students izvēlas nodarbību sadaļā “Tiešraides”.  
+**Pamata plūsma:**
+1. Students atver portālu un autorizējas.
+2. Students atver “Tiešraides” un izvēlas nodarbību.
+3. Sistēma pārbauda: (a) vai students pieder nodarbības grupai; (b) vai pašreizējais laiks ir atļautajā pieslēgšanās logā (definēt, piem., no **X min** pirms līdz **Y min** pēc sākuma).
+4. Sistēma uzsāk video straumes atskaņošanu.
+5. Sistēma ieraksta piekļuves žurnālā: lietotājs, nodarbība, laiks, rezultāts (atļauts/liegts), IP/ierīce (ja nepieciešams).
+**Pēcnosacījumi:** Piekļuves notikums ir saglabāts audita žurnālā.
+
+---
+
+## 2) Skatīties nodarbības tiešraidi (vecāks)
+
+### 1) Kritēriju novērtējums
+- Nepieciešamība: **OK**
+- Nepārprotamība: **Daļēji**
+- Pilnīgums: **Daļēji**
+- Realizējamība: **OK**
+- Pārbaudāmība: **Daļēji**
+- Korektums: **Daļēji**
+- Viennozīmīgums: **Daļēji**
+
+### 2) Problēmas
+- “noteiktos laikos” un “atļautais laiks” nav definēts (tas ir būtisks piekļuves noteikums).
+- Nav skaidrs, vai vecāks redz **visas** bērna nodarbības vai tikai atsevišķas (piem., “atvērtās nodarbības”).
+- Nav definēts, kas notiek, ja piesaistīti vairāki bērni, bet vecākam nav tiesību uz konkrēto straumi.
+
+### 3) Uzlabota versija
+Pievienot:
+- **Priekšnosacījums:** vecāks ir piesaistīts bērnam sistēmā un ir piešķirtas skatīšanās tiesības.
+- **Noteikums:** definēt “vecāku skatīšanās logu” (piem., tikai pirmās 10 min, vai tikai noteiktās dienās, vai tikai ar skolotāja atļauju).
+- **Žurnāls:** vienots formāts kā UC1.
+
+---
+
+## 3) Pārvaldīt tiešraides grafiku un piekļuves noteikumus
+
+### 1) Kritēriju novērtējums
+- Nepieciešamība: **OK**
+- Nepārprotamība: **Daļēji**
+- Pilnīgums: **Daļēji**
+- Realizējamība: **Daļēji**
+- Pārbaudāmība: **Daļēji**
+- Korektums: **Daļēji**
+- Viennozīmīgums: **Daļēji**
+
+### 2) Problēmas
+- “studiju/kameru” – nav skaidrs, vai ir vairākas lokācijas, vai viena kamera var būt piesaistīta vairākām grupām.
+- “piekļuves politika (studenti/vecāki)” – pārāk vispārīgi; trūkst parametru (laika logi, ierobežojumi, izņēmumi).
+- “Sistēma aktivizē straumi atbilstoši grafikam” – realizējamība atkarīga no integrācijas ar straumēšanas risinājumu; nav definēts, ko nozīmē “aktivizē” (start/stop? publicē saiti? ieslēdz kameru?).
+
+### 3) Uzlabota versija
+- Precizēt entītijas: **Kamera**, **Telpa**, **Nodarbība**, **Grupa**, **Straumes kanāls/URL**.
+- Definēt politikas parametrus: “atļauts studentiem”, “atļauts vecākiem”, “pieslēgšanās logs”, “maksimālais skatītāju skaits” (ja aktuāli).
+- Pievienot pēcnosacījumu: “grafiks saglabāts un stājas spēkā no …”.
+
+---
+
+## 4) Ieeja ēkā ar QR kodu (piekļuves kontrole)
+
+### 1) Kritēriju novērtējums
+- Nepieciešamība: **OK**
+- Nepārprotamība: **Daļēji**
+- Pilnīgums: **Daļēji**
+- Realizējamība: **Daļēji**
+- Pārbaudāmība: **Daļēji**
+- Korektums: **Daļēji**
+- Viennozīmīgums: **Daļēji**
+
+### 2) Problēmas
+- 1. solis piedāvā 2 dažādus risinājumus (“students rāda QR” vs “skenē uz vietas izvietotu kodu”) — tas ir **divi atšķirīgi modeļi** ar atšķirīgu drošību un plūsmu.
+- “Skeneris/sistēma identificē studentu” – ja students skenē “uz vietas izvietotu kodu”, tad QR pats par sevi neidentificē studentu (vajag papildus autentifikāciju/ierīces identitāti).
+- “apmaksa/atļauja, konta statuss” – nav definēti noteikumi (kas tieši bloķē ieeju).
+- Nav definēts, kas notiek atteikuma gadījumā (durvis neatveras, tiek rādīts iemesls, tiek sūtīts paziņojums).
+
+### 3) Uzlabota versija
+Izvēlēties **vienu** primāro modeli (ieteicams drošākais):
+- **Modelis A:** students portālā/lietotnē ģenerē **dinamisku QR** (laika ierobežots), skeneris nolasa un validē.
+- (Alternatīvi) Modelis B: students skenē pie durvīm izvietotu QR un apstiprina lietotnē (bet tad jādefinē autentifikācija).
+
+Pievienot:
+- Priekšnosacījumi: aktīvs konts, aktīvas tiesības, ierīce/QR pieejams.
+- Noteikumi: ko nozīmē “aktīva piekļuve” (piem., apmaksāts periods līdz datumam X).
+- Pēcnosacījumi: izveidots piekļuves notikums ar rezultātu (atļauts/liegts) un iemeslu.
+
+---
+
+## 5) Iziešana no ēkas ar QR kodu
+
+### 1) Kritēriju novērtējums
+- Nepieciešamība: **Daļēji**
+- Nepārprotamība: **OK**
+- Pilnīgums: **Daļēji**
+- Realizējamība: **OK**
+- Pārbaudāmība: **Daļēji**
+- Korektums: **Daļēji**
+- Viennozīmīgums: **OK**
+
+### 2) Problēmas
+- Nepieciešamība: nav skaidrs, vai biznesam tiešām vajag “izeju” (daudzās skolās pietiek ar ierašanos). Ja vajag drošībai/precīzam laikam — jāpasaka.
+- Nav definēts, ko darīt, ja nav bijusi “ieeja” (piem., students aizmirsis noskenēt).
+- “atjauno apmeklējuma statusu” – neskaidrs, kāds tieši statuss un kurā brīdī.
+
+### 3) Uzlabota versija
+- Pievienot noteikumu: ja nav atrasta atbilstoša ieeja, sistēma vai nu (a) izveido tikai izejas notikumu, vai (b) atzīmē kā anomāliju.
+- Precizēt pēcnosacījumu: “apmeklējuma ierakstam tiek pievienots iziešanas laiks, ja tas ir sasaistāms ar nodarbību X”.
+
+---
+
+## 6) Automātiska apmeklējuma uzskaite pēc ieejas/izejas datiem
+
+### 1) Kritēriju novērtējums
+- Nepieciešamība: **OK**
+- Nepārprotamība: **Daļēji**
+- Pilnīgums: **Daļēji**
+- Realizējamība: **Daļēji**
+- Pārbaudāmība: **Daļēji**
+- Korektums: **Daļēji**
+- Viennozīmīgums: **Daļēji**
+
+### 2) Problēmas
+- Nav definēti algoritma noteikumi: cik minūtes pirms/pēc nodarbības skenējums skaitās “klāt”.
+- Nav definēts, kā rīkoties ar:
+  - tikai ieeju bez izejas,
+  - vairākām ieejām/izejām,
+  - skenējumu ārpus grafika,
+  - attālinātu dalību (tiešraide) kā apmeklējuma avotu.
+- Aktors “Skolotājs / administrators” – bet 1.–3. solis ir sistēmas automātika (aktors te nav īsti izpildītājs).
+
+### 3) Uzlabota versija
+- Noformēt kā sistēmas UC ar trigeri “saņemts piekļuves notikums” vai kā “batch job”.
+- Definēt noteikumus (piem.):
+  - “Klāt”, ja ieeja ir intervālā [nodarbības sākums − 15 min; sākums + 20 min].
+  - “Daļēji”, ja iziešana pirms beigām (ja tas svarīgi).
+  - “Attālināti”, ja tiešraides skatīšanās ilgums ≥ N min (ja izmanto).
+- Pievienot pārbaudāmus kritērijus (sliekšņi, laika logi).
+
+---
+
+## 7) Skolotājs pārskata un koriģē apmeklējumu
+
+### 1) Kritēriju novērtējums
+- Nepieciešamība: **OK**
+- Nepārprotamība: **Daļēji**
+- Pilnīgums: **Daļēji**
+- Realizējamība: **OK**
+- Pārbaudāmība: **Daļēji**
+- Korektums: **OK**
+- Viennozīmīgums: **OK**
+
+### 2) Problēmas
+- Statusu kopa nav definēta (klāt/iztrūkst/attālināti/attaisnots u.c.) un to nozīme.
+- Nav definēts, vai skolotājs drīkst labot jebkuru nodarbību vai tikai savas, un cik ilgi pēc nodarbības.
+- “audita ieraksts” – labi, bet jāprecizē minimālie lauki.
+
+### 3) Uzlabota versija
+- Definēt statusu vārdnīcu un validācijas noteikumus.
+- Pievienot autorizācijas noteikumu: skolotājs rediģē tikai savas grupas nodarbības.
+- Audits: kas mainīts (vecā vērtība/jaunā), kas, kad, iemesls (ja nepieciešams).
+
+---
+
+## 8) Izsniegt tērpu studentam (svītrkods)
+
+### 1) Kritēriju novērtējums
+- Nepieciešamība: **OK**
+- Nepārprotamība: **OK**
+- Pilnīgums: **Daļēji**
+- Realizējamība: **OK**
+- Pārbaudāmība: **OK**
+- Korektums: **OK**
+- Viennozīmīgums: **OK**
+
+### 2) Problēmas
+- “termīņš/pasākums” – nav skaidrs, vai termiņš ir obligāts, kā to nosaka.
+- Nav alternatīvu gadījumu: tērps bojāts, nav atrasts, svītrkods nedarbojas, students nav sistēmā.
+- Nav definēts, vai vienam studentam var izsniegt vairākus tērpus vienlaikus, un vai tērpam var būt komplekts (daļas).
+
+### 3) Uzlabota versija
+- Pievienot datu prasības: obligātie lauki izsniegšanai (students, tērps, pasākums vai atgriešanas datums).
+- Noteikumi: “tērpu nevar izsniegt, ja statuss ≠ Pieejams”.
+- Pēcnosacījums: izveidots izsniegšanas ieraksts + tērpa statuss atjaunots.
+
+---
+
+## 9) Pieņemt tērpa atgriešanu (svītrkods)
+
+### 1) Kritēriju novērtējums
+- Nepieciešamība: **OK**
+- Nepārprotamība: **OK**
+- Pilnīgums: **Daļēji**
+- Realizējamība: **OK**
+- Pārbaudāmība: **OK**
+- Korektums: **OK**
+- Viennozīmīgums: **OK**
+
+### 2) Problēmas
+- “atrod aktīvo izsniegšanas ierakstu” – kas notiek, ja nav atrasts (tērps nav izsniegts / izsniegts citā sistēmā / dubultatgriešana).
+- “stāvoklis: labs/bojāts/jāmazgā” – nav definēts, vai tas ietekmē pieejamību (piem., “jāmazgā” => nav pieejams).
+
+### 3) Uzlabota versija
+- Definēt atgriešanas iznākumus:
+  - Ja stāvoklis “labs” => statuss “Pieejams”
+  - Ja “jāmazgā” => statuss “Apkopē”
+  - Ja “bojāts” => statuss “Remontā” + incidenta ieraksts (ja vajag)
+- Definēt kļūdas plūsmu, ja nav aktīva izsnieguma.
+
+---
+
+## 10) Pārskatīt tērpu inventāru un parādus
+
+### 1) Kritēriju novērtējums
+- Nepieciešamība: **OK**
+- Nepārprotamība: **Daļēji**
+- Pilnīgums: **Daļēji**
+- Realizējamība: **OK**
+- Pārbaudāmība: **Daļēji**
+- Korektums: **OK**
+- Viennozīmīgums: **Daļēji**
+
+### 2) Problēmas
+- “parādi” un “kavēts” nav definēts (cik dienas pēc termiņa?).
+- “nosūta atgādinājumu” – nav definēts kanāls (e-pasts/SMS), saturs, adresāts (vecāks vs students).
+
+### 3) Uzlabota versija
+- Definēt “kavēts” aprēķinu: atgriešanas termiņš < šodiena.
+- Definēt atgādinājuma nosūtīšanas noteikumus un auditēšanu (kad nosūtīts, kam).
+
+---
+
+## 11) Reģistrēties nodarbībām tiešsaistē
+
+### 1) Kritēriju novērtējums
+- Nepieciešamība: **OK**
+- Nepārprotamība: **Daļēji**
+- Pilnīgums: **Daļēji**
+- Realizējamība: **Daļēji**
+- Pārbaudāmība: **Daļēji**
+- Korektums: **Daļēji**
+- Viennozīmīgums: **OK**
+
+### 2) Problēmas
+- “integrācija ar Wix vai citu platformu” – pārāk atvērts; nav skaidrs, kur glabājas “patiesības avots” (Wix vai jūsu sistēma).
+- Nav definēti obligātie lauki un validācijas (vecums, kontakts, piekrišanas).
+- Nav definēts, kas notiek pēc pieteikuma (statusi: iesniegts/gaida apstiprinājumu/noraidīts).
+
+### 3) Uzlabota versija
+- Definēt pieteikuma datu modeli (minimālais komplekts).
+- Definēt statusu dzīves ciklu un paziņojumus.
+- Precizēt integrācijas robežas: “Sistēma saņem pieteikumu no Wix webhook/API un izveido ierakstu”.
+
+---
+
+## 12) Apmaksāt nodarbības tiešsaistē
+
+### 1) Kritēriju novērtējums
+- Nepieciešamība: **OK**
+- Nepārprotamība: **Daļēji**
+- Pilnīgums: **Daļēji**
+- Realizējamība: **Daļēji**
+- Pārbaudāmība: **Daļēji**
+- Korektums: **Daļēji**
+- Viennozīmīgums: **Daļēji**
+
+### 2) Problēmas
+- “abonements/periods” – nav definēti produktu tipi, periodi, cenas, atlaides.
+- “Sistēma saņem maksājuma statusu” – nav definēts avots (payment gateway), notikumu tipi (authorized/paid/failed/refunded).
+- “izsniedz kvīti” – juridiski/finansiāli svarīgi: kas ir kvīts (PDF? e-pasts?), numerācija, glabāšana.
+
+### 3) Uzlabota versija
+- Definēt maksājumu scenāriju ar skaidriem statusiem un pēcnosacījumiem:
+  - veiksmīgs => piešķirt piekļuves periodu līdz datumam X
+  - neveiksmīgs => saglabāt mēģinājumu, nepagarināt piekļuvi
+- Definēt integrācijas līgumu: callback/webhook, idempotence (lai dubulti neieskaita).
+
+---
+
+## 13) Administrators apstiprina/aktivizē dalībnieku un piekļuves tiesības
+
+### 1) Kritēriju novērtējums
+- Nepieciešamība: **OK**
+- Nepārprotamība: **Daļēji**
+- Pilnīgums: **Daļēji**
+- Realizējamība: **OK**
+- Pārbaudāmība: **Daļēji**
+- Korektums: **OK**
+- Viennozīmīgums: **Daļēji**
+
+### 2) Problēmas
+- “ja nepieciešams apmaksas” – nav skaidrs, kad nepieciešams (vienmēr? tikai noteiktām grupām?).
+- “ģenerē QR piekļuves identifikatoru” – nav definēts, vai tas ir statisks vai dinamisks, derīguma termiņš, atjaunošana.
+- “piekļuves līmenis (students/vecāks)” – vecāks nav “dalībnieks” tādā pašā nozīmē; vajag skaidru lomu modeli.
+
+### 3) Uzlabota versija
+- Definēt lomas: Students, Vecāks, Skolotājs, Administrators.
+- Definēt aktivizācijas kritērijus (pieteikums apstiprināts; maksājums saņemts; dokumenti iesniegti).
+- Definēt QR politiku (derīgums, atsaukšana, nozaudētas ierīces gadījums).
+
+---
+
+## 14) Pārskati: apmeklējums, piekļuves žurnāli, reģistrācijas, tērpi
+
+### 1) Kritēriju novērtējums
+- Nepieciešamība: **OK**
+- Nepārprotamība: **Daļēji**
+- Pilnīgums: **Daļēji**
+- Realizējamība: **OK**
+- Pārbaudāmība: **Daļēji**
+- Korektums: **OK**
+- Viennozīmīgums: **Daļēji**
+
+### 2) Problēmas
+- “pārskatāmi dati” un “mazinātu manuālo darbu” nav pārbaudāmi kritēriji.
+- Nav definēts katra pārskata saturs (kolonnas, agregācijas), piekļuves tiesības, datu atjaunošanas biežums.
+- Eksports: nav definēts formāts, lauku komplekts, vai eksportā ir personas dati (GDPR riski).
+
+### 3) Uzlabota versija
+- Katram pārskata tipam definēt minimālo specifikāciju:
+  - Apmeklējums: nodarbība, students, statuss, ieeja/izeja, labojumu audits
+  - Piekļuves žurnāls: laiks, lietotājs, rezultāts, iemesls
+  - Tērpi: statuss, izsniegts kam, termiņš, kavējums
+- Definēt piekļuves tiesības un anonimizācijas/filtrēšanas prasības.
+
+---
+
+# Kopsavilkums
+
+## Kopējā kvalitāte
+**Vidēja (draft līmenis).** Artefakts labi nosedz funkcionalitātes apjomu un galvenos procesus, bet vairumā UC trūkst precizitātes, lai tos uzreiz izmantotu detalizētai projektēšanai un testēšanai.
+
+## Galvenās problēmas (atkārtojas visos UC)
+1. **Nepārprotamība/pārbaudāmība:** nav definēti laika logi, statusu vārdnīcas, sliekšņi, kļūdu iznākumi.
+2. **Pilnīgums:** trūkst priekšnosacījumu, pēcnosacījumu, alternatīvo scenāriju un biznesa noteikumu.
+3. **Viennozīmīgums:** dažos UC ir sajaukti vairāki risinājuma varianti vienā plūsmā (īpaši QR ieejā).
+4. **Realizējamības riski:** integrācijas (Wix/maksājumi/straumēšana/durvju kontrole) nav pietiekami konkretizētas.
+
+## Vai artefakts ir izmantojams tālākai projektēšanai?
+**Jā, kā koncepcijas un tvēruma (scope) pamats**, bet **pirms detalizētas projektēšanas/testu dizaina** nepieciešams:
+- formalizēt biznesa noteikumus (laiki, statusi, tiesības),
+- pievienot alternatīvos scenārijus un kļūdu apstrādi,
+- vienoties par integrāciju robežām un datu avotiem,
+- standartizēt UC veidni (priekšnosacījumi, trigeris, pamata/alternatīvās plūsmas, pēcnosacījumi, dati/audits).
+
+Ja vēlies, nākamajā solī varu:
+- uzrakstīt **alternatīvos scenārijus** katram UC (ar “liegts/atteikts” iznākumiem un sistēmas reakciju), vai
+- pārveidot visus UC vienotā, testējamā šablonā (ar skaidriem noteikumiem un datu laukiem).

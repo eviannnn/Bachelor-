@@ -1,0 +1,391 @@
+Zemāk ir validācija pret ISO/IEC/IEEE 29148:2018 prasību kvalitātes kritērijiem (necessary, unambiguous, complete, feasible, verifiable, correct, singular). Pieņemu, ka šīs ir “user stories” kā prasību artefakts, tātad vērtēju gan stāsta formulējumu, gan acceptance criteria kā pārbaudāmības pamatu.
+
+---
+
+## 1) Students pieslēdzas tiešraidei nodarbības laikā
+
+### 1. Novērtējums
+- **Necessary:** Jā (atbalsta attālinātu dalību).
+- **Unambiguous:** Daļēji (kas ir “nodarbības laikā”, “autorizēti”, “bez instalācijām”).
+- **Complete:** Daļēji (nav definēts, kā tiek noteikts “konkrētā nodarbība”, kas notiek ar kavējumu, laika joslas, piekļuves saite u.c.).
+- **Feasible:** Jā, ar nosacījumiem (tehnoloģija jāizvēlas; “bez instalācijām” nozīmē web).
+- **Verifiable:** Daļēji (vajag precīzākus kritērijus: pārlūki, ierīces, laika logs).
+- **Correct:** Visticamāk jā (saskan ar mērķi).
+- **Singular:** Daļēji (ietver gan piekļuvi, gan ierīču atbalstu, gan kļūdu apstrādi).
+
+### 2. Problēmas
+- “Pieejama tikai konkrētās nodarbības laikā” nav izmērāms (cik min pirms/pēc?).
+- “Bez papildu instalācijām” – jāpasaka “web pārlūkā” un atbalstītās versijas.
+- “Autorizēti lietotāji” – jāprecizē lomas (students/vecāks/skolotājs) un tiesību noteikšana.
+- Nav minēts, kā students atrod tiešraidi (kalendārs, paziņojums, saite nodarbības skatā).
+
+### 3. Uzlabota versija
+**User story:**  
+Kā **students**, es vēlos atvērt **manas grupas nodarbības tiešraidi** sistēmā, lai varu piedalīties attālināti, ja nevaru ierasties klātienē.
+
+**Acceptance criteria (precizēti):**
+- Tiešraides saite ir redzama tikai lietotājiem ar tiesībām uz konkrēto nodarbību (students attiecīgajā grupā; skolotājs; administrācija).
+- Tiešraide ir pieejama **no T-10 min līdz T+10 min** attiecībā pret nodarbības sākumu/beigām (parametrs konfigurējams).
+- Tiešraide atveras **web pārlūkā** bez papildus instalācijām; atbalstītie pārlūki: pēdējās 2 Chrome/Edge/Safari versijas (mobilais un desktop).
+- Ja straume nav pieejama, lietotājs redz kļūdas stāvokli ar iemesla tipu (piem., “nav sākusies”, “beigusies”, “tehniska kļūme”) un ieteikto rīcību.
+
+---
+
+## 2) Vecāks skatās bērna nodarbības tiešraidi
+
+### 1. Novērtējums
+- **Necessary:** Jā (caurspīdīgums vecākiem).
+- **Unambiguous:** Daļēji (“sava bērna grupai/studijai” – ja bērnam vairākas grupas?).
+- **Complete:** Daļēji (nav definēta vecāka–bērna sasaistes izveide).
+- **Feasible:** Jā.
+- **Verifiable:** Jā/daļēji (auditam ok, bet jāprecizē, kas ir “skatījuma fakts”).
+- **Correct:** Jā.
+- **Singular:** Daļēji (piekļuve + audits vienā stāstā ir ok, bet var dalīt).
+
+### 2. Problēmas
+- Nav definēts, kā sistēma zina “savs bērns” (apstiprinājums, uzaicinājums, administrācijas piesaiste).
+- “Reģistrē skatījuma faktu” – vai reģistrē atvēršanu, skatīšanās ilgumu, sesiju?
+
+### 3. Uzlabota versija
+**User story:**  
+Kā **vecāks**, es vēlos skatīties **sava bērna nodarbību tiešraides**, lai redzētu progresu un nodarbības norisi.
+
+**Acceptance criteria:**
+- Vecāks redz tiešraides tikai tiem bērniem, kuri ir **piesaistīti vecāka kontam** (piesaisti veic administrācija vai ar uzaicinājuma/apstiprinājuma plūsmu).
+- Vecāks redz tikai tās nodarbības, kurās bērns ir reģistrēts (grupa/nodarbība).
+- Sistēma auditā reģistrē tiešraides skatījuma sesiju: lietotājs, nodarbība, **atvēršanas laiks**, **aizvēršanas laiks** (vai “skatījās ≥ X sekundes”, ja vajag).
+
+---
+
+## 3) Skolotājam tiešraide ieslēdzas/izslēdzas automātiski pēc grafika
+
+### 1. Novērtējums
+- **Necessary:** Jā (samazina manuālu darbu).
+- **Unambiguous:** Daļēji (“kamera piesaistīta studijai” – viena vai vairākas?).
+- **Complete:** Daļēji (izņēmumi: atcelta nodarbība, grafika izmaiņas, kavēšanās).
+- **Feasible:** Jā, bet atkarīgs no infrastruktūras.
+- **Verifiable:** Daļēji (jādefinē precīzs start/stop noteikums).
+- **Correct:** Jā.
+- **Singular:** Daļēji (admin konfigurācija + skolotāja statuss).
+
+### 2. Problēmas
+- Nav definēts, kas notiek, ja nodarbība pārcelta/atcelta.
+- “Automātiski aktivizējas noteiktā laikā” – cik minūtes pirms? vai pēc grafika izmaiņām reāllaikā?
+
+### 3. Uzlabota versija
+**User story:**  
+Kā **skolotājs**, es vēlos, lai sistēma automātiski pārvalda tiešraides sākšanu un beigšanu pēc nodarbību grafika, lai man nav manuāli jāvada straumēšana.
+
+**Acceptance criteria:**
+- Administrators var piesaistīt (1) studiju telpu, (2) kameru/straumes avotu un (3) nodarbību grafiku.
+- Tiešraide startē **T-5 min** un apstājas **T+5 min** (konfigurējams).
+- Ja nodarbība ir atcelta vai pārcelta, tiešraide netiek startēta vai tiek startēta pēc atjaunotā grafika (saskaņā ar grafika statusu).
+- Skolotāja skatā pie nodarbības redzams statuss: “plānota”, “aktīva”, “nav pieejama (kļūda)”, “pabeigta”.
+
+---
+
+## 4) Students ieiet/iziet, skenējot QR kodu
+
+### 1. Novērtējums
+- **Necessary:** Jā (piekļuve + uzskaite).
+- **Unambiguous:** Daļēji (kur skenē? pie durvīm? lietotnē? apsargs? turnikets?).
+- **Complete:** Nē (nav definēts “ieeja/izeja” noteikšanas mehānisms, dubultskani, offline režīms).
+- **Feasible:** Jā, bet atkarīgs no fiziskās infrastruktūras.
+- **Verifiable:** Daļēji (vajag precizēt drošību: QR statisks/dinamisks).
+- **Correct:** Jā.
+- **Singular:** Daļēji (piekļuve + apmeklējuma uzskaite vienā).
+
+### 2. Problēmas
+- “QR kods profilā” – ja tas ir statisks, to var nofotografēt un nodot citam.
+- Nav definēts, kā sistēma atšķir ieeju no izejas (divi skeneri, režīms, pēdējais stāvoklis?).
+- Nav minēts, kas notiek, ja lietotājs aizmirst noskenēt izeju.
+
+### 3. Uzlabota versija
+**User story:**  
+Kā **students**, es vēlos reģistrēt ierašanos un aiziešanu, skenējot QR kodu pie ieejas/izejas, lai piekļuve un apmeklējuma uzskaite būtu ātra.
+
+**Acceptance criteria:**
+- QR kods ir **dinamisks** (piem., derīgs 30 sekundes) un pieejams tikai pēc autentifikācijas.
+- Skenēšana notiek pie **ieejas/izejas skenera**, kas sistēmai nodod notikuma tipu (ENTRY/EXIT) vai sistēma to nosaka pēc pēdējā stāvokļa ar skaidru noteikumu.
+- Pēc skenēšanas sistēma saglabā notikumu: lietotājs, notikuma tips, laiks, lokācija (ja ir vairākas ieejas).
+- Nederīga/neaizsniegta piekļuve tiek noraidīta ar iemesla kodu (piem., “konts neaktīvs”, “nav abonementa”, “QR beidzies”).
+
+---
+
+## 5) Skolotājs redz automātisku apmeklējuma sarakstu
+
+### 1. Novērtējums
+- **Necessary:** Jā.
+- **Unambiguous:** Daļēji (“ieradies/izgājis” – kā interpretēt klātbūtni?).
+- **Complete:** Daļēji (nav definēts, kā veido “klātesošs” statusu, ja nav izejas skana).
+- **Feasible:** Jā.
+- **Verifiable:** Jā/daļēji (auditēšana ok, bet vajag noteikumus).
+- **Correct:** Jā.
+- **Singular:** Jā (pamatā par sarakstu; filtrēšana ir ok kā daļa).
+
+### 2. Problēmas
+- Manuāla korekcija: jāprecizē, ko drīkst labot (laiku, statusu, piezīmi) un vai ir ierobežojumi.
+- Filtri: “pēc nodarbības” dublē “nodarbības skatā”.
+
+### 3. Uzlabota versija
+**User story:**  
+Kā **skolotājs**, es vēlos redzēt nodarbības apmeklējumu, kas automātiski veidots no ieejas/izejas notikumiem, lai nav manuāli jāatzīmē klātbūtne.
+
+**Acceptance criteria:**
+- Nodarbības skatā redzams saraksts ar studentiem un statusu: “nav ieradies”, “ieradies (laiks)”, “izgājis (laiks)”.
+- Sistēma definē “klātesošs” kā: ir ENTRY notikums nodarbības logā; EXIT nav obligāts (vai ir atsevišķs statuss “nav reģistrēta izeja”).
+- Skolotājs var pievienot manuālu korekciju (statuss/laiks/piezīme); korekcija tiek auditēta (kas, kad, iepriekšējā vērtība, jaunā vērtība, iemesls).
+- Sarakstu var filtrēt pēc datuma un grupas (ja skolotājam vairākas grupas).
+
+---
+
+## 6) Administrācija redz piekļuves/apmeklējuma atskaites
+
+### 1. Novērtējums
+- **Necessary:** Jā.
+- **Unambiguous:** Daļēji (“disciplīna”, “resursi” nav prasību līmenī; bet atskaite ir skaidra).
+- **Complete:** Daļēji (nav definēti KPI lauki: kavējumi, vidējais apmeklējums, unikālie apmeklējumi).
+- **Feasible:** Jā.
+- **Verifiable:** Jā (eksports, lomu piekļuve).
+- **Correct:** Jā.
+- **Singular:** Jā.
+
+### 2. Problēmas
+- “Apmeklējums pa periodiem” – jāprecizē, kādi griezumi obligāti (grupa, students, nodarbība).
+- Eksporta formāts: “CSV/Excel” – jāizvēlas vai definēt abus.
+
+### 3. Uzlabota versija
+**User story:**  
+Kā **administrācijas darbinieks**, es vēlos ģenerēt apmeklējuma un piekļuves atskaites pa periodiem un grupām, lai varētu analizēt apmeklējumu un plānot resursus.
+
+**Acceptance criteria:**
+- Atskaitē var izvēlēties periodu (no–līdz) un grupu(as); rezultātā redz: nodarbību skaits, apmeklējumu skaits, unikālie studenti, kavējumu skaits (ja definēts).
+- Datus var eksportēt **CSV** (obligāti) un (ja vajag) XLSX kā atsevišķa prasība.
+- Redzamība atbilst lomām un datu piekļuves tiesībām (piem., administrācija redz visas grupas; skolotājs tikai savas).
+
+---
+
+## 7) Administrācija reģistrē tērpa izsniegšanu ar svītrkodu
+
+### 1. Novērtējums
+- **Necessary:** Jā.
+- **Unambiguous:** Jā/daļēji (statusi skaidri, bet “tērpa ID” – vai unikāls?).
+- **Complete:** Daļēji (nav definēts, kā piesaista pasākumam, depozīts, izmērs u.c. – ja vajag).
+- **Feasible:** Jā.
+- **Verifiable:** Jā.
+- **Correct:** Jā.
+- **Singular:** Jā.
+
+### 2. Problēmas
+- “Sistēma neļauj izsniegt, ja izsniegts citam” – ko darīt, ja jāmaina īpašnieks (atgriešana/override)?
+- “Bilde” – vai obligāta? no kurienes?
+
+### 3. Uzlabota versija
+**User story:**  
+Kā **administrācijas darbinieks**, es vēlos reģistrēt tērpa izsniegšanu, skenējot svītrkodu, lai sistēmā vienmēr būtu zināms, pie kura skolēna tērps atrodas.
+
+**Acceptance criteria:**
+- Izsniegšanas ieraksts satur: tērpa unikālo ID, skolēnu, izsniegšanas datumu/laiku, izsniedzēju (lietotāja ID).
+- Ja tērps ir statusā “izsniegts”, sistēma bloķē izsniegšanu un parāda, kam tas izsniegts; atļauta tikai darbība “reģistrēt atgriešanu” vai “administratora override” (ja paredzēts).
+- Tērpa kartītē redzams statuss un attēls (ja attēls ir pievienots; ja nav, rāda “nav attēla”).
+
+---
+
+## 8) Administrācija reģistrē tērpa atgriešanu ar svītrkodu
+
+### 1. Novērtējums
+- **Necessary:** Jā.
+- **Unambiguous:** Jā.
+- **Complete:** Daļēji (nav definēts bojājumu/defektu fiksējums, ja tas vajadzīgs).
+- **Feasible:** Jā.
+- **Verifiable:** Jā.
+- **Correct:** Jā.
+- **Singular:** Jā.
+
+### 2. Problēmas
+- “Tērps nav atrasts” – vai var izveidot jaunu? vai tikai meklēt?
+- Vēsture – jāprecizē, ka tā ir nemaināma (audit trail).
+
+### 3. Uzlabota versija
+**User story:**  
+Kā **administrācijas darbinieks**, es vēlos reģistrēt tērpa atgriešanu, skenējot svītrkodu, lai samazinātu pazudušu tērpu risku.
+
+**Acceptance criteria:**
+- Atgriežot tērpu, sistēma maina statusu uz “noliktavā” un saglabā atgriešanas datumu/laiku un pieņēmēju.
+- Ja svītrkods nav atpazīts, sistēma piedāvā manuālu meklēšanu pēc tērpa ID/nosaukuma un neļauj saglabāt atgriešanu bez tērpa identifikācijas.
+- Sistēma uztur nemaināmu izsniegšanas/atgriešanas vēsturi (kas, kad, kam).
+
+---
+
+## 9) Skolotājs redz izsniegtos tērpus pasākumam + atgādinājumi
+
+### 1. Novērtējums
+- **Necessary:** Jā.
+- **Unambiguous:** Daļēji (“pasākums” – kā definēts sistēmā?).
+- **Complete:** Daļēji (nav definēts atgādinājuma kanāls; “ģenerēt sarakstu” ok).
+- **Feasible:** Jā.
+- **Verifiable:** Jā/daļēji (atgādinājums kā eksports ir pārbaudāms).
+- **Correct:** Jā.
+- **Singular:** Daļēji (pārskats + atgādinājumu funkcija).
+
+### 2. Problēmas
+- Nepieciešama “pasākuma” entītija vai vismaz tērpa piesaiste pasākumam.
+- “Jāatgādina” – kur glabājas atzīme, kam tā redzama, cik ilgi?
+
+### 3. Uzlabota versija
+**User story:**  
+Kā **skolotājs**, es vēlos redzēt tērpu izsniegšanas statusu skolēniem konkrētam pasākumam, lai varu savlaicīgi organizēt mēģinājumus un atgādinājumus.
+
+**Acceptance criteria:**
+- Sistēmā tērpa izsniegšanas ierakstam var norādīt pasākumu (vai pasākums tiek piesaistīts tērpam/skolēnam citā veidā).
+- Skolotājs var filtrēt pēc pasākuma, grupas un statusa; redz kolonnu kopu: skolēns, tērps, izsniegšanas datums, statuss.
+- Skolotājs var atzīmēt ierakstus ar “jāatgādina” un eksportēt sarakstu CSV (skolēns + kontakts, ja tiesības atļauj).
+
+---
+
+## 10) Potenciālais students/vecāks aizpilda pieteikumu mājaslapā
+
+### 1. Novērtējums
+- **Necessary:** Jā.
+- **Unambiguous:** Daļēji (“minimāli nepieciešamos datus” jāfiksē).
+- **Complete:** Daļēji (GDPR piekrišana, vecāka vs studenta dati, dubultpieteikumi).
+- **Feasible:** Jā.
+- **Verifiable:** Jā.
+- **Correct:** Jā.
+- **Singular:** Jā.
+
+### 2. Problēmas
+- “grupa/vecums” – jāizvēlas viens: vecums un sistēma piedāvā grupas, vai lietotājs izvēlas grupu.
+- Nav prasības par datu apstrādes piekrišanu un privātuma paziņojumu (bieži obligāti).
+
+### 3. Uzlabota versija
+**User story:**  
+Kā **potenciālais students vai vecāks**, es vēlos iesniegt tiešsaistes pieteikumu nodarbībām, lai varu pieteikties bez zvaniem un e-pastiem.
+
+**Acceptance criteria:**
+- Forma obligāti ievāc: pieteicēja vārds/uzvārds, kontakts (e-pasts vai telefons), studenta vecums (vai dzimšanas gads), izvēlētā nodarbība/grupa (vai preferences), un piekrišanu datu apstrādei.
+- Pēc iesniegšanas lietotājs saņem apstiprinājumu ekrānā un e-pastā (ja e-pasts ievadīts).
+- Administrācijas skatā pieteikumiem ir statusi un redzams iesniegšanas laiks; sistēma novērš acīmredzamus dublikātus (piem., brīdinājums pēc e-pasta + nodarbības).
+
+---
+
+## 11) Vecāks apmaksā nodarbības tiešsaistē reģistrācijas laikā
+
+### 1. Novērtējums
+- **Necessary:** Jā.
+- **Unambiguous:** Daļēji (“reģistrācijas laikā” – pieteikuma solī? pēc apstiprināšanas?).
+- **Complete:** Daļēji (maksājumu pakalpojumu sniedzējs, valūta, rēķins/kvīts).
+- **Feasible:** Jā.
+- **Verifiable:** Jā.
+- **Correct:** Jā.
+- **Singular:** Jā.
+
+### 2. Problēmas
+- Nav definēts, kas ir “veiksmīgs maksājums” (callback/webhook apstiprinājums).
+- “apmaksāt vēlāk” – cik ilgi rezervē vietu?
+
+### 3. Uzlabota versija
+**User story:**  
+Kā **vecāks**, es vēlos apmaksāt nodarbības tiešsaistē pieteikuma iesniegšanas procesā, lai uzreiz pabeigtu reģistrāciju.
+
+**Acceptance criteria:**
+- Pieteikuma plūsmā ir izvēle: “apmaksāt tagad” vai “apmaksāt vēlāk”.
+- Pēc maksājumu pakalpojumu sniedzēja apstiprinājuma sistēma saglabā: maksājuma statusu (paid/failed/pending), summu, valūtu, transakcijas atsauci un laiku.
+- Neveiksmīga maksājuma gadījumā pieteikums saglabājas ar statusu “gaida apmaksu” un lietotājs var atkārtot maksājumu no saites/e-pasta.
+
+---
+
+## 12) Administrācija pārvalda pieteikumus un maksājumu statusus vienuviet
+
+### 1. Novērtējums
+- **Necessary:** Jā.
+- **Unambiguous:** Jā/daļēji (statusu saraksts ok, bet jāvienojas par pilnu statusu modeli).
+- **Complete:** Daļēji (nav definēts, kas notiek, mainot statusu; paziņojumi klientam).
+- **Feasible:** Jā.
+- **Verifiable:** Jā.
+- **Correct:** Jā.
+- **Singular:** Jā.
+
+### 2. Problēmas
+- Statusi nav pilni (piem., “atcelts”, “gaida apmaksu” jau minēts citur).
+- Nav prasības par audit ieraksta saturu.
+
+### 3. Uzlabota versija
+**User story:**  
+Kā **administrācijas darbinieks**, es vēlos pārvaldīt pieteikumus un ar tiem saistītos maksājumus vienā skatā, lai samazinātu manuālo darbu un kļūdas.
+
+**Acceptance criteria:**
+- Administrācija var mainīt pieteikuma statusu no definēta saraksta (piem., jauns, gaida info, gaida apmaksu, apstiprināts, noraidīts, atcelts).
+- Administrācija redz maksājuma statusu un var filtrēt pieteikumus pēc “neapmaksāts/gaida apmaksu”.
+- Visas statusu izmaiņas tiek auditētas: kas, kad, vecā vērtība, jaunā vērtība, komentārs (obligāts noraidījumam).
+
+---
+
+## 13) Administrators pārvalda lietotāju lomas
+
+### 1. Novērtējums
+- **Necessary:** Jā.
+- **Unambiguous:** Daļēji (“redz tikai savas grupas” – kā tiek definēta piederība).
+- **Complete:** Daļēji (nav minētas papildu lomas: superadmin, viesis; nav minēta tiesību matrica).
+- **Feasible:** Jā.
+- **Verifiable:** Jā.
+- **Correct:** Jā.
+- **Singular:** Daļēji (lomas + datu ierobežojumi vairākās dimensijās).
+
+### 2. Problēmas
+- Lomu modelis sajaukts ar datu piekļuves noteikumiem (RBAC + “ownership”/ABAC).
+- Nav definēts vecāka–bērna sasaistes pārvaldības process.
+
+### 3. Uzlabota versija
+**User story:**  
+Kā **sistēmas administrators**, es vēlos piešķirt un mainīt lietotāju lomas un piesaistes (piem., vecāks–bērns, skolotājs–grupa), lai lietotāji redz tikai atļautos datus un funkcijas.
+
+**Acceptance criteria:**
+- Lomu piešķiršana un maiņa ir pieejama tikai administratoram.
+- Vecāks var piekļūt tikai tiem bērniem, kas ir piesaistīti viņa kontam.
+- Skolotājs var piekļūt tikai tām grupām/nodarbībām, kurām viņš ir piesaistīts (piesaisti pārvalda administrators).
+- Ir definēta tiesību matrica (vismaz dokumentēta), kas nosaka piekļuvi galvenajiem moduļiem (tiešraide, apmeklējums, tērpi, maksājumi).
+
+---
+
+## 14) Lietotājs droši pieslēdzas sistēmai
+
+### 1. Novērtējums
+- **Necessary:** Jā.
+- **Unambiguous:** Daļēji (“droša autentifikācija”, “noteikts neaktivitātes laiks”).
+- **Complete:** Daļēji (MFA? paroļu politika? bloķēšana pēc mēģinājumiem?).
+- **Feasible:** Jā.
+- **Verifiable:** Daļēji (jānosaka konkrēti parametri).
+- **Correct:** Jā.
+- **Singular:** Jā.
+
+### 2. Problēmas
+- “piem., e-pasts + parole vai vienreizējā saite” – jāizvēlas vai jādefinē abi kā atbalstīti varianti.
+- Sesijas timeout jānorāda (piem., 30 min).
+
+### 3. Uzlabota versija
+**User story:**  
+Kā **lietotājs**, es vēlos autentificēties sistēmā drošā veidā, lai mani personas dati un darbības (apmeklējums, maksājumi, tiešraides piekļuve) būtu aizsargāti.
+
+**Acceptance criteria:**
+- Sistēma atbalsta autentifikāciju ar (A) e-pastu un paroli un paroles atiestatīšanu caur e-pastu **vai** (B) “magic link” (izvēlēties un fiksēt kā prasību; ja abi, tad definēt kā opcijas).
+- Sesija automātiski beidzas pēc **30 min** neaktivitātes (konfigurējams).
+- Pēc N neveiksmīgiem mēģinājumiem konts tiek īslaicīgi bloķēts (piem., 5 mēģinājumi / 15 min) (ja drošības politika to prasa).
+
+---
+
+# Kopsavilkums
+
+## Kopējā kvalitāte
+Vidēji laba kā sākotnējs user story komplekts: mērķi ir saprotami, lielākajai daļai ir acceptance criteria, un ir aptverts plašs funkcionalitātes loks.
+
+## Galvenās problēmas (pret 29148 kritērijiem)
+- **Nepārprotamība / pārbaudāmība:** bieži lietoti nenoteikti termini (“noteiktā laikā”, “droši”, “bez instalācijām”, “autorizēti”), trūkst skaitlisku robežu un skaidru noteikumu.
+- **Pilnīgums:** vairākās vietās trūkst domēna modeļa elementu (vecāks–bērns piesaiste, pasākuma entītija, ieeja/izeja noteikšana, statusu dzīves cikli).
+- **Viennozīmīgums (singular):** dažas user stories apvieno vairākas prasības (piekļuve + audits + UI + ierīču atbalsts). Tas nav kritiski, bet sarežģī izsekojamību un testēšanu.
+
+## Vai artefakts ir izmantojams tālākai projektēšanai?
+Jā, **kā pamats** (backlog līmenī) tas ir izmantojams, bet pirms detalizētas projektēšanas/testēšanas ieteicams:
+1) fiksēt domēna definīcijas (nodarbības logs, pasākums, piesaistes, statusi),  
+2) precizēt mērāmus parametrus (minūtes, pārlūku atbalsts, timeout),  
+3) atdalīt dažas prasības atsevišķos stāstos (īpaši drošība/audits), lai uzlabotu izsekojamību un pārbaudāmību.

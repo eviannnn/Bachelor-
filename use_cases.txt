@@ -1,0 +1,198 @@
+## 1) Skatīties nodarbības tiešraidi (students)
+
+- **Nosaukums:** Nodarbības tiešraides skatīšanās (students)  
+- **Aktors:** Students (dejotājs)  
+- **Īss apraksts:** Students pieslēdzas tiešraidei, lai piedalītos attālināti, ja nevar ierasties klātienē.  
+- **Galvenie soļi:**
+  1. Students atver skolas mājaslapu/portālu un autorizējas.
+  2. Atver sadaļu “Tiešraides” un izvēlas savu grupu/nodarbību.
+  3. Sistēma pārbauda piekļuves tiesības un nodarbības laiku.
+  4. Students uzsāk skatīšanos (video straume).
+  5. Sistēma reģistrē tiešraides piekļuves faktu (logs).
+
+---
+
+## 2) Skatīties nodarbības tiešraidi (vecāks)
+
+- **Nosaukums:** Nodarbības tiešraides skatīšanās (vecāks)  
+- **Aktors:** Vecāks/aizbildnis  
+- **Īss apraksts:** Vecāks noteiktos laikos pieslēdzas, lai vērotu bērna nodarbību un progresu.  
+- **Galvenie soļi:**
+  1. Vecāks autorizējas portālā.
+  2. Izvēlas bērnu (ja piesaistīti vairāki) un attiecīgo nodarbību.
+  3. Sistēma pārbauda, vai vecākam ir tiesības skatīties šo straumi un vai ir atļautais laiks.
+  4. Vecāks skatās tiešraidi.
+  5. Sistēma saglabā piekļuves žurnālu.
+
+---
+
+## 3) Pārvaldīt tiešraides grafiku un piekļuves noteikumus
+
+- **Nosaukums:** Tiešraižu grafika/piekļuves pārvaldība  
+- **Aktors:** Administrators / direktors  
+- **Īss apraksts:** Administrators nosaka, kurām grupām un kuros laikos tiešraide ir pieejama, un kam ir tiesības to skatīties.  
+- **Galvenie soļi:**
+  1. Administrators atver administrēšanas paneli.
+  2. Izvēlas studiju/kameru un piesaista to grupai/nodarbībai.
+  3. Iestata tiešraides laikus (grafiku) un piekļuves politiku (studenti/vecāki).
+  4. Saglabā izmaiņas.
+  5. Sistēma aktivizē straumi atbilstoši grafikam un reģistrē notikumus.
+
+---
+
+## 4) Ieeja ēkā ar QR kodu (piekļuves kontrole)
+
+- **Nosaukums:** Ieeja ēkā ar QR kodu  
+- **Aktors:** Students (dejotājs)  
+- **Īss apraksts:** Students ieiet ēkā, noskenējot QR kodu; sistēma reģistrē ierašanos un izmanto to apmeklējuma uzskaitei.  
+- **Galvenie soļi:**
+  1. Students pie ieejas atver QR kodu (lietotnē/portālā) vai skenē uz vietas izvietotu kodu (atkarībā no risinājuma).
+  2. Skeneris/sistēma nolasa QR un identificē studentu.
+  3. Sistēma pārbauda, vai piekļuve ir aktīva (reģistrācija, apmaksa/atļauja, konta statuss).
+  4. Sistēma reģistrē “Ieeja” ar laika zīmogu.
+  5. (Ja paredzēts) sistēma dod signālu durvju atvēršanai vai apstiprinājumu apsargam/administratoram.
+
+---
+
+## 5) Iziešana no ēkas ar QR kodu
+
+- **Nosaukums:** Iziešana no ēkas ar QR kodu  
+- **Aktors:** Students (dejotājs)  
+- **Īss apraksts:** Students, izejot no ēkas, reģistrē iziešanas laiku, lai būtu precīzs apmeklējuma ieraksts.  
+- **Galvenie soļi:**
+  1. Students noskenē QR kodu pie izejas.
+  2. Sistēma identificē studentu.
+  3. Sistēma reģistrē “Iziešana” ar laika zīmogu.
+  4. Sistēma atjauno apmeklējuma statusu (piem., “klātienē pabeidzis”).
+
+---
+
+## 6) Automātiska apmeklējuma uzskaite pēc ieejas/izejas datiem
+
+- **Nosaukums:** Automātiska apmeklējuma uzskaite  
+- **Aktors:** Skolotājs / administrators  
+- **Īss apraksts:** Sistēma automātiski veido apmeklējuma ierakstus, balstoties uz ieejas/izejas skenējumiem un nodarbību grafiku.  
+- **Galvenie soļi:**
+  1. Sistēma saņem ieejas/izejas notikumus.
+  2. Sistēma salīdzina notikumus ar nodarbību grafiku (grupa, laiks).
+  3. Sistēma atzīmē studentu kā “ieradies/klāt” attiecīgajā nodarbībā.
+  4. Skolotājs atver nodarbības apmeklējuma sarakstu un redz automātiski aizpildītus datus.
+  5. (Ja vajag) skolotājs veic korekcijas (piem., “attaisnots”, “attālināti”).
+
+---
+
+## 7) Skolotājs pārskata un koriģē apmeklējumu
+
+- **Nosaukums:** Apmeklējuma saraksta pārskatīšana/korekcija  
+- **Aktors:** Skolotājs  
+- **Īss apraksts:** Skolotājs pārbauda automātiski ģenerēto apmeklējumu un nepieciešamības gadījumā labo statusus.  
+- **Galvenie soļi:**
+  1. Skolotājs autorizējas un atver šodienas nodarbību.
+  2. Apskata apmeklējuma sarakstu (klāt/iztrūkst/attālināti).
+  3. Atzīmē izņēmumus (piem., students bija klāt, bet neskenēja; vai attālināti piedalījās).
+  4. Saglabā izmaiņas.
+  5. Sistēma saglabā audita ierakstu (kas un kad laboja).
+
+---
+
+## 8) Izsniegt tērpu studentam (svītrkods)
+
+- **Nosaukums:** Tērpa izsniegšana ar svītrkodu  
+- **Aktors:** Skolotājs / kostīmu atbildīgais / administrators  
+- **Īss apraksts:** Tērps tiek izsniegts studentam, noskenējot tērpa svītrkodu un piesaistot to studentam sistēmā.  
+- **Galvenie soļi:**
+  1. Atbildīgais atver “Tērpu sistēmu”.
+  2. Atrod studentu (pēc vārda/ID) vai noskenē studenta identifikatoru (ja paredzēts).
+  3. Noskenē tērpa svītrkodu.
+  4. Sistēma pārbauda, vai tērps nav jau izsniegts citam.
+  5. Sistēma reģistrē izsniegšanu (students, tērps, datums, termiņš/pasākums).
+  6. Sistēma atjauno tērpa statusu uz “Izsniegts”.
+
+---
+
+## 9) Pieņemt tērpa atgriešanu (svītrkods)
+
+- **Nosaukums:** Tērpa atgriešana ar svītrkodu  
+- **Aktors:** Skolotājs / kostīmu atbildīgais / administrators  
+- **Īss apraksts:** Atgriežot tērpu, tas tiek noskenēts un sistēmā atzīmēts kā atgriezts.  
+- **Galvenie soļi:**
+  1. Atbildīgais atver tērpu atgriešanas funkciju.
+  2. Noskenē tērpa svītrkodu.
+  3. Sistēma atrod aktīvo izsniegšanas ierakstu.
+  4. Atbildīgais apstiprina atgriešanu (un, ja vajag, atzīmē stāvokli: “labs/bojāts/jāmazgā”).
+  5. Sistēma reģistrē atgriešanas datumu un atjauno statusu uz “Pieejams”.
+
+---
+
+## 10) Pārskatīt tērpu inventāru un parādus
+
+- **Nosaukums:** Tērpu inventāra un izsniegumu pārskats  
+- **Aktors:** Direktors / administrators / kostīmu atbildīgais  
+- **Īss apraksts:** Lietotājs redz, kuri tērpi ir pieejami, kuri izsniegti, kam tie ir izsniegti un kas kavē atgriešanu.  
+- **Galvenie soļi:**
+  1. Atver inventāra pārskatu.
+  2. Filtrē pēc statusa (pieejams/izsniegts/kavēts), grupas vai pasākuma.
+  3. Apskata detaļas (tērpa foto, ID, izsniegšanas vēsture).
+  4. (Ja vajag) eksportē sarakstu vai nosūta atgādinājumu.
+
+---
+
+## 11) Reģistrēties nodarbībām tiešsaistē
+
+- **Nosaukums:** Reģistrācija nodarbībām (web forma)  
+- **Aktors:** Students / vecāks  
+- **Īss apraksts:** Lietotājs aizpilda pieteikumu nodarbībām skolas mājaslapā (integrācija ar Wix vai citu platformu).  
+- **Galvenie soļi:**
+  1. Lietotājs atver mājaslapas sadaļu “Pieteikties”.
+  2. Izvēlas nodarbību/grupu un aizpilda datus (kontakti, vecums, līmenis u.c.).
+  3. Apstiprina noteikumus/privātuma politiku.
+  4. Iesniedz pieteikumu.
+  5. Sistēma saglabā pieteikumu un nosūta apstiprinājumu (e-pasts).
+
+---
+
+## 12) Apmaksāt nodarbības tiešsaistē
+
+- **Nosaukums:** Apmaksa par nodarbībām  
+- **Aktors:** Vecāks / students  
+- **Īss apraksts:** Lietotājs veic apmaksu par dalību nodarbībās, izmantojot integrētu maksājumu risinājumu.  
+- **Galvenie soļi:**
+  1. Lietotājs izvēlas maksājuma veidu (abonements/periods).
+  2. Sistēma novirza uz maksājumu vidi (Wix/partneris).
+  3. Lietotājs apstiprina maksājumu.
+  4. Sistēma saņem maksājuma statusu (veiksmīgs/neveiksmīgs).
+  5. Sistēma atjauno reģistrācijas statusu un izsniedz kvīti/apstiprinājumu.
+
+---
+
+## 13) Administrators apstiprina/aktivizē dalībnieku un piekļuves tiesības
+
+- **Nosaukums:** Dalībnieka aktivizēšana un tiesību piešķiršana  
+- **Aktors:** Administrators / direktors  
+- **Īss apraksts:** Pēc reģistrācijas un (ja nepieciešams) apmaksas administrators aktivizē dalībnieku, lai tas varētu izmantot QR piekļuvi un sistēmas funkcijas.  
+- **Galvenie soļi:**
+  1. Administrators atver jauno pieteikumu sarakstu.
+  2. Pārbauda datus un maksājuma statusu.
+  3. Piešķir grupu/grafiku un piekļuves līmeni (students/vecāks).
+  4. Aktivizē kontu un ģenerē QR piekļuves identifikatoru.
+  5. Sistēma nosūta lietotājam instrukcijas (kā lietot QR, kur skatīties tiešraidi).
+
+---
+
+## 14) Pārskati: apmeklējums, piekļuves žurnāli, reģistrācijas, tērpi
+
+- **Nosaukums:** Administratīvo pārskatu ģenerēšana  
+- **Aktors:** Direktors / administrators  
+- **Īss apraksts:** Administrācija iegūst pārskatāmus datus par apmeklējumu, piekļuvi, tērpu apriti un reģistrācijām, lai mazinātu manuālo darbu.  
+- **Galvenie soļi:**
+  1. Atver pārskatu sadaļu.
+  2. Izvēlas pārskata tipu (apmeklējums/piekļuve/tērpi/maksājumi).
+  3. Norāda periodu, grupu, filtrus.
+  4. Sistēma ģenerē pārskatu (tabula/grafiks).
+  5. Eksportē (PDF/Excel) vai saglabā.
+
+---
+
+Ja vēlies, varu nākamajā solī:
+1) salikt šos use case UML diagrammas līmenī (aktori + sistēmas robeža), vai  
+2) katram use case uzrakstīt arī **alternatīvos scenārijus** (piem., “QR nederīgs”, “straume nav pieejama”, “tērps jau izsniegts”, “maksājums neizdevās”).

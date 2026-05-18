@@ -1,0 +1,361 @@
+Zemāk – validācija pēc ISO/IEC/IEEE 29148:2018 kvalitātes kritērijiem katrai prasībai: nepieciešamība, nepārprotamība, pilnīgums, realizējamība, pārbaudāmība, korektums, viennozīmīgums. Pie katras: (1) novērtējums, (2) problēmas, (3) uzlabota versija.
+
+> Leģenda vērtējumam: **OK** / **Daļēji** / **Nē**  
+> Piezīme: “Korektums” šeit = iekšēja saskaņotība, atbilstība domēnam un mērījumu loģikai (nevis “patiesums” bez konteksta).
+
+---
+
+## 1) Veiktspēja (Performance)
+
+### P1. Sistēmas atbildes laiks (UI/API)
+1) Kritēriji  
+- Nepieciešamība: **OK**  
+- Nepārprotamība: **Daļēji** (kas ir “lietotāja darbība”, kā mērīt)  
+- Pilnīgums: **Daļēji** (nav definēta “normāla slodze”, datu apjoms, vide)  
+- Realizējamība: **OK** (tipiski sasniedzams)  
+- Pārbaudāmība: **Daļēji** (vajag mērījumu metodi, percentiļu definīciju, mērījuma punktu)  
+- Korektums: **OK**  
+- Viennozīmīgums: **Daļēji** (vienā prasībā vairākas darbības + 2 apakšprasības)
+
+2) Problēmas
+- “Normāla slodze” nav definēta (lietotāju skaits, RPS, datu apjoms, pīķi).
+- Nav skaidrs, vai 2.0s/4.0s attiecas uz **front-end** (LCP/TTI) vai **API** (servera apstrāde) vai end-to-end.
+- “Atskaites” vaicājumi nav definēti kā konkrēti endpointi/filtri/datu apjoms.
+
+3) Uzlabota versija
+- **P1. UI/API latentums (end-to-end)**  
+  - Pie slodzes profila **NL-1** (definēts: 200 vienlaicīgi autentificēti lietotāji; 70% lasīšana/30% rakstīšana; DB ar ≥ 50k apmeklējuma notikumiem un ≥ 10k kostīmu transakcijām; 1 studija), **end-to-end** atbildes laiks (no klienta pieprasījuma līdz pilnai atbildei) šādiem API: `POST /auth/login`, `GET /classes`, `GET /attendance?month=...`, `POST /attendance/qr-event`, `POST /costumes/issue`, `POST /costumes/return` ir: **p95 ≤ 2.0 s**, **p99 ≤ 4.0 s**.  
+  - Atskaites endpointiem `GET /reports/attendance?month=...` un `GET /reports/costumes/status` pie tā paša profila: **p95 ≤ 5.0 s**.  
+  - Mērījums: APM/Load-test rīks, percentiles aprēķins no ≥ 1000 pieprasījumiem katram endpointam.
+
+---
+
+### P2. QR piekļuves/uzskaites notikumu apstrāde
+1) Kritēriji  
+- Nepieciešamība: **OK**  
+- Nepārprotamība: **Daļēji** (“atspoguļo lietotāja statusā” – kur un kā)  
+- Pilnīgums: **Daļēji** (offline, retries, idempotence sasaistās ar R2)  
+- Realizējamība: **OK**  
+- Pārbaudāmība: **OK/Daļēji** (burst definēts, bet vajag testvidi un “datu zuduma” definīciju)  
+- Korektums: **OK**  
+- Viennozīmīgums: **Daļēji** (2 dažādi mērķi vienā prasībā)
+
+2) Problēmas
+- “≤3s” – no kura brīža līdz kuram (scan → DB commit → UI refresh)?
+- “bez datu zuduma” – vai pieļaujami dublikāti? (R2 min dublikātus, bet šeit nav sasaistes)
+- Nav definēts, vai 10/s ir per studija, per ierīce vai sistēmai kopā.
+
+3) Uzlabota versija
+- **P2a. QR notikuma apstiprinājums**: pie slodzes profila **NL-QR-1** (10 skenējumi/s sistēmai kopā 60s; 1–3 skeneru ierīces), laiks no skenējuma nosūtīšanas līdz servera apstiprinājumam un notikuma persistēšanai DB: **p95 ≤ 3 s**.  
+- **P2b. Caurlaidspēja un noturība**: sistēma apstrādā **≥ 600** QR notikumus 60 sekunžu burstā ar **0 neatgriezeniski pazaudētiem notikumiem** (pārbaudīts, salīdzinot klienta nosūtīto unikālo notikumu ID skaitu ar DB saglabāto). Dublikāti: **≤ 0.1%** (saskaņots ar R2).
+
+---
+
+### P3. Kostīmu svītrkodu apstrāde
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **OK/Daļēji**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **OK**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- “apstiprina” – UI apstiprinājums vai DB transakcija?
+- Konfliktu piemēri nav pilni (jau izsniegts, neeksistē, neatļauta loma).
+
+3) Uzlabota versija
+- **P3. Kostīmu skenēšanas latentums**: `POST /costumes/issue` un `POST /costumes/return` end-to-end: **p95 ≤ 2 s** pie slodzes profila **NL-1**.  
+- **P3b. Konfliktu atbilde**: ja kostīms nav pieejams izsniegšanai (statuss “issued”) vai nav atrodams, sistēma atgriež kļūdas atbildi (piem., HTTP 409/404) **p95 ≤ 1 s**.
+
+---
+
+### P4. Tiešraides pieejamība un starta laiks
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **Daļēji**, pilnīgums **Daļēji**, realizējamība **Daļēji** (atkarīgs no CDN/ABR), pārbaudāmība **Daļēji**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- “pie atbilstoša interneta” nav testējams bez definīcijas (bandwidth/latency/jitter).
+- “rebuffering <1%” – jādefinē player metrika (piem., rebuffer ratio) un mērījumu logs.
+
+3) Uzlabota versija
+- **P4a. Starta laiks**: pie tīkla profila **NET-1** (downlink ≥ 10 Mbps, RTT ≤ 50 ms, packet loss ≤ 0.5%), straumes starta laiks (no “Play” līdz pirmajam kadram) **p95 ≤ 5 s**.  
+- **P4b. Rebuffering**: 95% skatīšanās sesiju (≥ 2 min) rebuffer ratio **< 1%**, mērīts ar player telemetry (definēts lauks un aprēķins).
+
+---
+
+### P5. Vienlaicīgo lietotāju slodze
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **Daļēji**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **Daļēji**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- “200 vienlaicīgi autentificēti” – autentificēti, bet ko dara? (aktīvi pieprasījumi vs vienkārši sesijas)
+- Tiešraides skatītāji – vai tie iet caur šo sistēmu vai atsevišķu straumēšanas platformu?
+
+3) Uzlabota versija
+- **P5a. Portāla slodze**: sistēma atbalsta **200 vienlaicīgi aktīvus** lietotājus (katrs veic vidēji 1 pieprasījumu/10s) un izpilda **P1**.  
+- **P5b. Tiešraide**: vienai studijai atbalsta **≥ 100** vienlaicīgas skatīšanās sesijas, saglabājot **P4** (pie NET-1), ja straumēšanas infrastruktūra ir konfigurēta atbilstoši.
+
+---
+
+## 2) Drošība (Security)
+
+### S1. Autentifikācija un sesiju drošība
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **Daļēji**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **OK**, korektums **Daļēji**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- “Visiem lietotājiem jāizmanto autentifikācija” – vai ir publisks saturs?
+- Bloķēšana pēc 10 mēģinājumiem – nav definēts per konts/per IP, un vai ir aizsardzība pret DoS.
+- Sesijas termiņi – nav definēts refresh token, “remember me”, mobilās ierīces.
+
+3) Uzlabota versija
+- Administrācijas kontiem MFA ir **obligāta** (TOTP vai WebAuthn).  
+- Konta aizsardzība: pēc **10** neveiksmīgiem mēģinājumiem **vienam kontam** 15 min laikā konts tiek bloķēts uz **15 min**; papildus tiek piemērots rate-limit per IP (konkrēts slieksnis jādefinē).  
+- Sesijas: admin sesija beidzas pēc **30 min** neaktivitātes, lietotāju sesija pēc **60 min**; definēt, ka “neaktivitāte” = nav veikts neviens autorizēts pieprasījums.
+
+---
+
+### S2. Autorizācija (RBAC)
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **OK**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **OK**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- Lomas nosauktas, bet nav definētas atļaujas (matrica).
+- “konkrētajai klasei” – jādefinē piederības noteikumi (pieraksts, apmaksa, periods).
+
+3) Uzlabota versija
+- Definēt RBAC/ABAC noteikumus: piekļuve tiešraidei atļauta, ja lietotājs ir **pierakstīts klasei** un klase ir aktīva attiecīgajā periodā. Neatļauta piekļuve: **HTTP 403**, notikums auditlogā ar lietotāja ID, klases ID, timestamp.
+
+---
+
+### S3. Šifrēšana
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **OK**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **Daļēji**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- “ekvivalents” AES-256 – jāprecizē (piem., KMS, envelope encryption).
+- TLS 1.2+ – vēlams definēt aizliegtos šifrus, HSTS.
+
+3) Uzlabota versija
+- Visi ārējie HTTP savienojumi izmanto **TLS 1.2 vai 1.3**, ar aizliegtu TLS <1.2; HSTS ieslēgts publiskajām tīmekļa saskarnēm.  
+- PII un žetoni glabātuvē šifrēti ar **AES-256-GCM** (vai KMS pārvaldītu ekvivalentu), atslēgu rotācija vismaz reizi **12 mēnešos** (vai pēc incidenta).  
+- Maksājumu kartes dati netiek glabāti; saglabā tikai PSP transakcijas ID, summu, valūtu, statusu.
+
+---
+
+### S4. Audits un žurnāli
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **Daļēji**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **Daļēji**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- “nemaināmi (append-only)” – tehniski jādefinē (WORM storage, DB permissions, hash-chain).
+- Nav definēts laika sinhronizācijas avots, laika zona, PII maskēšana logiem.
+
+3) Uzlabota versija
+- Auditlogi ir **append-only**: lietotājiem/servisiem nav tiesību dzēst/rediģēt; glabāšana WORM vai atsevišķā žurnālu glabātuvē ar ierobežotām tiesībām.  
+- Retence: **≥ 12 mēneši**.  
+- Audit ieraksts satur: actor ID, darbība, objekta ID, rezultāts (success/fail), timestamp (UTC), avota IP/ierīce (ja pieejams).
+
+---
+
+### S5. Ievainojamību pārvaldība
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **OK**, pilnīgums **Daļēji**, realizējamība **Daļēji**, pārbaudāmība **OK**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- “novērst ≤7 dienu laikā” – no atklāšanas brīža? no apstiprināšanas? attiecas uz prod?
+- “pirms relīzes” – kas ir relīze (prod deploy) un kādi izņēmumi.
+
+3) Uzlabota versija
+- CVSS ≥ 9: labojums **prod vidē** izvietots ≤ **7 kalendāro dienu** laikā no apstiprinātas atradnes reģistrēšanas; CVSS 7–8.9: ≤ **30 dienu** laikā.  
+- CI/CD pipeline pirms prod deploy veic SAST un dependency scan; prod deploy bloķēts, ja ir **≥1 critical** atradne (izņēmumi tikai ar dokumentētu risk acceptance).
+
+---
+
+### S6. Privātums (minimizācija)
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **Daļēji**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **Daļēji**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- “tikai nepieciešamos datus” – bez datu kataloga nav pārbaudāms.
+- Eksports/dzēšana 30 dienās – jādefinē, kādi dati, kā autentificē pieprasījumu, izņēmumi (juridiskā glabāšana).
+
+3) Uzlabota versija
+- Sistēmai ir datu katalogs (lauki + mērķis + glabāšanas termiņš). Jauns PII lauks drīkst tikt pievienots tikai ar dokumentētu mērķi.  
+- Datu subjekta pieprasījumi (eksports/dzēšana) izpildīti ≤ **30 dienu** laikā pēc identitātes verifikācijas; dzēšana neattiecas uz datiem, kas jāglabā juridisku pienākumu dēļ (tie tiek anonimizēti/pseudonimizēti, ja iespējams).
+
+---
+
+## 3) Lietojamība (Usability)
+
+### U1. Uzdevumu izpildes panākumu rādītāji
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **Daļēji**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **OK**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- “≥10 lietotāji katrai lomai” – lomu skaits 4–5, tātad 40–50 cilvēki; var būt dārgi (feasible risks).
+- Nav definēts testēšanas scenārijs, ierīces, pieredzes līmenis.
+
+3) Uzlabota versija
+- Lietojamības testā ar **≥ 10 lietotājiem katrai kritiskajai lomai** (Students/Vecāks/Skolotājs/Admin; vai pamatoti samazināts skaits ar pamatojumu) vismaz **90%** pabeidz definētos scenārijus ≤ **2 min** bez palīdzības. Scenāriji un “pabeigts” kritēriji ir dokumentēti testplānā.
+
+---
+
+### U2. Kļūdu līmenis
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **Daļēji**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **Daļēji**, korektums **OK**, viennozīmīgums **OK**.
+
+2) Problēmas
+- “kritiska lietojamības kļūda” nav definēta (klasifikācija).
+
+3) Uzlabota versija
+- Kritiska lietojamības kļūda = lietotājs nevar pabeigt uzdevumu bez moderatora iejaukšanās vai apiet kļūdu. Šādu kļūdu īpatsvars **< 5%** uz uzdevumu lietojamības testā.
+
+---
+
+### U3. Pieejamība (Accessibility)
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **OK**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **OK**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- WCAG 2.1 AA – jānorāda tvērums (kuras lapas/flows), izņēmumi (ja tādi).
+
+3) Uzlabota versija
+- Tīmekļa saskarne (visas publiskās un autentificētās galvenās plūsmas: login, grafiks, tiešraide, apmeklējums, kostīmi, maksājumi) atbilst **WCAG 2.1 AA**, pārbaudīts ar automatizētu skenēšanu + manuālu auditu (definēts rīks un izlases apjoms).  
+- Pie 360px platuma galvenās darbības izpildāmas bez horizontālas ritināšanas.
+
+---
+
+### U4. Saderība
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **OK**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **OK**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- “pēdējās 2 versijas” – mobilajiem pārlūkiem versijas nav tik tiešas; vajag OS versiju robežas.
+- “galvenās lapas” – jāuzskaita.
+
+3) Uzlabota versija
+- Atbalstīt: pēdējās 2 stabilās versijas Chrome/Edge/Firefox/Safari; mobilajām: iOS Safari (pēdējās 2 iOS galvenās versijas) un Android Chrome (pēdējās 2).  
+- “Galvenās lapas” = login, grafiks, tiešraides skatītājs, apmeklējuma skats, kostīmu skats, maksājumu skats; tām jāizpilda P1.
+
+---
+
+### U5. Apmācība un palīdzība
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **Daļēji**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **Daļēji**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- Aptaujas metodika nav definēta (cik respondentu, kāds jautājums, kad mērīt).
+
+3) Uzlabota versija
+- Sistēmā ir palīdzības sadaļa (FAQ + īsas instrukcijas QR un kostīmu skenēšanai). Pilotēšanas aptaujā ar **≥ 20** respondentiem vidējais vērtējums jautājumam “Instrukcijas ir skaidras” ir **≥ 4.0/5**.
+
+---
+
+## 4) Uzticamība (Reliability)
+
+### R1. Pieejamība (Uptime)
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **Daļēji**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **Daļēji**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- Nav definēts, kas skaitās dīkstāve, kā mērīt (synthetic checks), plānotā apkope.
+- “klases laikos” – jādefinē laika zona un grafika avots.
+
+3) Uzlabota versija
+- Portāls/admin: mēneša pieejamība **≥ 99.5%**, mērīta ar ārēju monitoringu (1 min intervāls), neiekļaujot iepriekš paziņotu plānoto apkopi (≤ X h/mēn).  
+- Tiešraide: pieejamība **≥ 99.0%** mērīta tikai klases grafika logā (UTC+… definēts), pēc grafika sistēmā.
+
+---
+
+### R2. Datu integritāte
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **Daļēji**, pilnīgums **Daļēji**, realizējamība **Daļēji**, pārbaudāmība **Daļēji**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- “datu zudums 0” – absolūts mērķis var būt nereāls bez arhitektūras nosacījumiem (queue, retries, offline režīms).
+- Dublikātu mērīšana – jādefinē logs un identifikators.
+
+3) Uzlabota versija
+- QR/kostīmu notikumiem tiek izmantots unikāls **eventId** un idempotence serverī.  
+- Pie slodzes testiem un normālas darbības “at-least-once” piegādes gadījumā: **0 neatgriezeniski pazaudētu** notikumu (visi nosūtītie eventId ir DB), dublikāti **< 0.1%** mēnesī.
+
+---
+
+### R3. Atkopšana pēc kļūmēm
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **OK**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **Daļēji**, korektums **OK**, viennozīmīgums **OK**.
+
+2) Problēmas
+- “kritiskām funkcijām” uzskaitītas, bet nav definēts, kā tiek mērīts RTO (no incidenta deklarēšanas?).
+
+3) Uzlabota versija
+- RPO ≤ 15 min, RTO ≤ 2 h kritiskajām funkcijām (auth, uzskaite, kostīmi, reģistrācija), mērīts no incidenta sākuma laika (monitorings konstatē) līdz pakalpojuma atjaunošanai.
+
+---
+
+### R4. Rezerves kopijas
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **OK**, pilnīgums **OK/Daļēji**, realizējamība **OK**, pārbaudāmība **OK**, korektums **OK**, viennozīmīgums **OK**.
+
+2) Problēmas
+- Nav definēts, kas tieši tiek backupots (DB, objektu glabātuve, konfigurācijas).
+
+3) Uzlabota versija
+- Backup aptver DB + konfigurācijas/secrets metadatus (ne pašus secrets) + kritiskos failus; 1x dienā, retence ≥ 30 dienas; restore tests 1x ceturksnī ar protokolu.
+
+---
+
+### R5. Monitorings un incidentu reakcija
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **Daļēji**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **Daļēji**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- “sliekšņa pārsniegšanas” sliekšņi nav definēti.
+- “paziņošana atbildīgajam” – kanāls, 24/7 vai darba laiks.
+
+3) Uzlabota versija
+- Definēt SLO sliekšņus (piem., error rate >1% 5 min, p95 latency >2s 10 min, stream start p95 >5s 10 min).  
+- Kritiska incidenta alerts tiek nosūtīts (PagerDuty/SMS/e-pasts) ≤ 5 min pēc sliekšņa pārsniegšanas; on-call režīms definēts.
+
+---
+
+## 5) Mērogojamība (Scalability)
+
+### SC1. Lietotāju un datu apjoma pieaugums
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **Daļēji**, pilnīgums **Daļēji**, realizējamība **Daļēji**, pārbaudāmība **Daļēji**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- “3x sākotnējā lietotāju skaita” – nav definēts sākotnējais skaits (baseline).
+- “bez arhitektūras pārbūves” – subjektīvi; labāk definēt “bez datu modeļa maiņas / bez jauna servisa”.
+
+3) Uzlabota versija
+- Pie baseline **B0** (definēts sākotnējais lietotāju skaits un slodzes profils) sistēma atbalsta **3×B0** ar P1/P2 izpildi, pieļaujot horizontālu resursu palielināšanu (instanču skaits, DB izmērs) bez funkcionālas pārbūves.
+
+---
+
+### SC2. Horizontāla mērogošana
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **OK**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **Daļēji**, korektums **OK**, viennozīmīgums **OK**.
+
+2) Problēmas
+- “lineāri līdz 4 instancēm (±20%)” – jādefinē, ko mēra (RPS pie p95 robežām).
+
+3) Uzlabota versija
+- Lietotnes slānis ir stateless; palielinot instanču skaitu no 1 → 4, maksimālā caurlaidspēja (RPS) pie nosacījuma, ka p95 latency atbilst P1, pieaug **≥ 3.2×** (lineāri ±20%).
+
+---
+
+### SC3. Tiešraides mērogošana
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **Daļēji**, pilnīgums **Daļēji**, realizējamība **OK/Daļēji**, pārbaudāmība **Daļēji**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- “kontrolēta atteice (queue/capacity reached)” – jādefinē UX un tehniskā atbilde (HTTP kods, UI ziņa).
+- “nevis degradācija visiem” – jādefinē degradācijas indikators.
+
+3) Uzlabota versija
+- Atbalsta ≥ 3 paralēlas studiju straumes; skatītāju limits konfigurējams per studija.  
+- Pārsniedzot limitu, jauns skatītājs saņem atbildi **≤ 2 s** ar skaidru statusu (piem., HTTP 429/503 ar kļūdas kodu `CAPACITY_REACHED`) un UI paziņojumu; esošās sesijas saglabā P4 mērķus.
+
+---
+
+### SC4. Integrāciju mērogošana (Wix/maksājumi)
+1) Kritēriji: nepieciešamība **OK**, nepārprotamība **Daļēji**, pilnīgums **Daļēji**, realizējamība **OK**, pārbaudāmība **Daļēji**, korektums **OK**, viennozīmīgums **Daļēji**.
+
+2) Problēmas
+- “bez kļūdām >1%” – jādefinē, kas ir kļūda (HTTP 5xx? biznesa atteikumi? PSP decline?).
+- Nav definēta atkārtošana, idempotence, rindas.
+
+3) Uzlabota versija
+- Integrācija apstrādā ≥ 50 reģistrācijas pieteikumus 10 min laikā; tehnisko kļūdu īpatsvars (HTTP 5xx/timeouts no mūsu sistēmas puses) **< 1%**. Biznesa atteikumi (piem., maksājuma noraidījums) netiek skaitīti kā sistēmas kļūda. Idempotence ar `requestId`.
+
+---
+
+# Kopsavilkums
+
+**Kopējā kvalitāte:** laba bāze (daudz skaitlisku mērķu, percentiles, SLA/SLO ideja), bet vairākām prasībām trūkst **mērījumu konteksta** (slodzes profili, tīkla profili, mērījuma punkts), tāpēc daļa ir tikai **daļēji pārbaudāmas** un **daļēji nepārprotamas**.
+
+**Galvenās problēmas (atkārtojas visur):**
+1. Nav definēti **baseline/slodzes profili** (“normāla slodze”, aktīvs lietotājs, datu apjoms).  
+2. Nav konsekventi definēts **mērījuma punkts** (UI vs API vs end-to-end).  
+3. Vairākas prasības ir **saliktas** (vienā punktā vairāki neatkarīgi mērķi) → cieš viennozīmīgums/singular.  
+4. Drošībā/privātumā dažviet vajag **precīzākus noteikumus** (rate-limit, logu nemaināmība, DSAR tvērums).
+
+**Vai artefakts ir izmantojams tālākai projektēšanai?**  
+Jā, **izmantojams**, bet ieteicams pirms detalizētas arhitektūras un testplāna izveides pievienot: (a) 2–3 slodzes profilus (NL-1, NL-QR-1, NL-REG-1), (b) 1–2 tīkla profilus tiešraidei (NET-1 u.c.), (c) endpointu/lapu sarakstu “galvenajām plūsmām”, (d) vienotu mērīšanas standartu (APM + sintētiskie testi + load testi).

@@ -1,0 +1,342 @@
+Zemāk ir validācija pret ISO/IEC/IEEE 29148:2018 kvalitātes kritērijiem (necessary, unambiguous, complete, feasible, verifiable, correct, singular). Pieņemu, ka artefakts ir “funkcionālās prasības” augstā līmenī (epiku/feature līmenis), nevis detalizētas sistēmas prasības. Tāpēc daudzām prasībām trūkst pārbaudāmības un precizitātes — to norādu un piedāvāju precizētas versijas.
+
+---
+
+## 1) Autentifikācija un autorizācija (lomas)
+
+**Oriģināls:** Sistēmai jāspēj nodrošināt lietotāju autentifikāciju un autorizāciju (piem., skolēns, vecāks, skolotājs, administrators/direktors) ar atšķirīgām piekļuves tiesībām funkcijām un datiem.
+
+1) **Kritēriju novērtējums**
+- Necessary: Jā  
+- Unambiguous: Daļēji (lomas “piem.”, nav definētas tiesības)  
+- Complete: Nē (nav autentifikācijas metodes, sesijas, paroles politikas, u.c.)  
+- Feasible: Jā (vispārīgi)  
+- Verifiable: Daļēji (bez tiesību matricas grūti testēt)  
+- Correct: Visticamāk jā  
+- Singular: Daļēji (autentifikācija + autorizācija vienā prasībā)
+
+2) **Problēmas**
+- “piem.” padara lomu kopu nenoteiktu.
+- Nav definēts, kādas funkcijas/dati katrai lomai pieejami (nav autorizācijas modeļa).
+- Divas prasības vienā (authn + authz).
+
+3) **Uzlabota versija**
+- **FR-1.1 Autentifikācija:** “Sistēma nodrošina lietotāju autentifikāciju, izmantojot [lietotājvārds+parole / e-pasts+parole / SSO] un izveido lietotāja sesiju pēc veiksmīgas pieteikšanās.”
+- **FR-1.2 Lomas:** “Sistēma atbalsta šādas lietotāju lomas: Skolēns, Vecāks, Skolotājs, Administrators (Direktors ir Administratora apakšloma vai atsevišķa loma — jānorāda).”
+- **FR-1.3 Autorizācija:** “Sistēma realizē lomu balstītu piekļuves kontroli (RBAC) saskaņā ar apstiprinātu tiesību matricu (pielikums ‘Access Matrix’), kas nosaka piekļuvi funkcijām un datiem katrai lomai.”
+
+---
+
+## 2) Skolēnu profili
+
+**Oriģināls:** Sistēmai jāspēj uzturēt skolēnu profilu datus (vārds, uzvārds, kontaktinformācija, piederība grupām/nodarbībām, statuss).
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Daļēji.  
+2) Problēmas: “kontaktinformācija”, “statuss” nav definēti; nav CRUD, validācijas, vēstures.  
+3) Uzlabota versija:
+- “Sistēma nodrošina skolēna profila izveidi, apskati, labošanu un deaktivizēšanu, glabājot vismaz: vārds, uzvārds, dzimšanas datums (ja nepieciešams), kontaktinformācija (telefons un/vai e-pasts), statuss {Aktīvs, Neaktīvs}, un piesaistes grupām/nodarbībām.”
+
+---
+
+## 3) Vecāku profili un sasaistes
+
+**Oriģināls:** uzturēt vecāku profilu datus un sasaistīt vecāku kontus ar vienu vai vairākiem bērniem.
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Jā.  
+2) Problēmas: nav sasaistes izveides mehānisma (apstiprinājums? uzaicinājums?); nav definēts, vai bērnam var būt vairāki vecāki.  
+3) Uzlabota versija:
+- “Sistēma ļauj izveidot vecāka profilu un uzturēt sasaisti ‘Vecāks–Skolēns’ (daudzi–daudzi), kur sasaistes izveidei nepieciešams administrācijas apstiprinājums vai uzaicinājuma kods.”
+
+---
+
+## 4) Skolotāju profili un sasaistes ar nodarbībām
+
+**Oriģināls:** uzturēt skolotāju profilu datus un sasaistīt skolotājus ar nodarbībām/grupām.
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Jā.  
+2) Problēmas: nav definēts, vai nodarbībai var būt vairāki skolotāji; nav CRUD.  
+3) Uzlabota versija:
+- “Sistēma nodrošina skolotāja profila CRUD un ļauj piesaistīt skolotāju vienai vai vairākām grupām/nodarbībām; sistēma atbalsta [vienu/daudzus] skolotājus vienai nodarbībai (jāizvēlas).”
+
+---
+
+## 5) Nodarbību/grupu saraksts ar grafiku
+
+**Oriģināls:** uzturēt nodarbību/grupu sarakstu ar grafiku (laiks, zāle/studija, skolotājs, dalībnieki).
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Daļēji.  
+2) Problēmas: nav definēta grafika granularitāte (atkārtošanās, izņēmumi, brīvdienas); “dalībnieki” – vai automātiski no grupas?  
+3) Uzlabota versija:
+- “Sistēma ļauj administrācijai uzturēt grupas un nodarbību grafiku, t.sk. atkārtošanās noteikumus (piem., katru pirmdienu 18:00–19:00), norādot studiju/zāli, atbildīgo skolotāju un dalībnieku sarakstu (tieši vai caur grupas dalību).”
+
+---
+
+# Tiešraides modulis
+
+## 6) Tiešraides skatīšanās no katras studijas kameras
+
+**Oriģināls:** nodrošināt tiešraides skatīšanos no katras studijas kameras autorizētiem lietotājiem.
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Daļēji (atkarīgs no infrastruktūras); Verifiable Daļēji; Correct Jā; Singular Jā.  
+2) Problēmas: “katras studijas kameras” – cik kameras, kā identificē; nav definēts straumes protokols, ierobežojumi, kvalitāte (tas gan var būt NFR).  
+3) Uzlabota versija:
+- “Sistēma nodrošina autorizētiem lietotājiem iespēju atvērt un skatīties tiešraides straumi no izvēlētas studijas kameras, kur katrai kamerai sistēmā ir unikāls identifikators un piesaiste studijai.”
+
+## 7) Tiešraides pieejamības ierobežošana pēc grafika
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Jā (ja definē noteikumus); Correct Jā; Singular Jā.  
+2) Problēmas: “piem.”; nav definēts “nodarbības laikā” (pirms/pēc buferis).  
+3) Uzlabota versija:
+- “Sistēma automātiski atļauj tiešraides piekļuvi tikai nodarbības logā: no (startTime − X min) līdz (endTime + Y min), kur X un Y konfigurē administrācija.”
+
+## 8) Vecāki redz tikai sava bērna nodarbības
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Daļēji; Feasible Jā; Verifiable Jā; Correct Jā; Singular Jā.  
+2) Problēmas: “vai bērna grupa” – jāprecizē noteikums (dalība grupā vs konkrētā nodarbībā).  
+3) Uzlabota versija:
+- “Vecāka kontam sistēma rāda un atļauj skatīt tikai tās tiešraides, kas piesaistītas nodarbībām/grupām, kurās ir reģistrēts vismaz viens ar vecāku sasaistīts skolēns.”
+
+## 9) Skolotāji/administrācija pārvalda piekļuves tiesības tiešraidēm
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Jā.  
+2) Problēmas: nav definēts, ko tieši var darīt skolotājs vs administrācija; nav audita.  
+3) Uzlabota versija:
+- “Administrators var piešķirt/atsaukt tiešraides piekļuvi lietotājam vai grupai; skolotājs var ieslēgt/izslēgt piekļuvi tikai savām nodarbībām. Sistēma auditē šīs izmaiņas (kas, kad, kam, kādu piekļuvi mainīja).”
+
+## 10) Tiešraides piekļuves žurnāls
+
+1) Kritēriji: Necessary Jā; Unambiguous Jā; Complete Daļēji; Feasible Jā; Verifiable Jā; Correct Jā; Singular Jā.  
+2) Problēmas: nav definēts, vai glabā IP/ierīci; datu glabāšanas termiņš (var būt NFR/Compliance).  
+3) Uzlabota versija:
+- “Sistēma reģistrē tiešraides skatīšanās sesijas: lietotājs, straumes/kameras ID, pieslēgšanās laiks, atvienošanās laiks; dati pieejami administrācijai filtrēšanai un eksportam.”
+
+---
+
+# QR piekļuve un apmeklējums
+
+## 11) Digitāls piekļuves identifikators (QR)
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Jā.  
+2) Problēmas: nav definēts, vai QR ir statisks/dinamisks; drošība (kopēšana).  
+3) Uzlabota versija:
+- “Sistēma ģenerē skolēnam unikālu piekļuves identifikatoru QR formā, ko var attēlot mobilajā lietotnē vai izdrukāt; identifikatoru var deaktivizēt un atjaunot administrators.”
+
+## 12) Ieejas notikuma reģistrēšana
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Daļēji; Feasible Jā; Verifiable Jā; Correct Jā; Singular Jā.  
+2) Problēmas: nav definēts skenera avots (mobilā ierīce/turnikets), kļūdu apstrāde.  
+3) Uzlabota versija:
+- “Nolasot QR kodu pie ieejas, sistēma izveido ‘Ieejas notikumu’ ar skolēna ID, datumu/laiku, skenēšanas punkta ID un operatora/ierīces identifikatoru.”
+
+## 13) Izejas notikuma reģistrēšana
+
+Analogas problēmas/uzlabojums kā 12, tikai “Izejas notikums”.
+
+## 14) Automātiska apmeklējuma veidošana no ieejas/izejas
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Daļēji; Verifiable Daļēji; Correct Daļēji; Singular Jā.  
+2) Problēmas: sarežģīti noteikumi (ja nav izejas, ja vairākas nodarbības, ja ienāk par agru/vēlu); nav definēts algoritms.  
+3) Uzlabota versija:
+- “Sistēma automātiski ģenerē apmeklējuma ierakstu nodarbībai, ja skolēnam ir ieejas notikums nodarbības logā (startTime−X līdz endTime+Y). Ja izejas notikums nav reģistrēts, apmeklējums tiek atzīmēts kā ‘Nepilnīgs’ un prasa manuālu pārbaudi.”
+
+## 15) Skolotājs redz apmeklējumu reāllaikā un vēsturiski
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Daļēji.  
+2) Problēmas: “reāllaikā” nav definēts (sekundes/minūtes); piekļuves robežas (tikai savas nodarbības).  
+3) Uzlabota versija:
+- “Skolotājs var apskatīt apmeklējumu sarakstu savām nodarbībām: (a) aktuālajai nodarbībai ar atjaunošanu ne retāk kā reizi N sekundēs, (b) vēsturiskām nodarbībām pēc datuma/perioda.”
+
+## 16) Administrācija filtrē apmeklējumu datus
+
+1) Kritēriji: Necessary Jā; Unambiguous Jā; Complete Daļēji; Feasible Jā; Verifiable Jā; Correct Jā; Singular Jā.  
+2) Problēmas: nav eksporta prasības (kaut citur ir atskaites).  
+3) Uzlabota versija:
+- “Administrators var filtrēt apmeklējumu ierakstus pēc datuma, grupas, skolēna un skolotāja, un eksportēt rezultātu CSV/XLSX.”
+
+## 17) Manuāla apmeklējuma korekcija ar auditu
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Daļēji; Feasible Jā; Verifiable Jā; Correct Jā; Singular Jā.  
+2) Problēmas: nav definēts, ko drīkst labot (statuss, laiki), kas drīkst labot.  
+3) Uzlabota versija:
+- “Administrators (un/vai skolotājs savām nodarbībām) var manuāli pievienot/labot apmeklējuma ierakstu, norādot korekcijas iemeslu; sistēma saglabā auditu: lietotājs, laiks, lauks(-i) pirms/pēc.”
+
+## 18) Apmeklējuma atskaites
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Jā.  
+2) Problēmas: “piem.”; nav formāts, periodi, definīcijas (kavējums).  
+3) Uzlabota versija:
+- “Sistēma ģenerē apmeklējuma atskaites par izvēlētu periodu: apmeklējumu skaits, kavējumu skaits (definīcija: nav ieejas notikuma nodarbības logā), apmeklējuma % pa skolēniem un grupām; atskaites eksportējamas CSV/XLSX.”
+
+---
+
+# Tērpu inventārs
+
+## 19) Inventāra katalogs ar unikālu ID, foto, aprakstu
+
+1) Kritēriji: Necessary Jā; Unambiguous Jā; Complete Daļēji; Feasible Jā; Verifiable Jā; Correct Jā; Singular Jā.  
+2) Problēmas: nav minēts statuss, izmērs, kategorija (var būt vajadzīgs).  
+3) Uzlabota versija:
+- “Sistēma uztur tērpu katalogu ar unikālu tērpa ID, nosaukumu, aprakstu un vismaz vienu foto; katram tērpam ir statuss {Pieejams, Izsniegts, Remontā, Norakstīts}.”
+
+## 20) Importēt/ievadīt tērpu datus (Excel)
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Daļēji.  
+2) Problēmas: “Excel princips” neskaidrs; nav faila formāts, lauku kartējums, kļūdu ziņojumi.  
+3) Uzlabota versija:
+- “Sistēma ļauj importēt tērpu datus no XLSX/CSV pēc definētas veidnes (lauku saraksts un obligātie lauki), nodrošinot importēšanas rezultātu kopsavilkumu (izveidoti/atjaunoti/atteikti ieraksti un kļūdu iemesli).”
+
+## 21) Svītrkodi un nolasīšana izsniegšanai/atgriešanai
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Daļēji.  
+2) Problēmas: “piešķirt svītrkodus” – ģenerē vai ievada; skenera tips.  
+3) Uzlabota versija:
+- “Sistēma ļauj katram tērpam piešķirt svītrkoda vērtību (ģenerētu vai manuāli ievadītu) un atbalsta svītrkoda nolasīšanu izsniegšanas/atgriešanas darbplūsmās.”
+
+## 22) Izsniegšanas reģistrēšana
+
+1) Kritēriji: Necessary Jā; Unambiguous Jā; Complete Daļēji; Feasible Jā; Verifiable Jā; Correct Jā; Singular Jā.  
+2) Problēmas: nav noteikts, vai var izsniegt, ja jau izsniegts.  
+3) Uzlabota versija:
+- “Izsniedzot tērpu, sistēma izveido izsniegšanas ierakstu (tērps, skolēns, datums/laiks, izsniedzējs) un neļauj izsniegt tērpu, ja tā statuss nav ‘Pieejams’.”
+
+## 23) Atgriešanas reģistrēšana un statusa atjaunošana
+
+Labi, bet precizēt validāciju:
+- “Atgriežot tērpu, sistēma izveido atgriešanas ierakstu (tērps, datums/laiks, pieņēmējs) un maina statusu uz ‘Pieejams’.”
+
+## 24) Statuss un vēsture
+
+1) Kritēriji: Necessary Jā; Unambiguous Jā; Complete Daļēji; Feasible Jā; Verifiable Jā; Correct Jā; Singular Jā.  
+2) Problēmas: nav definēts, cik ilgi glabā vēsturi.  
+3) Uzlabota versija:
+- “Sistēma rāda tērpa statusu un pilnu aprites vēsturi (izsniegts kam/kad; atgriezts kad; darbību veicējs).”
+
+## 25) Meklēšana/filtrēšana inventārā
+
+1) Kritēriji: Necessary Jā; Unambiguous Jā; Complete Daļēji; Feasible Jā; Verifiable Jā; Correct Jā; Singular Jā.  
+2) Problēmas: “grupas” filtrs – kā tērps saistās ar grupu (caur skolēnu).  
+3) Uzlabota versija:
+- “Sistēma ļauj filtrēt tērpus pēc ID, statusa, skolēna; filtrs ‘grupa’ tiek realizēts caur skolēna aktuālo grupu dalību.”
+
+## 26) Atskaites par neatgrieztiem tērpiem un statistiku
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Daļēji.  
+2) Problēmas: “statistika” neskaidra; nav eksporta.  
+3) Uzlabota versija:
+- “Sistēma ģenerē atskaiti ‘Neatgrieztie tērpi’ (tērps, skolēns, izsniegšanas datums, dienu skaits izsniegumā) un ‘Aprites statistiku’ (izsniegumu skaits pa periodu), ar eksportu CSV/XLSX.”
+
+---
+
+# Publiskā reģistrācija un apmaksa
+
+## 27) Publiska reģistrācijas plūsma mājaslapā (integrējama)
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Daļēji; Verifiable Daļēji; Correct Jā; Singular Jā.  
+2) Problēmas: “integrējamu” – kā (iframe, link, API); drošība; UX robežas.  
+3) Uzlabota versija:
+- “Sistēma nodrošina publisku reģistrācijas formu, ko var integrēt skolas mājaslapā kā iegulšanu (iframe) vai pāradresācijas saiti; integrācijas veids tiek konfigurēts administrācijas panelī.”
+
+## 28) Savākt pieteikuma datus
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Jā.  
+2) Problēmas: “piekrišanas” – kādas (GDPR, foto/video); obligātums.  
+3) Uzlabota versija:
+- “Reģistrācijas pieteikums satur: dalībnieka datus, izvēlēto grupu/nodarbību, kontaktinformāciju un piekrišanas (saraksts ar obligātajām/izvēles piekrišanām definēts konfigurācijā).”
+
+## 29) Reģistrēties ar tūlītēju apmaksu vai bez
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Daļēji.  
+2) Problēmas: “atkarībā no scenārija” nav definēts; kas nosaka scenāriju.  
+3) Uzlabota versija:
+- “Sistēma atbalsta divus reģistrācijas režīmus: (A) ar tūlītēju apmaksu, (B) bez tūlītējas apmaksas. Režīmu nosaka izvēlētā grupa/nodarbība vai administrācijas konfigurācija.”
+
+## 30) Integrācija ar ārēju platformu (Wix) ar izsekojamību
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Daļēji; Verifiable Daļēji; Correct Daļēji; Singular Daļēji.  
+2) Problēmas: “caur saiti/iegulšanu vai citu mehānismu” – pārāk plaši; “izsekojamība” nav definēta (ID, webhook?).  
+3) Uzlabota versija:
+- “Ja tiek izmantota ārēja reģistrācijas/apmaksas platforma, sistēma katram pieteikumam ģenerē unikālu izsekošanas ID un saglabā saiti starp izsekošanas ID un ārējās platformas darījuma/pieteikuma identifikatoru (ja pieejams), lai administrācija varētu saskaņot pieteikumus ar maksājumiem.”
+
+## 31) Reģistrācijas un maksājumu statusi
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Daļēji; Feasible Jā; Verifiable Jā; Correct Jā; Singular Jā.  
+2) Problēmas: statusu dzīves cikls nav definēts (pārejas).  
+3) Uzlabota versija:
+- “Sistēma uztur pieteikuma statusu un maksājuma statusu ar definētām pārejām (state machine) un auditē statusu maiņas.”
+
+## 32) Administrācija pārskata/apstiprina/noraida pieteikumus
+
+1) Kritēriji: Necessary Jā; Unambiguous Jā; Complete Daļēji; Feasible Jā; Verifiable Jā; Correct Jā; Singular Jā.  
+2) Problēmas: nav paziņojumi lietotājam (var būt atsevišķa prasība).  
+3) Uzlabota versija:
+- “Administrators var apskatīt pieteikumus, mainīt to statusu uz ‘Apstiprināts’ vai ‘Noraidīts’ un pievienot komentāru; sistēma saglabā auditu.”
+
+## 33) Eksports atskaitēm/grāmatvedībai
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Jā.  
+2) Problēmas: nav formāts, lauki, periods.  
+3) Uzlabota versija:
+- “Administrators var eksportēt reģistrācijas un maksājumu datus CSV/XLSX, izvēloties periodu un laukus (minimāli: pieteikuma ID, dalībnieks, grupa, statuss, summa, maksājuma statuss, datumi).”
+
+---
+
+# Administrēšana, žurnāli, meklēšana, datu aizsardzība
+
+## 34) Vienots administratīvais panelis
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Jā.  
+2) Problēmas: “vienots” var būt interpretējams (viena UI, viena pieteikšanās).  
+3) Uzlabota versija:
+- “Sistēma nodrošina administrācijas tīmekļa paneli ar vienotu pieteikšanos, kur pieejami moduļi: Lietotāji, Grafiks, Apmeklējums, Tiešraides piekļuves pārvaldība, Tērpi, Reģistrācijas.”
+
+## 35) Sistēmas notikumu un kļūdu žurnāli
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Jā.  
+2) Problēmas: nav līmeņi, piekļuve, glabāšanas termiņš.  
+3) Uzlabota versija:
+- “Sistēma reģistrē tehniskos notikumus un kļūdas (kategorija, laiks, komponents, kļūdas kods/ziņa) un nodrošina administrācijai žurnālu apskati ar filtriem; žurnāli tiek glabāti vismaz N dienas.”
+
+## 36) Meklēšana/filtrēšana/šķirošana visos moduļos
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Daļēji.  
+2) Problēmas: pārāk vispārīgi; “visos” bez minimālā kopuma.  
+3) Uzlabota versija:
+- “Sistēma nodrošina meklēšanu un filtrēšanu vismaz šādos sarakstos: skolēni, vecāki, skolotāji, grupas/nodarbības, apmeklējumi, tērpi, pieteikumi; katrā sarakstā ir definēti vismaz 3 galvenie filtri (pielikumā ‘List Filters’).”
+
+## 37) Datu piekļuves tiesību kontrole
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Jā; Singular Jā.  
+2) Problēmas: dublē FR-1.3 (autorizācija), bet šeit ir datu līmeņa noteikumi; vajag konsolidēt.  
+3) Uzlabota versija:
+- “Sistēma īsteno datu līmeņa piekļuves kontroli: vecāks var piekļūt tikai ar viņu sasaistīto skolēnu datiem; skolotājs — tikai savu grupu/nodarbību datiem; administrators — visiem datiem.”
+
+## 38) Personas datu glabāšana un piekļuves izsekojamība
+
+1) Kritēriji: Necessary Jā; Unambiguous Daļēji; Complete Nē; Feasible Jā; Verifiable Daļēji; Correct Daļēji; Singular Daļēji.  
+2) Problēmas: “atbilstošu” (GDPR) bez konkrētām prasībām; sajauc funkcionālo ar atbilstības/NFR; “audits par būtiskām darbībām” nav definēts.  
+3) Uzlabota versija:
+- “Sistēma auditē būtiskas darbības ar personas datiem (profila izveide/labošana/dzēšana, sasaistes maiņa, piekļuves tiesību maiņa, apmeklējuma korekcijas), saglabājot: darbības veicēju, laiku, objektu un izmaiņas. Audita ieraksti ir pieejami tikai administratoriem.”
+
+## 39) Darbība uz biežāk lietotajām ierīcēm un pārlūkprogrammām
+
+1) Kritēriji: Necessary Jā; Unambiguous Nē; Complete Nē; Feasible Jā; Verifiable Nē; Correct Jā; Singular Daļēji.  
+2) Problēmas: tā ir vairāk NFR (savietojamība); “biežāk lietotajām” nav testējams.  
+3) Uzlabota versija (kā NFR, bet var turēt šeit, ja nav citas sadaļas):
+- “Sistēmas tīmekļa saskarne atbalsta pēdējās 2 stabilās versijas: Chrome, Safari, Edge, Firefox; mobilajās ierīcēs atbalsta iOS Safari un Android Chrome. QR attēlošana un skenēšana darbojas mobilajās ierīcēs.”
+
+---
+
+## Kopsavilkums
+
+**Kopējā kvalitāte:** vidēja kā “augsta līmeņa funkciju saraksts”, bet zema/vidēja kā ISO 29148 prasību specifikācija (īpaši pārbaudāmība, nepārprotamība un pilnīgums).
+
+**Galvenās problēmas:**
+- Daudzas prasības ir pārāk vispārīgas (“piem.”, “biežāk lietotajām”, “atbilstoši tiesībām”), līdz ar to **nav viennozīmīgi pārbaudāmas**.
+- Bieži trūkst **definīciju** (statusi, grafika logi, lomu tiesību matrica, algoritmi apmeklējumam).
+- Dažās vietās ir **vairākas prasības vienā** (authn+authz; meklēšana/filtrēšana/šķirošana; compliance+audits).
+- Daļa punktu ir **NFR/atbilstības** (pārlūkprogrammas, GDPR) un būtu jāizdala atsevišķi.
+
+**Vai artefakts ir izmantojams tālākai projektēšanai?**  
+Jā, kā pamats (scope/feature saraksts un moduļu robežas ir saprotamas). Taču pirms detalizētas projektēšanas un testēšanas plānošanas tas ir jāpārstrādā par numurētām, atomārām prasībām ar: (1) lomu/tiesību matricu, (2) grafika un apmeklējuma noteikumiem, (3) integrācijas scenārijiem un datu laukiem, (4) skaidriem pārbaudāmiem kritērijiem (acceptance criteria).
+
+Ja vēlies, varu nākamajā solī: (a) pārveidot visu sarakstu par strukturētu SRS ar FR-ID, aprakstu, pamatojumu, avotu, prioritāti un verifikācijas metodi; vai (b) izveidot tiesību matricu un galvenos “state machine” (pieteikumi, maksājumi, tērpi, apmeklējums).
