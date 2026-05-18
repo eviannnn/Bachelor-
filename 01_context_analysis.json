@@ -1,0 +1,72 @@
+{
+  "system_goal": "Izstrādāt integrētu digitālu risinājumu deju skolai, kas izmanto esošo infrastruktūru, lai nodrošinātu nodarbību tiešraides, digitalizētu piekļuves un apmeklējuma uzskaiti, automatizētu tērpu apriti un vienkāršotu reģistrāciju un maksājumus, tādējādi paaugstinot operacionālo efektivitāti un uzlabojot skolēnu un vecāku pieredzi.",
+  "main_stakeholders": [
+    "Skolēni (dejotāji)",
+    "Vecāki",
+    "Skolotāji",
+    "Direktore/īpašniece (Annika Andersone)",
+    "Administratīvais personāls",
+    "Tehniskie studenti/izstrādes komanda",
+    "Maksājumu/registrācijas platformas nodrošinātājs (Wix) (loma minēta, konkrēts nodrošinātājs nav pilnībā skaidrs)"
+  ],
+  "main_entities": [
+    "Skolēns",
+    "Vecāks",
+    "Skolotājs",
+    "Administrators/direktors",
+    "Nodarbība",
+    "Nodarbību grafiks",
+    "Studija (telpa)",
+    "Kamera",
+    "Tiešraides sesija",
+    "Tiešraides piekļuves tiesības",
+    "Piekļuves notikums (ieeja/izeja)",
+    "QR kods (piekļuvei)",
+    "Apmeklējuma ieraksts",
+    "Tērps",
+    "Tērpa identifikators (svītrkods)",
+    "Tērpa izsniegšanas/atdošanas ieraksts",
+    "Reģistrācija",
+    "Maksājums",
+    "Transakcijas ieraksts",
+    "Lietotāja konts/autentifikācija",
+    "Sistēmas žurnāli (lietojums, kļūdas, veiktspēja)"
+  ],
+  "business_processes": [
+    "Nodarbību tiešraižu nodrošināšana noteiktos laikos ar drošu piekļuvi skolēniem un vecākiem",
+    "Attālinātas dalības atbalsts skolēniem, kuri nevar ierasties klātienē",
+    "Digitāla piekļuves kontrole ar QR kodu, reģistrējot ieejas un izejas laikus",
+    "Automatizēta apmeklējuma uzskaite un atskaišu/uzskaites datu uzturēšana",
+    "Tērpu inventarizācija un tērpu aprites pārvaldība (izsniegšana/atdošana) ar svītrkodiem",
+    "Tiešsaistes reģistrācijas procesa nodrošināšana esošajā mājaslapā",
+    "Tiešsaistes maksājumu procesa nodrošināšana (integrācija ar platformu, minēts Wix)",
+    "Datu pārvaldība vienotā saskarnē (apmeklējums, tērpi, reģistrācijas, maksājumi)",
+    "Piekļuves un tiešraižu skatījumu žurnālu uzturēšana drošības un audita vajadzībām",
+    "Lietotāju testēšana ar skolēniem, vecākiem, skolotājiem un administrāciju pirms ieviešanas"
+  ],
+  "assumptions": [
+    "Esošās studiju kameras ir tehniski izmantojamas tiešraidei (ne tikai iekšējai novērošanai) vai ir iespējams tās pielāgot bez būtiskām papildu izmaksām",
+    "Skolēniem ir pieejami viedtālruņi, lai izmantotu QR koda piekļuvi",
+    "Interneta pieslēgums skolā ir pietiekami stabils tiešraižu nodrošināšanai nodarbību laikā",
+    "Ir iespējams nodrošināt drošu autentifikāciju un piekļuves tiesību pārvaldību tiešraidēm un administratīvajām funkcijām",
+    "Svītrkodu skenēšanai ir pieejams skeneris vai alternatīvi var izmantot viedtālruņa skenēšanu (konkrēts risinājums nav noteikts)",
+    "Esošās mājaslapas var tehniski papildināt ar reģistrācijas formu un maksājumu plūsmu (minēta integrācija ar Wix)",
+    "Tiks ievērotas piemērojamās datu aizsardzības prasības un skolas iekšējās politikas",
+    "Projekta mērķa termiņš ir orientējoši līdz 2026. gada augustam, bet tas nav stingrs"
+  ],
+  "unclear_points": [
+    "Kāda tieši ir izvēlētā arhitektūra: viena vienota sistēma vai vairāku rīku integrācija (Wix + atsevišķas piekļuves/tērpu/straumēšanas sistēmas)",
+    "Kāds ir esošo kameru modelis, piekļuves protokoli un vai tās atbalsta drošu straumēšanu ārpus iekšējā tīkla",
+    "Kā tiks nodrošināta piekļuves kontrole ēkai ar QR kodu bez fiziskām kartēm/čipiem: kāda aparatūra kontrolēs durvju slēdzeni un kā tā integrēsies ar sistēmu",
+    "Vai QR kods būs statisks vai dinamisks, un kā tiks novērsta koda kopēšana/ļaunprātīga izmantošana",
+    "Tiešraižu piekļuves politika: vai vecāki var skatīties jebkurā laikā vai tikai noteiktos laikos; vai būs ieraksti; kādi ir privātuma ierobežojumi",
+    "Lietotāju kontu un lomu modelis (skolēns/vecāks/skolotājs/admins) un autentifikācijas mehānisms (piem., e-pasts, SSO u.c.)",
+    "Maksājumu apstrādes detaļas: vai maksājumi notiks Wix ietvaros vai caur citu maksājumu pakalpojumu sniedzēju; kā tiks glabāti transakciju dati",
+    "Datu migrācija no esošā Excel tērpu saraksta: apjoms, datu kvalitāte, foto glabāšana un identifikatoru konsekvence",
+    "Nepieciešamās atskaites un pārskati (formāti, biežums, piekļuves tiesības) nav precizēti",
+    "Precīzs apjoms un robežas attiecībā uz 'sarežģītām vai dārgām aparatūras instalācijām' nav definētas",
+    "Juridiskie un organizatoriskie nosacījumi video straumēšanai (piekrišanas, nepilngadīgo datu apstrāde) nav konkretizēti",
+    "Mērogojamības mērķi (lietotāju skaits, vienlaicīgo skatītāju skaits, datu apjomi) nav norādīti",
+    "Atbalsta un apmācību process lietotāju ieviešanai (user adoption) nav aprakstīts"
+  ]
+}
