@@ -1,0 +1,205 @@
+{
+  "functional_requirements": [
+    {
+      "id": "FR-001",
+      "requirement": "Sistēmai jānodrošina deju nodarbību tiešraides straumēšana, izmantojot esošās studiju kameras, lai skolēni varētu piedalīties attālināti.",
+      "source_fragment": "“Enable remote participation by live-streaming classes for students who can’t attend in person...”",
+      "priority": "high",
+      "rationale": "Tiešraide ir minēta kā galvenais mērķis un minimālās versijas (MVP) sastāvdaļa, kas risina attālinātas dalības problēmu."
+    },
+    {
+      "id": "FR-002",
+      "requirement": "Sistēmai jānodrošina tiešraides piekļuve vecākiem noteiktos laikos, lai viņi varētu vērot bērnu nodarbības reāllaikā.",
+      "source_fragment": "“Parents will have the opportunity to observe their children's classes in real time through the live broadcasts...”",
+      "priority": "high",
+      "rationale": "Vecāku caurskatāmība un iesaiste ir identificēta kā būtiska vajadzība."
+    },
+    {
+      "id": "FR-003",
+      "requirement": "Sistēmai jānodrošina droša piekļuves kontrole tiešraidēm (autorizācija) skolēniem un vecākiem.",
+      "source_fragment": "“Configure cameras to securely stream classes at scheduled times, with access for students and parents.”",
+      "priority": "high",
+      "rationale": "Tiešraides piekļuvei jābūt ierobežotai un kontrolētai privātuma un drošības dēļ."
+    },
+    {
+      "id": "FR-004",
+      "requirement": "Sistēmai jānodrošina QR koda piekļuves risinājums ēkai, kur dejotāji ieiet/iziet, skenējot QR kodu ar viedtālruni.",
+      "source_fragment": "“Develop a system that allows dancers to enter and exit using a phone-scanned QR code...”",
+      "priority": "high",
+      "rationale": "Digitāla piekļuve ir centrāla projekta sastāvdaļa un aizstāj fiziskos piekļuves rīkus."
+    },
+    {
+      "id": "FR-005",
+      "requirement": "Sistēmai automātiski jāreģistrē ieejas un izejas laiki un jāveido apmeklējuma uzskaite reāllaikā, izmantojot QR piekļuves datus.",
+      "source_fragment": "“...automatically logging attendance.”; “records entry and exit times automatically.”",
+      "priority": "high",
+      "rationale": "Automatizēta apmeklējuma uzskaite ir tieši minēta kā risinājums manuālas uzskaites neefektivitātei."
+    },
+    {
+      "id": "FR-006",
+      "requirement": "Sistēmai jānodrošina tērpu pārvaldība ar svītrkodiem, piešķirot tērpus konkrētiem skolēniem un reģistrējot izsniegšanu un atgriešanu.",
+      "source_fragment": "“A barcode-based costume system will allow for fast and accurate check-out and return logging...”",
+      "priority": "high",
+      "rationale": "Tērpu izsekojamība ir būtiska, lai mazinātu zudumus un uzlabotu atbildību."
+    },
+    {
+      "id": "FR-007",
+      "requirement": "Sistēmai jāuztur tērpu inventāra dati, tostarp tērpa identifikators un fotoattēls, un jānodrošina šo datu izmantošana tērpu izsniegšanas/atgriešanas procesā.",
+      "source_fragment": "“Costume inventory in an Excel file, which includes each costume's number and a photo... transform ... into an interactive barcode-based digital costume management system”",
+      "priority": "medium",
+      "rationale": "Esošie dati (numurs, foto) ir minēti kā pamats; nepieciešama digitalizācija un sasaistīšana ar izsniegšanas ierakstiem."
+    },
+    {
+      "id": "FR-008",
+      "requirement": "Sistēmai jānodrošina tiešsaistes reģistrācijas forma esošajā mājaslapā nodarbībām.",
+      "source_fragment": "“Add a user-friendly form to the existing website that allows online registration...”",
+      "priority": "high",
+      "rationale": "Reģistrācijas procesa vienkāršošana ir viena no galvenajām projekta vērtībām un MVP prasība."
+    },
+    {
+      "id": "FR-009",
+      "requirement": "Sistēmai jānodrošina iespēja veikt apmaksu par nodarbībām tiešsaistē vai reģistrēties bez tūlītējas apmaksas (atkarībā no izvēles).",
+      "source_fragment": "“...registration, with or without immediate payment.”; “option to pay for classes.”",
+      "priority": "high",
+      "rationale": "Apmaksas elastība ir tieši prasīta, lai uzlabotu lietotāju pieredzi un procesu skaidrību."
+    },
+    {
+      "id": "FR-010",
+      "requirement": "Sistēmai jāintegrējas ar reģistrācijas/apmaksas platformu (minēts Wix) vai jānodrošina saites/iestrāde esošajā mājaslapā.",
+      "source_fragment": "“...website with links to a registration and payment platform (Wix)”",
+      "priority": "medium",
+      "rationale": "Aprakstā minēta konkrēta platforma kā paredzēts risinājums, taču integrācijas dziļums nav precizēts."
+    },
+    {
+      "id": "FR-011",
+      "requirement": "Sistēmai jānodrošina vienota pārvaldības saskarne (administratīvs interfeiss) apmeklējuma ierakstu, tērpu inventāra un reģistrāciju datu pārvaldībai vienuviet.",
+      "source_fragment": "“Build a simple interface to manage attendance records, costume inventory, and registration data in one place.”",
+      "priority": "high",
+      "rationale": "Centralizēta pārvaldība ir nepieciešama administratīvā sloga mazināšanai."
+    },
+    {
+      "id": "FR-012",
+      "requirement": "Sistēmai jānodrošina atskaišu veidošana vai vismaz datu pārskatāmība par apmeklējumu, tērpu apriti un reģistrācijām.",
+      "source_fragment": "“Data Management and Reporting Tools”",
+      "priority": "medium",
+      "rationale": "Atskaites ir minētas kā nepieciešamas plānošanai un administratīvai kontrolei, bet detalizācija nav sniegta."
+    },
+    {
+      "id": "FR-013",
+      "requirement": "Sistēmai jāreģistrē tiešraižu piekļuves žurnāli (kas un kad piekļuva), lai pārvaldītu atļaujas un drošību.",
+      "source_fragment": "“Live Streaming Access Logs: Information on who accessed the live streams and when...”",
+      "priority": "medium",
+      "rationale": "Piekļuves izsekojamība ir nepieciešama drošības un atbilstības nodrošināšanai."
+    },
+    {
+      "id": "FR-014",
+      "requirement": "Sistēmai jāuzglabā un jāapstrādā skolēnu dalībnieku dati (vārdi, kontaktinformācija, nodarbību grafiki, reģistrācijas statuss).",
+      "source_fragment": "“Student and Participant Information: Names, contact details, class schedules, and registration status.”",
+      "priority": "high",
+      "rationale": "Šie dati ir pamatā reģistrācijai, piekļuves tiesībām un administratīvai pārvaldībai."
+    },
+    {
+      "id": "FR-015",
+      "requirement": "Sistēmai jāuzglabā maksājumu un reģistrācijas dati, tostarp maksājuma statuss un darījumu ieraksti.",
+      "source_fragment": "“Payment and Registration Data: Details of class registrations, payment status, transaction records...”",
+      "priority": "high",
+      "rationale": "Maksājumu uzskaite ir nepieciešama finanšu procesiem un lietotāju statusa noteikšanai."
+    }
+  ],
+  "nonfunctional_requirements": [
+    {
+      "id": "NFR-001",
+      "requirement": "Sistēmai jānodrošina personas datu un maksājumu datu aizsardzība, ievērojot attiecīgos datu aizsardzības normatīvus, un jāievieš droša autentifikācija un šifrēšana.",
+      "category": "security",
+      "priority": "high",
+      "rationale": "Aprakstā uzsvērta privātuma ievērošana un sensitīvu datu aizsardzība."
+    },
+    {
+      "id": "NFR-002",
+      "requirement": "Sistēmai jābūt uzticamai un pieejamai nodarbību laikos, nodrošinot stabilu tiešraidi, piekļuves kontroli un reģistrāciju bez pārtraukumiem.",
+      "category": "reliability",
+      "priority": "high",
+      "rationale": "Tiešraides un piekļuves funkcijas ir laika kritiskas; pārtraukumi tieši ietekmē lietotāju pieredzi."
+    },
+    {
+      "id": "NFR-003",
+      "requirement": "Lietotāja saskarnēm jābūt vienkāršām un intuitīvām skolēniem, vecākiem, skolotājiem un administrācijai.",
+      "category": "usability",
+      "priority": "high",
+      "rationale": "Lietojamība ir minēta kā standarts un priekšnoteikums lietotāju pieņemšanai."
+    },
+    {
+      "id": "NFR-004",
+      "requirement": "Sistēmai jābūt saderīgai ar izplatītākajām ierīcēm (viedtālruņi, planšetes, datori) un galvenajām pārlūkprogrammām.",
+      "category": "compatibility",
+      "priority": "high",
+      "rationale": "Dažādas lietotāju grupas izmantos atšķirīgas ierīces; saderība ir tieši prasīta."
+    },
+    {
+      "id": "NFR-005",
+      "requirement": "Sistēmai jāspēj mērogoties, pieaugot lietotāju un datu apjomam.",
+      "category": "performance",
+      "priority": "medium",
+      "rationale": "Aprakstā minēta nepieciešamība atbalstīt skolas izaugsmi; konkrēti slodzes rādītāji nav doti."
+    },
+    {
+      "id": "NFR-006",
+      "requirement": "Apmeklējuma, tērpu un maksājumu dati jāreģistrē precīzi un jāatjaunina operatīvi (tuvināti reāllaikam).",
+      "category": "reliability",
+      "priority": "high",
+      "rationale": "Neprecizitātes var radīt strīdus un administratīvas kļūdas; prasība minēta kā kvalitātes kritērijs."
+    },
+    {
+      "id": "NFR-007",
+      "requirement": "Risinājumam jāizmanto esošā infrastruktūra, kur iespējams, un jāizvairās no sarežģītām vai dārgām aparatūras instalācijām.",
+      "category": "other",
+      "priority": "medium",
+      "rationale": "Aprakstā noteikts ierobežojums par izmaksu efektivitāti un esošo resursu izmantošanu."
+    },
+    {
+      "id": "NFR-008",
+      "requirement": "Risinājumam jāizvairās no fiziskiem piekļuves rīkiem (atslēgkartēm, čipiem) un jānodrošina pilnībā digitāla piekļuve, izmantojot viedtālruņus.",
+      "category": "compatibility",
+      "priority": "high",
+      "rationale": "Tas ir skaidri definēts kā “should not be included” un kā mērķa pieejas princips."
+    },
+    {
+      "id": "NFR-009",
+      "requirement": "Sistēmai jānodrošina sistēmas lietojuma, kļūdu un veiktspējas žurnālu vākšana uzturēšanas un uzlabojumu vajadzībām.",
+      "category": "maintainability",
+      "priority": "medium",
+      "rationale": "Aprakstā minēti “System Usage Data” uzturēšanai un uzlabojumiem."
+    }
+  ],
+  "missing_requirements": [
+    "Neskaidrs: lietotāju kontu un lomu modelis (skolēns/vecāks/skolotājs/administrators), autentifikācijas metode un autorizācijas noteikumi.",
+    "Neskaidrs: tiešraižu piekļuves politika (vai vecāki redz tikai sava bērna grupu; vai ir ieraksti; piekļuves termiņi).",
+    "Neskaidrs: tiešraižu tehniskā arhitektūra (straumēšanas protokols/platforma), kvalitātes mērķi (izšķirtspēja, latentums) un interneta prasības.",
+    "Neskaidrs: QR piekļuves procesa detaļas (vai QR ir statisks/dinamisks; kā notiek identitātes pārbaude; kā rīkoties bez telefona vai ar izlādētu bateriju).",
+    "Neskaidrs: piekļuves kontroles integrācija ar fiziskām durvīm (kāds slēdzis/elektroslēdzene jau ir; vai paredzēta tikai reģistrācija bez durvju atvēršanas).",
+    "Neskaidrs: apmeklējuma uzskaites loģika (kā noteikt nodarbības apmeklējumu no ieejas/izejas laikiem; kavējumi; vairākas ieejas).",
+    "Neskaidrs: tērpu svītrkodu skenēšanas veids (mobilā kamera vs atsevišķs skeneris), un tērpu marķēšanas process.",
+    "Neskaidrs: datu migrācija no Excel tērpu faila un esošajām mājaslapām (apjoms, kvalitāte, atbildības).",
+    "Neskaidrs: maksājumu apstrādes prasības (maksājumu pakalpojumu sniedzējs, atgriešanas/atcelšanas politika, rēķini/kvītis).",
+    "Neskaidrs: valodu prasības (UI valodas), piekļūstamības prasības un lietotāju apmācības materiāli.",
+    "Neskaidrs: datu glabāšanas termiņi, rezerves kopijas, atjaunošanas mērķi (RPO/RTO) un auditēšanas prasības.",
+    "Neskaidrs: integrācija ar esošajām divām mājaslapām (kura ir primārā; vai jāapvieno; dizaina/brandinga prasības)."
+  ],
+  "questions_to_customer": [
+    "Kāds ir paredzētais autentifikācijas veids lietotājiem (piem., e-pasts/parole, vienreizējās saites, SSO), un kādas lomas/tiesības nepieciešamas katrai lietotāju grupai?",
+    "Vai vecākiem jābūt iespējai skatīties tikai sava bērna grupas tiešraidi, un kā tiks verificēta saistība “vecāks–bērns”?",
+    "Vai tiešraides tiks tikai straumētas, vai arī ierakstītas? Ja ierakstītas, cik ilgi glabāt un kam dot piekļuvi?",
+    "Kāds ir vēlamais tiešraižu grafika un piekļuves logu modelis (automātiska ieslēgšana noteiktos laikos, manuāla ieslēgšana, hibrīds)?",
+    "Vai QR sistēmai jāatver durvis fiziski, vai tikai jāreģistrē ierašanās/iziešana? Ja jāatver, kāda durvju aparatūra pašlaik ir pieejama?",
+    "Kā rīkoties izņēmuma gadījumos: skolēns bez telefona, bez interneta, izlādēta baterija, vai viesi?",
+    "Kā definēt apmeklējumu: vai pietiek ar ieeju ēkā, vai jāsaista ar konkrētu nodarbību/studiju un laiku?",
+    "Kāds ir tērpu aprites process praksē (kas izsniedz, kur notiek izsniegšana, vai tērpi tiek izsniegti uz ilgu laiku), un kādas atskaites ir nepieciešamas?",
+    "Vai svītrkodu skenēšanai paredzēts izmantot mobilos telefonus vai atsevišķus skenerus? Vai tērpi jau ir marķēti?",
+    "Kura platforma tiks izmantota reģistrācijai un maksājumiem (Wix vai cita), un kādas maksājumu metodes jāatbalsta?",
+    "Vai reģistrācijai bez tūlītējas apmaksas ir jārezervē vieta grupā, un kāds ir apmaksas termiņš/atcelšanas noteikumi?",
+    "Kādas ir prasības datu glabāšanai un privātumam (datu glabāšanas termiņi, piekļuves auditēšana, dzēšanas pieprasījumi)?",
+    "Vai ir nepieciešama datu migrācija no esošā Excel tērpu saraksta un esošajām mājaslapām; ja jā, kādā apjomā un formātā?",
+    "Kādas valodas jāatbalsta lietotāja saskarnē un paziņojumos?",
+    "Kāds ir vēlamais ieviešanas apjoms līdz 2026. gada augustam (MVP vs pilna funkcionalitāte) un kādi ir prioritārie moduļi pirmajai laidienai?"
+  ]
+}
