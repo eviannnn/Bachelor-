@@ -1,0 +1,196 @@
+{
+  "functional_requirements": [
+    {
+      "id": "FR-001",
+      "requirement": "Sistēmai jānodrošina deju nodarbību tiešraides straumēšana, izmantojot esošās studiju kameras, lai skolēni varētu piedalīties attālināti.",
+      "actor": "Skolēns",
+      "object": "Nodarbību tiešraide",
+      "priority": "high",
+      "acceptance_criterion": "Nodarbības laikā autorizēts skolēns var atvērt tiešraidi atbalstītā pārlūkprogrammā/ierīcē un saņemt nepārtrauktu video plūsmu."
+    },
+    {
+      "id": "FR-002",
+      "requirement": "Sistēmai jānodrošina vecākiem iespēja noteiktos laikos skatīties bērnu nodarbību tiešraides reāllaikā.",
+      "actor": "Vecāks",
+      "object": "Nodarbību tiešraide",
+      "priority": "high",
+      "acceptance_criterion": "Noteiktajā piekļuves logā autorizēts vecāks var atvērt tiešraidi un skatīties to reāllaikā."
+    },
+    {
+      "id": "FR-003",
+      "requirement": "Sistēmai jānodrošina autorizēta piekļuve tiešraidēm skolēniem un vecākiem atbilstoši piešķirtajām tiesībām.",
+      "actor": "Skolēns/Vecāks/Administrators",
+      "object": "Tiešraižu piekļuves kontrole",
+      "priority": "high",
+      "acceptance_criterion": "Neautorizēts lietotājs nevar piekļūt tiešraidei; autorizētam lietotājam piekļuve tiek piešķirta tikai atbilstoši viņa tiesībām."
+    },
+    {
+      "id": "FR-004",
+      "requirement": "Sistēmai jāreģistrē tiešraižu piekļuves notikumi (lietotājs un laiks), lai nodrošinātu izsekojamību un drošības pārvaldību.",
+      "actor": "Administrators",
+      "object": "Tiešraižu piekļuves žurnāli",
+      "priority": "medium",
+      "acceptance_criterion": "Administrators var apskatīt žurnālu ierakstus, kuros redzams, kurš lietotājs un kad piekļuvis tiešraidei."
+    },
+    {
+      "id": "FR-005",
+      "requirement": "Sistēmai jānodrošina dejotāju ieejas/izejas reģistrācija, izmantojot ar viedtālruni skenējamu QR kodu.",
+      "actor": "Skolēns (dejotājs)",
+      "object": "QR piekļuves (ieeja/izeja) process",
+      "priority": "high",
+      "acceptance_criterion": "Pēc QR koda skenēšanas sistēma reģistrē notikumu kā ieeju vai izeju un saglabā laika zīmogu."
+    },
+    {
+      "id": "FR-006",
+      "requirement": "Sistēmai automātiski jāreģistrē ieejas un izejas laiki un jāuztur apmeklējuma uzskaite, balstoties uz QR piekļuves datiem.",
+      "actor": "Administrators",
+      "object": "Apmeklējuma uzskaite",
+      "priority": "high",
+      "acceptance_criterion": "Pēc katra QR notikuma apmeklējuma datos parādās atbilstošs ieraksts ar lietotāju un laiku; administrators var apskatīt apmeklējuma ierakstus."
+    },
+    {
+      "id": "FR-007",
+      "requirement": "Sistēmai jānodrošina tērpu inventāra pārvaldība, tostarp tērpa identifikators un fotoattēls.",
+      "actor": "Administrators",
+      "object": "Tērpu inventārs",
+      "priority": "medium",
+      "acceptance_criterion": "Administrators var izveidot/rediģēt tērpa ierakstu ar identifikatoru un pievienot fotoattēlu; ieraksts ir pieejams tērpu aprites procesā."
+    },
+    {
+      "id": "FR-008",
+      "requirement": "Sistēmai jānodrošina tērpu izsniegšanas un atgriešanas reģistrēšana, izmantojot svītrkodus, piesaistot tērpu konkrētam skolēnam.",
+      "actor": "Administrators",
+      "object": "Tērpu izsniegšana/atgriešana",
+      "priority": "high",
+      "acceptance_criterion": "Skenējot tērpa svītrkodu, administrators var reģistrēt izsniegšanu vai atgriešanu; sistēma saglabā tērpa, skolēna un laika informāciju."
+    },
+    {
+      "id": "FR-009",
+      "requirement": "Sistēmai jānodrošina tiešsaistes reģistrācijas forma esošajā mājaslapā nodarbībām.",
+      "actor": "Skolēns/Vecāks",
+      "object": "Nodarbību reģistrācija",
+      "priority": "high",
+      "acceptance_criterion": "Lietotājs var aizpildīt un iesniegt reģistrācijas formu mājaslapā; sistēma saglabā reģistrācijas ierakstu."
+    },
+    {
+      "id": "FR-010",
+      "requirement": "Sistēmai jānodrošina iespēja reģistrēties nodarbībām ar tūlītēju apmaksu vai bez tūlītējas apmaksas (atbilstoši izvēlei).",
+      "actor": "Skolēns/Vecāks",
+      "object": "Reģistrācijas un apmaksas plūsma",
+      "priority": "high",
+      "acceptance_criterion": "Reģistrācijas laikā lietotājs var izvēlēties apmaksāt uzreiz vai pabeigt reģistrāciju bez apmaksas; sistēma saglabā izvēlēto statusu."
+    },
+    {
+      "id": "FR-011",
+      "requirement": "Sistēmai jānodrošina integrācija ar reģistrācijas/apmaksas platformu (piemēram, Wix) vai jānodrošina tās iestrāde/saites esošajā mājaslapā.",
+      "actor": "Administrators",
+      "object": "Integrācija ar reģistrācijas/apmaksas platformu",
+      "priority": "medium",
+      "acceptance_criterion": "Mājaslapā ir pieejama reģistrācijas/apmaksas funkcionalitāte, izmantojot integrāciju vai iestrādi/saites; lietotājs var nonākt līdz reģistrācijas pabeigšanai."
+    },
+    {
+      "id": "FR-012",
+      "requirement": "Sistēmai jāuzglabā un jāapstrādā skolēnu dalībnieku dati (vārds, kontaktinformācija, nodarbību grafiks, reģistrācijas statuss).",
+      "actor": "Administrators",
+      "object": "Skolēnu/dalībnieku dati",
+      "priority": "high",
+      "acceptance_criterion": "Administrators var izveidot un apskatīt skolēna profilu ar norādītajiem datu laukiem; reģistrācijas statuss ir redzams un atjaunināms."
+    },
+    {
+      "id": "FR-013",
+      "requirement": "Sistēmai jāuzglabā reģistrācijas un maksājumu dati, tostarp maksājuma statuss un darījumu ieraksti.",
+      "actor": "Administrators",
+      "object": "Maksājumu un reģistrāciju dati",
+      "priority": "high",
+      "acceptance_criterion": "Administrators var apskatīt reģistrācijas ierakstu ar maksājuma statusu un darījuma informāciju (ja piemērojams)."
+    },
+    {
+      "id": "FR-014",
+      "requirement": "Sistēmai jānodrošina vienota administratīvā saskarne apmeklējuma ierakstu, tērpu inventāra un reģistrāciju datu pārvaldībai vienuviet.",
+      "actor": "Administrators",
+      "object": "Administratīvā saskarne",
+      "priority": "high",
+      "acceptance_criterion": "Administrators vienā sistēmas saskarnē var piekļūt apmeklējuma, tērpu un reģistrāciju sadaļām un veikt pamatdarbības (apskate, pievienošana/rediģēšana, meklēšana)."
+    },
+    {
+      "id": "FR-015",
+      "requirement": "Sistēmai jānodrošina datu pārskatāmība un/vai atskaites par apmeklējumu, tērpu apriti un reģistrācijām.",
+      "actor": "Administrators",
+      "object": "Atskaites un pārskati",
+      "priority": "medium",
+      "acceptance_criterion": "Administrators var iegūt pārskatu (ekrānā vai eksportā) par apmeklējumu, tērpu izsniegšanu/atgriešanu un reģistrācijām."
+    }
+  ],
+  "nonfunctional_requirements": [
+    {
+      "id": "NFR-001",
+      "requirement": "Sistēmai jānodrošina personas un maksājumu datu aizsardzība, ieviešot drošu autentifikāciju, autorizāciju un datu šifrēšanu, ievērojot piemērojamos datu aizsardzības normatīvus.",
+      "quality_attribute": "security",
+      "priority": "high",
+      "acceptance_criterion": "Dati tiek pārraidīti šifrēti; piekļuve aizsargātām funkcijām ir iespējama tikai pēc autentifikācijas; ir definētas un piemērotas piekļuves tiesības."
+    },
+    {
+      "id": "NFR-002",
+      "requirement": "Sistēmai jābūt pieejamai un uzticamai nodarbību laikos, lai tiešraides, piekļuves kontrole un reģistrācija darbotos bez nepamatotiem pārtraukumiem.",
+      "quality_attribute": "reliability",
+      "priority": "high",
+      "acceptance_criterion": "Nodarbību laikā sistēmas pamatfunkcijas ir lietojamas; pārtraukumu un atteiču gadījumi tiek reģistrēti žurnālos. Konkrēti pieejamības rādītāji ir neskaidri."
+    },
+    {
+      "id": "NFR-003",
+      "requirement": "Lietotāja saskarnēm jābūt vienkāršām un intuitīvām skolēniem, vecākiem, skolotājiem un administrācijai.",
+      "quality_attribute": "usability",
+      "priority": "high",
+      "acceptance_criterion": "Galvenie lietotāju scenāriji (reģistrācija, tiešraides atvēršana, QR notikuma reģistrācija, tērpa izsniegšana/atgriešana) ir izpildāmi bez apmācības; mērījumu kritēriji ir neskaidri."
+    },
+    {
+      "id": "NFR-004",
+      "requirement": "Sistēmai jābūt saderīgai ar izplatītākajām ierīcēm (viedtālruņi, planšetes, datori) un galvenajām tīmekļa pārlūkprogrammām.",
+      "quality_attribute": "compatibility",
+      "priority": "high",
+      "acceptance_criterion": "Sistēmas galvenās funkcijas darbojas vismaz uz mūsdienīgām Chrome, Safari, Firefox un Edge versijām; precīzs atbalsta apjoms ir neskaidrs."
+    },
+    {
+      "id": "NFR-005",
+      "requirement": "Sistēmai jāspēj mērogoties, pieaugot lietotāju un datu apjomam, saglabājot pieņemamu veiktspēju.",
+      "quality_attribute": "performance",
+      "priority": "medium",
+      "acceptance_criterion": "Pieaugot lietotāju skaitam, sistēma saglabā funkcionalitāti bez kritiskas degradācijas; konkrēti slodzes un atbildes laika mērķi ir neskaidri."
+    },
+    {
+      "id": "NFR-006",
+      "requirement": "Apmeklējuma, tērpu un maksājumu dati jāreģistrē precīzi un jāatjaunina operatīvi (tuvināti reāllaikam).",
+      "quality_attribute": "data_quality",
+      "priority": "high",
+      "acceptance_criterion": "Pēc notikuma (QR skenējums, svītrkoda skenējums, reģistrācija/apmaksa) atbilstošais ieraksts ir redzams sistēmā bez nepamatotas aizkaves; pieļaujamā aizkave ir neskaidra."
+    },
+    {
+      "id": "NFR-007",
+      "requirement": "Risinājumam, kur iespējams, jāizmanto esošā infrastruktūra un jāizvairās no sarežģītām vai dārgām aparatūras instalācijām.",
+      "quality_attribute": "constraint",
+      "priority": "medium",
+      "acceptance_criterion": "Risinājuma ieviešanai nav nepieciešamas jaunas obligātas specializētas aparatūras komponentes, izņemot gadījumus, kas ir saskaņoti ar pasūtītāju; konkrētas robežas ir neskaidras."
+    },
+    {
+      "id": "NFR-008",
+      "requirement": "Piekļuves risinājumam jābūt pilnībā digitālam, izmantojot viedtālruņus, un tajā nedrīkst būt nepieciešami fiziski piekļuves rīki (atslēgkartes, čipi).",
+      "quality_attribute": "constraint",
+      "priority": "high",
+      "acceptance_criterion": "Piekļuves procesā nav paredzēta atslēgkaršu/čipu izsniegšana vai izmantošana; piekļuve tiek nodrošināta ar viedtālruni un QR kodu."
+    },
+    {
+      "id": "NFR-009",
+      "requirement": "Sistēmai jānodrošina sistēmas lietojuma, kļūdu un veiktspējas notikumu žurnālu vākšana uzturēšanas un uzlabojumu vajadzībām.",
+      "quality_attribute": "maintainability",
+      "priority": "medium",
+      "acceptance_criterion": "Sistēmā ir pieejami žurnāli ar kļūdām un galvenajiem notikumiem; administrators/uzturētājs var tos iegūt analīzei. Žurnālu glabāšanas termiņš ir neskaidrs."
+    }
+  ],
+  "classification_notes": [
+    "Dublikāti tika apvienoti: tērpu svītrkodu pārvaldība (iepriekš FR-006 un FR-007) tika nošķirta divās skaidrās funkcijās: inventārs (FR-007) un aprite (FR-008), saglabājot saturu bez pārklāšanās.",
+    "FR-005 un FR-006 ir cieši saistītas, bet nav dublikāti: viena definē QR skenēšanas procesu, otra — apmeklējuma uzskaites veidošanu no notikumiem.",
+    "NFR-008 pēc būtības ir risinājuma ierobežojums (constraint), nevis saderība; tā tika pārklasificēta kā ierobežojums, saglabājot prioritāti un nozīmi.",
+    "Vairākiem NFR pieņemšanas kritērijiem trūkst kvantitatīvu mērījumu (piem., pieejamība, aizkaves, slodze); tie atzīmēti kā neskaidri, jo ievaddatos nav konkrētu rādītāju.",
+    "Tiešraižu autorizācija (FR-003) un datu aizsardzība (NFR-001) ir atšķirīgas: FR definē funkciju (piekļuves kontrole), NFR definē kvalitātes prasības (drošības mehānismi un atbilstība)."
+  ]
+}
